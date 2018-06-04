@@ -47,3 +47,6 @@ Hier is het iets duidelijker wat ik precies ga doen: ik koppel de grouped horizo
 **Het Lastigste Deel:**
 
 Ik hoop dat ik niet in de knoop kom met de update functies omdat ik dat nog wel het lastigste vind van data visualiseren. Daarnaast hoop ik dat mijn variabelen tenzamen wel betekenis geven aan het storytelling gedeelte van mijn website, en dat dit ook voor de gebruiker duidelijk is.
+
+
+![](photo/image.jpg)

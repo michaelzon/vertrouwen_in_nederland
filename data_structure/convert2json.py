@@ -65,3 +65,15 @@ with open('internet_gebruik.json', 'w') as json_f:
     json_f.write('{"gebruik":')
     json.dump(rows, json_f)
     json_f.write('}')
+
+# read the csv file
+with open('gebruik_dienstverlening.csv') as csv_f:
+
+    reader = csv.DictReader(csv_f, delimiter = ";")
+    rows = list(reader)
+
+# write to json file, making it a dict
+with open('gebruik_dienstverlening.json', 'w') as json_f:
+    json_f.write('{"dienstverlening":')
+    json.dump(rows, json_f)
+    json_f.write('}')

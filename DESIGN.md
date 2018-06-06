@@ -45,14 +45,14 @@ data.forEach > om voor elk datapunt X actie uit te voeren
 
 Linegraph:
 
-d3.timeScale > zorgen dat juiste jaartallen correct worden weergeven op x-as.
-d3.scaleLinear > scalen van de waarden op de y-as
-d3.scaleOrdinal > het kleuren van de lijnen in de chart
-d3.range d3.domain, d3.min and d3.max > correct plotten van datapunten
-d3.svg.axis > weergeven van axes
-d3.svg.line > weergeven van de lijn
+d3.timeScale > zorgen dat juiste jaartallen correct worden weergeven op x-as.  
+d3.scaleLinear > scalen van de waarden op de y-as.  
+d3.scaleOrdinal > het kleuren van de lijnen in de chart.  
+d3.range d3.domain, d3.min and d3.max > correct plotten van datapunten.  
+d3.svg.axis > weergeven van axes.  
+d3.svg.line > weergeven van de lijn.  
 
-Dendrogram + grouped horizontal barchart
-d3.cluster > zet de dendrogram en diens datumpunten op de juiste positie.
-d3.seperation > zorgt voor ruimte tussen nodes in de trie.
-d3.size > bepaald de ruimte voor de trie
+Dendrogram + grouped horizontal barchart.  
+d3.cluster > zet de dendrogram en diens datumpunten op de juiste positie.  
+d3.seperation > zorgt voor ruimte tussen nodes in de trie.  
+d3.size > bepaald de ruimte voor de trie.  

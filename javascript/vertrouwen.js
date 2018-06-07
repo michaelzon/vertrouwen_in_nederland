@@ -2,36 +2,50 @@
 
 window.onload = function(){
 
-  // // api request for the data
-  // var rawTableInfo = "https://opendata.cbs.nl/ODataApi/odata/82378NED/TableInfos";
-  // var rawData = "https://opendata.cbs.nl/ODataApi/odata/82378NED/TypedDataSet";
-  // var rawProperties = "https://opendata.cbs.nl/ODataApi/odata/82378NED/DataProperties";
-  // var rawGroups = "https://opendata.cbs.nl/ODataApi/odata/82378NED/Persoonskenmerken";
-  // var rawPeriods = "https://opendata.cbs.nl/ODataApi/odata/82378NED/Perioden";
-  //
-  // // request for the queries
-  // d3.queue()
-  // .defer(d3.request, rawTableInfo)
-  // .defer(d3.request, rawData)
-  // .defer(d3.request, rawProperties)
-  // .defer(d3.request, rawGroups)
-  // .defer(d3.request, rawPeriods)
-  // .awaitAll(doSomething);
+  // request for the queries
+  d3.queue()
+  .defer(d3.json, "data_structure/json/vertrouwen_nederland.json")      //[0]
+  .defer(d3.json, "data_structure/json/gebruik_dienstverlening.json")   //[1]
+  .defer(d3.json, "data_structure/json/internet_faciliteiten.json")     //[2]
+  .defer(d3.json, "data_structure/json/internet_gebruik.json")          //[3]
+  .defer(d3.json, "data_structure/json/politieke_interesse.json")       //[4]
+  .defer(d3.json, "data_structure/json/politieke_participatie.json")    //[5]
+  .awaitAll(importData);
 
   makeLinegraphCanvas()
   makeDendrogramCanvas()
+  importData()
 
 };
 
-// function doSomething(error, response){
-//
-//   // check if data gets loaded
-//   if (error) throw error;
-//
-//   var tableInfo = JSON.parse(response[0].responseText);
-//   var data = JSON.parse(response[1].responseText);
-//   console.log(data)
-// };
+function importData(error, response){
+
+  // check if data gets loaded
+  if (error) throw error;
+
+  // d3.json("data_structure/json/vertrouwen_nederland.json", function(data){
+  //   var vertrouwen = data;
+  // })
+
+  // console.log(response[0])
+  // console.log(response[1])
+  // console.log(response[2])
+  // console.log(response[3])
+  // console.log(response[4])
+  // console.log(response[5])
+
+  bigDatty = []
+
+  for(i = 0; i < 6; i ++){
+    bigDatty.push(response[i])
+
+  }
+  console.log(bigDatty[0]['vertrouwen'][5]['Migratieachtergrond'])
+
+  // for(i = 0; i < bigDatty.length)
+
+
+};
 
 function makeLinegraphCanvas(){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},

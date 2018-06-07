@@ -13,3 +13,5 @@
 ![](photo/image_3.jpg)
 
 ![](photo/image_4.jpg)
+
+* Ik ga nu beginnen aan mijn json data inladen. Om weer even te weten hoe dit ook alweer moest ben ik een tutorial op youtube gaan kijken: https://www.youtube.com/watch?v=duGyc25m9YI&t=415s. 

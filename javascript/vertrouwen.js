@@ -14,7 +14,6 @@ window.onload = function(){
 
   makeLinegraphCanvas()
   makeDendrogramCanvas()
-  importData()
 
 };
 
@@ -23,27 +22,29 @@ function importData(error, response){
   // check if data gets loaded
   if (error) throw error;
 
-  // d3.json("data_structure/json/vertrouwen_nederland.json", function(data){
-  //   var vertrouwen = data;
-  // })
-
-  // console.log(response[0])
-  // console.log(response[1])
-  // console.log(response[2])
-  // console.log(response[3])
-  // console.log(response[4])
-  // console.log(response[5])
-
-  bigDatty = []
+  // creating one big array of all my objects
+  bigDatty = [];
 
   for(i = 0; i < 6; i ++){
     bigDatty.push(response[i])
-
   }
-  console.log(bigDatty[0]['vertrouwen'][5]['Migratieachtergrond'])
 
-  // for(i = 0; i < bigDatty.length)
+  var vertrouwen = (bigDatty[0]['vertrouwen']);
 
+  for(var i = 0; i < vertrouwen.length; i ++){
+    vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
+    vertrouwen[i].Periode = Number(vertrouwen[i].Periode);
+    vertrouwen[i].Ambtenaren = Number(vertrouwen[i].Ambtenaren);
+    vertrouwen[i].EuropeseUnie = Number(vertrouwen[i].EuropeseUnie);
+    vertrouwen[i].Pers = Number(vertrouwen[i].Pers);
+    vertrouwen[i].Politie = Number(vertrouwen[i].Politie);
+    vertrouwen[i].Rechters = Number(vertrouwen[i].Rechters);
+    vertrouwen[i].TweedeKamer = Number(vertrouwen[i].TweedeKamer);
+    vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
+  }
+
+  console.log(vertrouwen)
+  console.log('yoyo',bigDatty)
 
 };
 

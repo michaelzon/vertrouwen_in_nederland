@@ -1,4 +1,4 @@
-# dag 1
+# dag 1 (8/6)
 
 * Gisteravond heb ik mijn datasets wat aangepast: ik neem minder variabelen over het internetgebruik in Nederland. Heb twee extra datasets geimporteert via statline: eentje over politieke interesse en eentje over politieke participatie. Zo sluiten de variabelen van mijn visualisaties beter op elkaar aan.
 
@@ -14,4 +14,8 @@
 
 ![](photo/image_4.jpg)
 
-* Ik ga nu beginnen aan mijn json data inladen. Om weer even te weten hoe dit ook alweer moest ben ik een tutorial op youtube gaan kijken: https://www.youtube.com/watch?v=duGyc25m9YI&t=415s. 
+* Ik ga nu beginnen aan mijn json data inladen. Om weer even te weten hoe dit ook alweer moest ben ik een tutorial op youtube gaan kijken: https://www.youtube.com/watch?v=duGyc25m9YI&t=415s
+
+# dag 2 (10/6)
+
+* Thuis even werken aan de linegraph. Hulpbron: https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f

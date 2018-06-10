@@ -12,7 +12,7 @@ window.onload = function(){
   .defer(d3.json, "data_structure/json/politieke_participatie.json")    //[5]
   .awaitAll(importData);
 
-  makeLinegraphCanvas()
+  // makeLinegraphCanvas()
   makeDendrogramCanvas()
 
 };
@@ -43,12 +43,15 @@ function importData(error, response){
     vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
   }
 
-  console.log(vertrouwen)
-  console.log('yoyo',bigDatty)
+  // console.log('trust',vertrouwen)
+  // console.log('yoyo',bigDatty)
+
+  makeLinegraphCanvas(vertrouwen)
 
 };
 
-function makeLinegraphCanvas(){
+function makeLinegraphCanvas(vertrouwen){
+
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1260,
@@ -170,6 +173,34 @@ function makeLinegraphCanvas(){
   g.append("text")
       .text("translate(margin.left, margin.top)")
       .attr("y", -8);
+
+
+  console.log(vertrouwen)
+
+  // its linegraph time
+
+  // determing the dimensions and margins of the linegraph
+  var graphMargin = {top: 20, rigth: 20, bottom: 30, left: 50},
+      graphWidth = 960 - graphMargin.left - graphMargin.right,
+      graphHeight = 500 - graphMargin.top - graphMargin.bottom;
+
+  var graphX = d3.scaleTime().range([0, 100]);
+  var graphY = d3.scaleLinear().range([100, 0]);
+
+  var vertrouwenLine = d3.line()
+      .x(function (d){ return graphX(d.Periode); })
+      .y(function (d){ return graphY()}); //weet niet of dit kan zo, maar gaat natuurlijk om een array van jaren
+
+
+  var graphSvg = d3.select("#linegraph").append("graphSvg")
+      .attr("graphWidth", graphWidth + margin.left + margin.right)
+      .attr("graphHeight", graphHeight + graphMargin.top + graphMargin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + graphMargin.left + "," + graphMargin.top + ")");
+
+
+
 };
 
 function makeDendrogramCanvas(){

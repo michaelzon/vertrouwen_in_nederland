@@ -18,4 +18,4 @@
 
 # dag 2 (10/6)
 
-* Thuis even werken aan de linegraph. Hulpbron: https://bl.ocks.org/d3noob/4db972df5d7efc7d611255d1cc6f3c4f
+* Thuis even werken aan het klaar zetten van mijn data. 

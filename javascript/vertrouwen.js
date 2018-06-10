@@ -28,8 +28,10 @@ function importData(error, response){
   for(i = 0; i < 6; i ++){
     bigDatty.push(response[i])
   }
-  console.log(bigDatty)
-  var vertrouwen = (bigDatty[0]['vertrouwen']);
+
+  console.log("bigDattaaay", bigDatty)
+
+  var vertrouwen = (bigDatty[0]["vertrouwen"]);
 
   for(var i = 0; i < vertrouwen.length; i ++){
     vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
@@ -41,9 +43,9 @@ function importData(error, response){
     vertrouwen[i].Rechters = Number(vertrouwen[i].Rechters);
     vertrouwen[i].TweedeKamer = Number(vertrouwen[i].TweedeKamer);
     vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
-  }
+  };
 
-  var dienstverlening = (bigDatty[1]['dienstverlening'])
+  var dienstverlening = (bigDatty[1]["dienstverlening"])
 
   for(var i = 0; i < dienstverlening.length; i ++){
     dienstverlening[i].ID = Number(dienstverlening[i].ID);
@@ -51,10 +53,10 @@ function importData(error, response){
     dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
     dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
     dienstverlening[i].ZoekenOpWebsitesPubliekeSector = Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
-    dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].ID);
+    dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
   }
 
-  var faciliteiten = (bigDatty[2]['faciliteiten']);
+  var faciliteiten = (bigDatty[2]["faciliteiten"]);
 
   for(var i = 0; i < faciliteiten.length; i ++){
     faciliteiten[i].ID = Number(faciliteiten[i].ID);
@@ -68,13 +70,13 @@ function importData(error, response){
     faciliteiten[i].LaptopOfNetbook = Number(faciliteiten[i].LaptopOfNetbook);
   };
 
-  var gebruik = (bigDatty[3]['gebruik']);
+  var gebruik = (bigDatty[3]["gebruik"]);
 
   for(var i = 0; i < gebruik.length; i ++){
     gebruik[i].ID = Number(gebruik[i].ID);
     gebruik[i].Periode = Number(gebruik[i].Periode);
     gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
-    gebruik[i].3Tot12MaandenGeleden = Number(gebruik[i].3Tot12MaandenGeleden);
+    gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
     gebruik[i].MeerDan12MaandenGeleden = Number(gebruik[i].MeerDan12MaandenGeleden);
     gebruik[i].NooitInternetGebruikt = Number(gebruik[i].NooitInternetGebruikt);
     gebruik[i].BijnaElkeDag = Number(gebruik[i].BijnaElkeDag);
@@ -82,15 +84,32 @@ function importData(error, response){
     gebruik[i].MinderDanEenKeerPerWeek = Number(gebruik[i].MinderDanEenKeerPerWeek);
   };
 
-  console.log(gebruik)
+  var interesse = (bigDatty[4]["interesse"]);
 
+  for(var i = 0; i < interesse.length; i ++){
+    interesse[i].ID = Number(interesse[i].ID);
+    interesse[i].Periode = Number(interesse[i].Periode);
+    interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
+    interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
+    interesse[i].WeinigGeinteresseerd = Number(interesse[i].WeinigGeinteresseerd);
+    interesse[i].NietGeinteresseerd = Number(interesse[i].NietGeinteresseerd);
+  };
 
+  var participatie = (bigDatty[5]["participatie"]);
 
-
-
-
-
-
+  for(var i = 0; i < participatie.length; i ++){
+    participatie[i].ID = Number(participatie[i].ID);
+    participatie[i].Periode = Number(participatie[i].Periode);
+    participatie[i].RadioTelevisieOfKrantIngeschakeld = Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
+    participatie[i].PolitiekeOrganisatieIngeschakeld = Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
+    participatie[i].MeegedaanAanBijeenkomstOverheid = Number(participatie[i].MeegedaanAanBijeenkomstOverheid);
+    participatie[i].ContactOpgenomenMetPoliticus = Number(participatie[i].ContactOpgenomenMetPoliticus);
+    participatie[i].MeegedaanAanActiegroep = Number(participatie[i].MeegedaanAanActiegroep);
+    participatie[i].MeegedaanAanProtestactie = Number(participatie[i].MeegedaanAanProtestactie);
+    participatie[i].MeegedaanAanHandtekeningenactie = Number(participatie[i].MeegedaanAanHandtekeningenactie);
+    participatie[i].MeegedaanPolitiekeActieViaInternet = Number(participatie[i].MeegedaanPolitiekeActieViaInternet);
+    participatie[i].Anders = Number(participatie[i].Anders);
+  };
 
   makeLinegraphCanvas(vertrouwen)
 

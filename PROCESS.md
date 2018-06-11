@@ -18,4 +18,8 @@
 
 # dag 2 (10/6)
 
-* Thuis even werken aan het klaar zetten van mijn data. 
+* Thuis even werken aan het klaar zetten van mijn data.
+
+# dag 3 (11/6)
+
+* Ga beginnen aan mijn linegraph.

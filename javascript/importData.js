@@ -10,9 +10,9 @@ function importData(error, response){
     bigDatty.push(response[i])
   }
 
-  console.log("bigDattaaay", bigDatty)
+  console.log("bigDatty: ", bigDatty)
 
-  var vertrouwen = (bigDatty[0]["vertrouwen"]);
+  vertrouwen = (bigDatty[0]["vertrouwen"]);
 
   for(var i = 0; i < vertrouwen.length; i ++){
     vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
@@ -92,8 +92,8 @@ function importData(error, response){
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
-  function(d) {return d}
+  // console.log(vertrouwen)
 
-  // makeLinegraphCanvas(vertrouwen)
+  makeLinegraphCanvas(vertrouwen)
 
 };

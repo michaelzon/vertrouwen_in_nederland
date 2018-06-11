@@ -1,5 +1,4 @@
 // the following part will be triggered when the page is loaded
-var vertrouwen = [];
 window.onload = function(){
 
   // request for the queries
@@ -44,7 +43,6 @@ function makeLinegraphCanvas(vertrouwen){
   //     .domain(function (d) {return d.Periode})
   //     // .domain(['2012', '2013', '2014', '2015', '2016'])
   //     .range([0, width]);
-
 
   // and for the height
   var yScale = d3.scaleLinear()

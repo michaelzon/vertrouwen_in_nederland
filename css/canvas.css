@@ -61,3 +61,11 @@ body {
   font-size: 26px;
   font-weight: bold;
 }
+
+/* for lines */
+path {
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+
+}

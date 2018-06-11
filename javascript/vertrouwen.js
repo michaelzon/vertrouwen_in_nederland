@@ -19,8 +19,6 @@ window.onload = function(){
 
 function makeLinegraphCanvas(vertrouwen){
 
-  console.log('verver', vertrouwen[0].Periode)
-
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1260,
@@ -30,32 +28,40 @@ function makeLinegraphCanvas(vertrouwen){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
+  console.log(height)
   // parse the date / time
-  var parseTime = d3.timeParse("%d-%b-%y");
+  // var parseTime = d3.timeParse("%Y");
+
+  // store 2012 and 2017 in variables
+  var minYear = d3.min(vertrouwen, d => d.Periode)
+  var maxYear = d3.max(vertrouwen, d => d.Periode)
+
+  var minPer = d3.min(vertrouwen, d => d.VertrouwenInAndereMensen)
+  var maxPer = d3.max(vertrouwen, d => d.VertrouwenInAndereMensen)
+
+  console.log(minPer)
+  console.log(maxPer)
 
   // scaling for the width of the graph
-  var xScale = d3.scaleTime()
-      .domain(d3.extent(vertrouwen, function(d) { return d.Periode; }))
+  var xScale = d3.scaleLinear()
+      .domain([minYear, maxYear])
       .range([0, width]);
-
-  // // scaling for the width of the graph
-  // var xScale = d3.scaleLinear()
-  //     .domain(function (d) {return d.Periode})
-  //     // .domain(['2012', '2013', '2014', '2015', '2016'])
-  //     .range([0, width]);
 
   // and for the height
   var yScale = d3.scaleLinear()
-      .domain([0, d3.max(vertrouwen, function (d) {return d.VertrouwenInAndereMensen})])
+      .domain([minPer, maxPer])
       .range([height, 0]);
 
   // function for creating x-axis later on
   var xAxis = d3.axisBottom(xScale)
-      // .tickFormat(function(d) { d.Periode})
+      // .tickFormat(d => d.Periode)
+      // .tickFormat(function (d){ console.log(d); return d.Periode})
+      // .tickFormat(d3.timeFormat("2000", "2001"))
+      .ticks(6)
 
   // and also for the y-axis
   var yAxis = d3.axisLeft(yScale)
-      // .ticks(3)
+      .ticks(7)
 
   // draw my canvas for the linegraph
   var svg = d3.select("#linegraph")
@@ -64,43 +70,36 @@ function makeLinegraphCanvas(vertrouwen){
       .attr("height", height)
 
   var charts = svg.append("g")
-      .attr("transform", "translate(50, 50)");
+      // .attr("transform", "translate(10, 10)");
 
-  // put a x-axis on it
-  svg.append("g")
-      .attr("class", "xaxis")
-      .call(xAxis);
-
-  // and a y-axis
-  svg.append("g")
-      .attr("class", "yaxis")
-      .call(yAxis);
+  // // put a x-axis on it
+  // svg.append("g")
+  //     .attr("class", "xaxis")
+  //     .call(xAxis);
   //
-  // var line = d3.line()
-  //     // .x(function (d){ return console.log(d); })
-  //     .x(d => xScale(d.Periode))
-  //     .y(d => yScale(d.VertrouwenInAndereMensen))
-  //     // .y(function (d){return d.vertrouwen.VertrouwenInAndereMensen})
-  //     .curve(d3.curveLinear);
+  // // and a y-axis
+  // svg.append("g")
+  //     .attr("class", "yaxis")
+  //     .call(yAxis);
 
   var line = d3.line()
-      // .x(d, i => xScale(d[i].Periode))
-      .x(function (d) { console.log('sfd',d.Periode); return xScale(d.Periode)})
-      // .y(d => yScale(d.VertrouwenInAndereMensen))
-      .y(function (d) { console.log(d.VertrouwenInAndereMensen); return yScale(d.VertrouwenInAndereMensen)})
-
-      // .curve(d3.curveLinear);
-
-  // charts.append("path")
-  //   .data(vertrouwen)
-  //   .attr("class", "line")
-  //   .attr("d", line);
+      .x(d => xScale(d.Periode))
+      .y(d => yScale(d.VertrouwenInAndereMensen))
+      .curve(d3.curveLinear);
 
   charts.append("path")
     .data([vertrouwen])
     .attr("class", "line")
     .attr("d", line);
 
+  charts.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", "translate (0," + (height - padding.top) + ")")
+      .call(xAxis);
+
+  charts.append("g")
+      .attr("class", "y-axis")
+      .call(yAxis)
   // console.log(vertrouwen.VertrouwenInAndereMensen)
 
 };

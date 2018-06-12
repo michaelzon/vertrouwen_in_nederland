@@ -28,7 +28,6 @@ function makeLinegraphCanvas(vertrouwen){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-  console.log(height)
   // parse the date / time
   // var parseTime = d3.timeParse("%Y");
 
@@ -41,6 +40,9 @@ function makeLinegraphCanvas(vertrouwen){
 
   console.log(minPer)
   console.log(maxPer)
+
+  console.log(vertrouwen)
+
 
   // scaling for the width of the graph
   var xScale = d3.scaleLinear()

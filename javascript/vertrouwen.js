@@ -1,4 +1,5 @@
 // the following part will be triggered when the page is loaded
+var vertrouwen = [];
 window.onload = function(){
 
   // request for the queries
@@ -35,11 +36,21 @@ function makeLinegraphCanvas(vertrouwen){
   var minYear = d3.min(vertrouwen, d => d.Periode)
   var maxYear = d3.max(vertrouwen, d => d.Periode)
 
-  var minPer = d3.min(vertrouwen, d => d.VertrouwenInAndereMensen)
+  // var minPer = d3.min(vertrouwen, d => d.VertrouwenInAndereMensen)
   var maxPer = d3.max(vertrouwen, d => d.VertrouwenInAndereMensen)
 
-  console.log(minPer)
-  console.log(maxPer)
+  // var minPer = d3.min(vertrouwen, d => console.log('jaja', d.VertrouwenInAndereMensen))
+
+  // var minPer = d3.min(vertrouwen, function (d,i){ console.log('jjj', d.VertrouwenInAndereMensen, i)})
+  var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d.VertrouwenInAndereMensen, i))
+  // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d[i]VertrouwenInAndereMensen))
+
+
+  var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d.VertrouwenInAndereMensen, i))
+
+
+  console.log("minper", minPer)
+  // console.log(maxPer)
 
   console.log(vertrouwen)
 

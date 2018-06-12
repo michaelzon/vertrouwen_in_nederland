@@ -14,8 +14,21 @@ function importData(error, response){
 
   vertrouwen = (bigDatty[0]["vertrouwen"]);
 
+  // for(var i = 0; i < vertrouwen.length; i ++){
+  //   vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
+  //   vertrouwen[i].Periode = Number(vertrouwen[i].Periode);
+  //   vertrouwen[i].Ambtenaren = Number(vertrouwen[i].Ambtenaren);
+  //   vertrouwen[i].EuropeseUnie = Number(vertrouwen[i].EuropeseUnie);
+  //   vertrouwen[i].Pers = Number(vertrouwen[i].Pers);
+  //   vertrouwen[i].Politie = Number(vertrouwen[i].Politie);
+  //   vertrouwen[i].Rechters = Number(vertrouwen[i].Rechters);
+  //   vertrouwen[i].TweedeKamer = Number(vertrouwen[i].TweedeKamer);
+  //   vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
+  // };
+
   for(var i = 0; i < vertrouwen.length; i ++){
-    vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
+    delete(vertrouwen[i].ID)
+    delete(vertrouwen[i].Migratieachtergrond)
     vertrouwen[i].Periode = Number(vertrouwen[i].Periode);
     vertrouwen[i].Ambtenaren = Number(vertrouwen[i].Ambtenaren);
     vertrouwen[i].EuropeseUnie = Number(vertrouwen[i].EuropeseUnie);
@@ -25,6 +38,99 @@ function importData(error, response){
     vertrouwen[i].TweedeKamer = Number(vertrouwen[i].TweedeKamer);
     vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
   };
+
+  console.log('vertrouwen',vertrouwen)
+  console.log('keys',Object.keys(vertrouwen[0]))
+  console.log('values',Object.values(vertrouwen[0]))
+
+  var totaal = {};
+  var years = [2012, 2013, 2014, 2015, 2016, 2017];
+
+  console.log(years[0])
+
+  totaal[years[0]] = {}
+  totaal[years[0]][Object.keys(vertrouwen[0])[0]] = Object.values(vertrouwen[0])[0]
+  totaal[years[0]][Object.keys(vertrouwen[0])[1]] = Object.values(vertrouwen[0])[1]
+  totaal[years[0]][Object.keys(vertrouwen[0])[2]] = Object.values(vertrouwen[0])[2]
+  totaal[years[0]][Object.keys(vertrouwen[0])[3]] = Object.values(vertrouwen[0])[3]
+  totaal[years[0]][Object.keys(vertrouwen[0])[4]] = Object.values(vertrouwen[0])[4]
+  totaal[years[0]][Object.keys(vertrouwen[0])[5]] = Object.values(vertrouwen[0])[5]
+  totaal[years[0]][Object.keys(vertrouwen[0])[6]] = Object.values(vertrouwen[0])[6]
+  totaal[years[0]][Object.keys(vertrouwen[0])[7]] = Object.values(vertrouwen[0])[7]
+
+  totaal[2013] = {}
+  totaal[2013][Object.keys(vertrouwen[1])[0]] = Object.values(vertrouwen[1])[0]
+  totaal[2013][Object.keys(vertrouwen[1])[1]] = Object.values(vertrouwen[1])[1]
+  totaal[2013][Object.keys(vertrouwen[1])[2]] = Object.values(vertrouwen[1])[2]
+  totaal[2013][Object.keys(vertrouwen[1])[3]] = Object.values(vertrouwen[1])[3]
+  totaal[2013][Object.keys(vertrouwen[1])[4]] = Object.values(vertrouwen[1])[4]
+  totaal[2013][Object.keys(vertrouwen[1])[5]] = Object.values(vertrouwen[1])[5]
+  totaal[2013][Object.keys(vertrouwen[1])[6]] = Object.values(vertrouwen[1])[6]
+
+  for loop met variabele voor jaar, eerste index 000000 111111 22222 333333, tweede index 0123456
+
+
+  // for()
+
+  console.log(totaal)
+
+
+  // for(var i = 0; i < vertrouwen.length; i ++){
+  //   var periode = vertrouwen[i].Periode;
+    // vertrouwen[i].Ambtenaren
+    // vertrouwen[i].EuropeseUnie
+    // vertrouwen[i].Pers
+    // vertrouwen[i].Politie
+    // vertrouwen[i].Rechters;
+    // vertrouwen[i].TweedeKamer
+    // vertrouwen[i].VertrouwenInAndereMensen
+  // };
+
+  // for(var i = 0; i < vertrouwen.length; i ++){
+  //   vertrouwen[i].ID
+  //   vertrouwen[i].Periode
+  //   vertrouwen[i].Ambtenaren
+  //   vertrouwen[i].EuropeseUnie
+  //   vertrouwen[i].Pers
+  //   vertrouwen[i].Politie
+  //   vertrouwen[i].Rechters;
+  //   vertrouwen[i].TweedeKamer
+  //   vertrouwen[i].VertrouwenInAndereMensen
+  // };
+
+  //
+  // console.log('ver',vertrouwen)
+  //
+  //   const object1 = {
+  //   a: 1,
+  //   b: 2,
+  //   c: 3
+  //   };
+  //
+  //
+  // const object2 = Object.assign({c: 4, d: 5}, object1);
+  //
+  // console.log(object2.c, object2.d);
+
+// expected output: 3 5
+  //
+
+  // var totaal = {};
+  //
+  // for(var i = 0; i < vertrouwen.length; i ++){
+  //   for (var j = 0; j < 5; j ++){
+  //     totaal.assign(vertrouwen[j].Periode)
+  //     totaal.assign(vertrouwen[j].Ambtenaren)
+  //     totaal.assign(vertrouwen[j].EuropeseUnie)
+  //     totaal.assign(vertrouwen[j].Pers)
+  //     totaal.assign(vertrouwen[j].Politie)
+  //     totaal.assign(vertrouwen[j].Rechters)
+  //     totaal.assign(vertrouwen[j].TweedeKamer)
+  //     totaal.assign(vertrouwen[j].VertrouwenInAndereMensen)
+  //   }
+  // }
+
+  // console.log(totaal)
 
   var dienstverlening = (bigDatty[1]["dienstverlening"])
 

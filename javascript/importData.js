@@ -155,16 +155,51 @@ function importData(error, response){
     dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
   }
 
-  console.log('dienstverlening', dienstverlening)
-
   var dienstverleningVars = Object.keys(dienstverlening[0])
-  console.log(dienstverleningVars)
 
+  var totaal = {};
+  for(var i = 0; i < years.length; i ++){
+    totaal[years[i]] = {};
+    for(var j = 0; j < dienstverleningVars.length; j ++){
+      totaal[years[i]][Object.keys(dienstverlening[i])[j]] = Object.values(dienstverlening[i])[j]
+    }
+  }
+
+  var nederlands = {};
+  for(var i = 0; i < years.length; i ++){
+    nederlands[years[i]] = {};
+    for(var j = 0; j < dienstverleningVars.length; j ++){
+      nederlands[years[i]][Object.keys(dienstverlening[i+6])[j]] = Object.values(dienstverlening[i+6])[j]
+    }
+  }
+
+  var westers = {};
+  for(var i = 0; i < years.length; i ++){
+    westers[years[i]] = {};
+    for(var j = 0; j < dienstverleningVars.length; j ++){
+      westers[years[i]][Object.keys(dienstverlening[i+12])[j]] = Object.values(dienstverlening[i+12])[j]
+    }
+  }
+
+  var nietWesters = {};
+  for(var i = 0; i < years.length; i ++){
+    nietWesters[years[i]] = {};
+    for(var j = 0; j < dienstverleningVars.length; j ++){
+      nietWesters[years[i]][Object.keys(dienstverlening[i+18])[j]] = Object.values(dienstverlening[i+18])[j]
+    }
+  }
+
+  dienstverlening = {};
+  dienstverlening["totaal"] = totaal
+  dienstverlening["nederlands"] = nederlands
+  dienstverlening["westers"] = westers
+  dienstverlening["nietWesters"] = nietWesters
 
   var faciliteiten = (bigDatty[2]["faciliteiten"]);
 
   for(var i = 0; i < faciliteiten.length; i ++){
-    faciliteiten[i].ID = Number(faciliteiten[i].ID);
+    delete(faciliteiten[i].ID)
+    delete(faciliteiten[i].Migratieachtergrond)
     faciliteiten[i].Periode = Number(faciliteiten[i].Periode);
     faciliteiten[i].ToegangTotInternet = Number(faciliteiten[i].ToegangTotInternet);
     faciliteiten[i].PersonalComputerPCOfDesktop = Number(faciliteiten[i].PersonalComputerPCOfDesktop);
@@ -175,10 +210,56 @@ function importData(error, response){
     faciliteiten[i].LaptopOfNetbook = Number(faciliteiten[i].LaptopOfNetbook);
   };
 
+  console.log('faciliteiten', faciliteiten)
+
+  var faciliteitenVars = Object.keys(faciliteiten[0])
+  console.log('vars',faciliteitenVars.length)
+
+  var totaal = {};
+  for(var i = 0; i < years.length; i ++){
+    totaal[years[i]] = {};
+    for(var j = 0; j < faciliteitenVars.length; j ++){
+      totaal[years[i]][Object.keys(faciliteiten[i])[j]] = Object.values(faciliteiten[i])[j]
+    }
+  }
+
+  var nederlands = {};
+  for(var i = 0; i < years.length; i ++){
+    nederlands[years[i]] = {};
+    for(var j = 0; j < faciliteitenVars.length; j ++){
+      nederlands[years[i]][Object.keys(faciliteiten[i+6])[j]] = Object.values(faciliteiten[i+6])[j]
+    }
+  }
+
+  var westers = {};
+  for(var i = 0; i < years.length; i ++){
+    westers[years[i]] = {};
+    for(var j = 0; j < faciliteitenVars.length; j ++){
+      westers[years[i]][Object.keys(faciliteiten[i+12])[j]] = Object.values(faciliteiten[i+12])[j]
+    }
+  }
+
+  var nietWesters = {};
+  for(var i = 0; i < years.length; i ++){
+    nietWesters[years[i]] = {};
+    for(var j = 0; j < faciliteitenVars.length; j ++){
+      nietWesters[years[i]][Object.keys(faciliteiten[i+18])[j]] = Object.values(faciliteiten[i+18])[j]
+    }
+  }
+
+  faciliteiten = {};
+  faciliteiten["totaal"] = totaal
+  faciliteiten["nederlands"] = nederlands
+  faciliteiten["westers"] = westers
+  faciliteiten["nietWesters"] = nietWesters
+
+  // console.log('fac', faciliteiten)
+
   var gebruik = (bigDatty[3]["gebruik"]);
 
   for(var i = 0; i < gebruik.length; i ++){
-    gebruik[i].ID = Number(gebruik[i].ID);
+    delete(gebruik[i].ID)
+    delete(gebruik[i].Migratieachtergrond)
     gebruik[i].Periode = Number(gebruik[i].Periode);
     gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
     gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
@@ -189,16 +270,109 @@ function importData(error, response){
     gebruik[i].MinderDanEenKeerPerWeek = Number(gebruik[i].MinderDanEenKeerPerWeek);
   };
 
+  console.log('gebruik', gebruik)
+
+  var gebruikVars = Object.keys(gebruik[0])
+  console.log('vars',gebruikVars.length)
+
+  var totaal = {};
+  for(var i = 0; i < years.length; i ++){
+    totaal[years[i]] = {};
+    for(var j = 0; j < gebruikVars.length; j ++){
+      totaal[years[i]][Object.keys(gebruik[i])[j]] = Object.values(gebruik[i])[j]
+    }
+  }
+
+  var nederlands = {};
+  for(var i = 0; i < years.length; i ++){
+    nederlands[years[i]] = {};
+    for(var j = 0; j < gebruikVars.length; j ++){
+      nederlands[years[i]][Object.keys(gebruik[i+6])[j]] = Object.values(gebruik[i+6])[j]
+    }
+  }
+
+  var westers = {};
+  for(var i = 0; i < years.length; i ++){
+    westers[years[i]] = {};
+    for(var j = 0; j < gebruikVars.length; j ++){
+      westers[years[i]][Object.keys(gebruik[i+12])[j]] = Object.values(gebruik[i+12])[j]
+    }
+  }
+
+  var nietWesters = {};
+  for(var i = 0; i < years.length; i ++){
+    nietWesters[years[i]] = {};
+    for(var j = 0; j < gebruikVars.length; j ++){
+      nietWesters[years[i]][Object.keys(gebruik[i+18])[j]] = Object.values(gebruik[i+18])[j]
+    }
+  }
+
+  gebruik = {};
+  gebruik["totaal"] = totaal
+  gebruik["nederlands"] = nederlands
+  gebruik["westers"] = westers
+  gebruik["nietWesters"] = nietWesters
+
+  console.log('geb', gebruik)
+
+
   var interesse = (bigDatty[4]["interesse"]);
 
   for(var i = 0; i < interesse.length; i ++){
-    interesse[i].ID = Number(interesse[i].ID);
+    delete(interesse[i].ID)
+    delete(interesse[i].Migratieachtergrond)
     interesse[i].Periode = Number(interesse[i].Periode);
     interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
     interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
     interesse[i].WeinigGeinteresseerd = Number(interesse[i].WeinigGeinteresseerd);
     interesse[i].NietGeinteresseerd = Number(interesse[i].NietGeinteresseerd);
   };
+
+  console.log("intrs", interesse)
+
+  var interesseVars = Object.keys(interesse[0])
+  console.log('varsI', interesseVars.length)
+
+  var totaal = {};
+  for(var i = 0; i < years.length; i ++){
+    totaal[years[i]] = {};
+    for(var j = 0; j < interesseVars.length; j ++){
+      totaal[years[i]][Object.keys(interesse[i])[j]] = Object.values(interesse[i])[j]
+    }
+  }
+
+  var nederlands = {};
+  for(var i = 0; i < years.length; i ++){
+    nederlands[years[i]] = {};
+    for(var j = 0; j < interesseVars.length; j ++){
+      nederlands[years[i]][Object.keys(interesse[i+6])[j]] = Object.values(interesse[i+6])[j]
+    }
+  }
+
+  var westers = {};
+  for(var i = 0; i < years.length; i ++){
+    westers[years[i]] = {};
+    for(var j = 0; j < interesseVars.length; j ++){
+      westers[years[i]][Object.keys(interesse[i+12])[j]] = Object.values(interesse[i+12])[j]
+    }
+  }
+
+  var nietWesters = {};
+  for(var i = 0; i < years.length; i ++){
+    nietWesters[years[i]] = {};
+    for(var j = 0; j < interesseVars.length; j ++){
+      nietWesters[years[i]][Object.keys(interesse[i+18])[j]] = Object.values(interesse[i+18])[j]
+    }
+  }
+
+  interesse = {};
+  interesse["totaal"] = totaal
+  interesse["nederlands"] = nederlands
+  interesse["westers"] = westers
+  interesse["nietWesters"] = nietWesters
+
+  console.log('geb', gebruik)
+
 
   var participatie = (bigDatty[5]["participatie"]);
 

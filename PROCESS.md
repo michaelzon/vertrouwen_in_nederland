@@ -40,4 +40,8 @@
 
 ![](photo/image_6.jpg)
 
-* Morgen ga ik hier een forloop voor maken en dan kan ik het toepassen op mijn andere jsons, en dan kan ik hopelijk door met mijn visualisaties. 
+* Morgen ga ik hier een forloop voor maken en dan kan ik het toepassen op mijn andere jsons, en dan kan ik hopelijk door met mijn visualisaties.
+
+# dag 5 (13/6)
+
+* Eindelijk klaar met reconstructie van mijn data 'vertrouwen'. Nu linegraphtime. 

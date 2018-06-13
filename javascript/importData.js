@@ -43,36 +43,118 @@ function importData(error, response){
   console.log('keys',Object.keys(vertrouwen[0]))
   console.log('values',Object.values(vertrouwen[0]))
 
-  var totaal = {};
+  // var totaal = {};
+  // var years = [2012, 2013, 2014, 2015, 2016, 2017];
+
+  // console.log(years[0])
+  //
+  // totaal[years[0]] = {};
+  // totaal[years[0]][Object.keys(vertrouwen[0])[0]] = Object.values(vertrouwen[0])[0]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[1]] = Object.values(vertrouwen[0])[1]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[2]] = Object.values(vertrouwen[0])[2]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[3]] = Object.values(vertrouwen[0])[3]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[4]] = Object.values(vertrouwen[0])[4]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[5]] = Object.values(vertrouwen[0])[5]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[6]] = Object.values(vertrouwen[0])[6]
+  // totaal[years[0]][Object.keys(vertrouwen[0])[7]] = Object.values(vertrouwen[0])[7]
+  //
+  // totaal[years[1]] = {};
+  // totaal[years[1]][Object.keys(vertrouwen[1])[0]] = Object.values(vertrouwen[1])[0]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[1]] = Object.values(vertrouwen[1])[1]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[2]] = Object.values(vertrouwen[1])[2]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[3]] = Object.values(vertrouwen[1])[3]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[4]] = Object.values(vertrouwen[1])[4]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[5]] = Object.values(vertrouwen[1])[5]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[6]] = Object.values(vertrouwen[1])[6]
+  // totaal[years[1]][Object.keys(vertrouwen[1])[7]] = Object.values(vertrouwen[1])[7]
+  //
+  // totaal[years[5]] = {};
+  // totaal[years[5]][Object.keys(vertrouwen[5])[0]] = Object.values(vertrouwen[5])[0]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[1]] = Object.values(vertrouwen[5])[1]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[2]] = Object.values(vertrouwen[5])[2]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[3]] = Object.values(vertrouwen[5])[3]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[4]] = Object.values(vertrouwen[5])[4]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[5]] = Object.values(vertrouwen[5])[5]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[6]] = Object.values(vertrouwen[5])[6]
+  // totaal[years[5]][Object.keys(vertrouwen[5])[7]] = Object.values(vertrouwen[5])[7]
+
+
+  // nietWesters = {};
+  // nietWesters[years[5]] = {}; // dit geeft die error
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[0]] = Object.values(vertrouwen[23])[0]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[1]] = Object.values(vertrouwen[23])[1]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[2]] = Object.values(vertrouwen[23])[2]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[3]] = Object.values(vertrouwen[23])[3]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[4]] = Object.values(vertrouwen[23])[4]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[5]] = Object.values(vertrouwen[23])[5]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[6]] = Object.values(vertrouwen[23])[6]
+  // nietWesters[years[5]][Object.keys(vertrouwen[23])[7]] = Object.values(vertrouwen[23])[7]
+
+  // console.log('nietwissa',nietWesters)
+
+
+  // for loop met variabele voor jaar, eerste index 000000 111111 22222 333333, tweede index 0123456
+
+
+  // totaal.years[0] = {}
+  // console.log(vertrouwen.length)
+
+  // var totaal = {};
+  // var years = [2012, 2013, 2014, 2015, 2016, 2017];
+  //
+  // for(var i = 0; i < vertrouwen.length; i ++){
+  //   for(var j = 0; j < years.length; j ++){
+  //     totaal[years[j]] = {};
+  //     for(var k = 0; k < 8; k ++){
+  //       // console.log('j:', j, 'i:', i, 'k', k)
+  //       totaal[years[j]][Object.keys(vertrouwen[i])[k]] = Object.values(vertrouwen[i])[k]
+  //     }
+  //   }
+  // }
+
   var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
-  console.log(years[0])
+  var totaal = {};
 
-  totaal[years[0]] = {}
-  totaal[years[0]][Object.keys(vertrouwen[0])[0]] = Object.values(vertrouwen[0])[0]
-  totaal[years[0]][Object.keys(vertrouwen[0])[1]] = Object.values(vertrouwen[0])[1]
-  totaal[years[0]][Object.keys(vertrouwen[0])[2]] = Object.values(vertrouwen[0])[2]
-  totaal[years[0]][Object.keys(vertrouwen[0])[3]] = Object.values(vertrouwen[0])[3]
-  totaal[years[0]][Object.keys(vertrouwen[0])[4]] = Object.values(vertrouwen[0])[4]
-  totaal[years[0]][Object.keys(vertrouwen[0])[5]] = Object.values(vertrouwen[0])[5]
-  totaal[years[0]][Object.keys(vertrouwen[0])[6]] = Object.values(vertrouwen[0])[6]
-  totaal[years[0]][Object.keys(vertrouwen[0])[7]] = Object.values(vertrouwen[0])[7]
+  for(var i = 0; i < years.length; i ++){
+    totaal[years[i]] = {};
+    for(var j = 0; j < 8; j ++){
+      totaal[years[i]][Object.keys(vertrouwen[i])[j]] = Object.values(vertrouwen[i])[j]
+    }
+  }
 
-  totaal[2013] = {}
-  totaal[2013][Object.keys(vertrouwen[1])[0]] = Object.values(vertrouwen[1])[0]
-  totaal[2013][Object.keys(vertrouwen[1])[1]] = Object.values(vertrouwen[1])[1]
-  totaal[2013][Object.keys(vertrouwen[1])[2]] = Object.values(vertrouwen[1])[2]
-  totaal[2013][Object.keys(vertrouwen[1])[3]] = Object.values(vertrouwen[1])[3]
-  totaal[2013][Object.keys(vertrouwen[1])[4]] = Object.values(vertrouwen[1])[4]
-  totaal[2013][Object.keys(vertrouwen[1])[5]] = Object.values(vertrouwen[1])[5]
-  totaal[2013][Object.keys(vertrouwen[1])[6]] = Object.values(vertrouwen[1])[6]
+  var nederlands = {};
+  for(var i = 0; i < years.length; i ++){
+    nederlands[years[i]] = {};
+    for(var j = 0; j < 8; j ++){
+      nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] = Object.values(vertrouwen[i+6])[j]
+    }
+  }
 
-  for loop met variabele voor jaar, eerste index 000000 111111 22222 333333, tweede index 0123456
+  var westers = {};
+  for(var i = 0; i < years.length; i ++){
+    westers[years[i]] = {};
+    for(var j = 0; j < 8; j ++){
+      westers[years[i]][Object.keys(vertrouwen[i+12])[j]] = Object.values(vertrouwen[i+12])[j]
+    }
+  }
 
+  var nietWesters = {};
+  for(var i = 0; i < years.length; i ++){
+    nietWesters[years[i]] = {};
+    for(var j = 0; j < 8; j ++){
+      nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j]
+    }
+  }
+  console.log('wes', westers)
+  vertrouwenData = {};
+  vertrouwenData["totaal"] = totaal
+  vertrouwenData["nederlands"] = nederlands
+  vertrouwenData["westers"] = westers
+  vertrouwenData["nietWesters"] = nietWesters
 
-  // for()
+  console.log('vertrouwendata',vertrouwenData)
 
-  console.log(totaal)
 
 
   // for(var i = 0; i < vertrouwen.length; i ++){

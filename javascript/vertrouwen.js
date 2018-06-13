@@ -20,6 +20,7 @@ window.onload = function(){
 
 function makeLinegraphCanvas(vertrouwen){
 
+  console.log('rood', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1260,

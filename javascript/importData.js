@@ -39,15 +39,11 @@ function importData(error, response){
     vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
   };
 
-  console.log('vertrouwen',vertrouwen)
-  console.log('keys',Object.keys(vertrouwen[0]))
-  console.log('values',Object.values(vertrouwen[0]))
+  // console.log('vertrouwen',vertrouwen)
+  // console.log('keys',Object.keys(vertrouwen[0]))
+  // console.log('values',Object.values(vertrouwen[0]))
 
-  // var totaal = {};
-  // var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
-  // console.log(years[0])
-  //
   // totaal[years[0]] = {};
   // totaal[years[0]][Object.keys(vertrouwen[0])[0]] = Object.values(vertrouwen[0])[0]
   // totaal[years[0]][Object.keys(vertrouwen[0])[1]] = Object.values(vertrouwen[0])[1]
@@ -90,18 +86,6 @@ function importData(error, response){
   // nietWesters[years[5]][Object.keys(vertrouwen[23])[6]] = Object.values(vertrouwen[23])[6]
   // nietWesters[years[5]][Object.keys(vertrouwen[23])[7]] = Object.values(vertrouwen[23])[7]
 
-  // console.log('nietwissa',nietWesters)
-
-
-  // for loop met variabele voor jaar, eerste index 000000 111111 22222 333333, tweede index 0123456
-
-
-  // totaal.years[0] = {}
-  // console.log(vertrouwen.length)
-
-  // var totaal = {};
-  // var years = [2012, 2013, 2014, 2015, 2016, 2017];
-  //
   // for(var i = 0; i < vertrouwen.length; i ++){
   //   for(var j = 0; j < years.length; j ++){
   //     totaal[years[j]] = {};
@@ -146,73 +130,16 @@ function importData(error, response){
       nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j]
     }
   }
-  console.log('wes', westers)
-  vertrouwenData = {};
-  vertrouwenData["totaal"] = totaal
-  vertrouwenData["nederlands"] = nederlands
-  vertrouwenData["westers"] = westers
-  vertrouwenData["nietWesters"] = nietWesters
 
-  console.log('vertrouwendata',vertrouwenData)
+  vertrouwen = {};
+  vertrouwen["totaal"] = totaal
+  vertrouwen["nederlands"] = nederlands
+  vertrouwen["westers"] = westers
+  vertrouwen["nietWesters"] = nietWesters
 
+  console.log('vertrouwendata',vertrouwen)
 
-
-  // for(var i = 0; i < vertrouwen.length; i ++){
-  //   var periode = vertrouwen[i].Periode;
-    // vertrouwen[i].Ambtenaren
-    // vertrouwen[i].EuropeseUnie
-    // vertrouwen[i].Pers
-    // vertrouwen[i].Politie
-    // vertrouwen[i].Rechters;
-    // vertrouwen[i].TweedeKamer
-    // vertrouwen[i].VertrouwenInAndereMensen
-  // };
-
-  // for(var i = 0; i < vertrouwen.length; i ++){
-  //   vertrouwen[i].ID
-  //   vertrouwen[i].Periode
-  //   vertrouwen[i].Ambtenaren
-  //   vertrouwen[i].EuropeseUnie
-  //   vertrouwen[i].Pers
-  //   vertrouwen[i].Politie
-  //   vertrouwen[i].Rechters;
-  //   vertrouwen[i].TweedeKamer
-  //   vertrouwen[i].VertrouwenInAndereMensen
-  // };
-
-  //
-  // console.log('ver',vertrouwen)
-  //
-  //   const object1 = {
-  //   a: 1,
-  //   b: 2,
-  //   c: 3
-  //   };
-  //
-  //
-  // const object2 = Object.assign({c: 4, d: 5}, object1);
-  //
-  // console.log(object2.c, object2.d);
-
-// expected output: 3 5
-  //
-
-  // var totaal = {};
-  //
-  // for(var i = 0; i < vertrouwen.length; i ++){
-  //   for (var j = 0; j < 5; j ++){
-  //     totaal.assign(vertrouwen[j].Periode)
-  //     totaal.assign(vertrouwen[j].Ambtenaren)
-  //     totaal.assign(vertrouwen[j].EuropeseUnie)
-  //     totaal.assign(vertrouwen[j].Pers)
-  //     totaal.assign(vertrouwen[j].Politie)
-  //     totaal.assign(vertrouwen[j].Rechters)
-  //     totaal.assign(vertrouwen[j].TweedeKamer)
-  //     totaal.assign(vertrouwen[j].VertrouwenInAndereMensen)
-  //   }
-  // }
-
-  // console.log(totaal)
+  // wat je kan doen om niet het aantal variabelen te hardcoden is de variabelen van de desbetreffende dict in een array pushen met objectkeys functie en daar dan de lengte van nemen 
 
   var dienstverlening = (bigDatty[1]["dienstverlening"])
 

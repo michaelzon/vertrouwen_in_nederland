@@ -99,7 +99,6 @@ function importData(error, response){
   var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
   var totaal = {};
-
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < 8; j ++){
@@ -137,9 +136,9 @@ function importData(error, response){
   vertrouwen["westers"] = westers
   vertrouwen["nietWesters"] = nietWesters
 
-  console.log('vertrouwendata',vertrouwen)
+  // console.log('vertrouwendata',vertrouwen)
 
-  // wat je kan doen om niet het aantal variabelen te hardcoden is de variabelen van de desbetreffende dict in een array pushen met objectkeys functie en daar dan de lengte van nemen 
+  // wat je kan doen om niet het aantal variabelen te hardcoden is de variabelen van de desbetreffende dict in een array pushen met objectkeys functie en daar dan de lengte van nemen
 
   var dienstverlening = (bigDatty[1]["dienstverlening"])
 

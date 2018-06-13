@@ -20,7 +20,7 @@ window.onload = function(){
 
 function makeLinegraphCanvas(vertrouwen){
 
-  console.log('rood', vertrouwen)
+  console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1260,
@@ -34,11 +34,11 @@ function makeLinegraphCanvas(vertrouwen){
   // var parseTime = d3.timeParse("%Y");
 
   // store 2012 and 2017 in variables
-  var minYear = d3.min(vertrouwen, d => d.Periode)
-  var maxYear = d3.max(vertrouwen, d => d.Periode)
+  var minYear = d3.min(vertrouwen, d => d.totaal.Periode)
+  var maxYear = d3.max(vertrouwen, d => d.totaal.Periode)
 
-  var minPer = d3.min(vertrouwen, d => d.VertrouwenInAndereMensen)
-  var maxPer = d3.max(vertrouwen, d => d.VertrouwenInAndereMensen)
+  var minPer = d3.min(vertrouwen, d => d.totaal.Periode.VertrouwenInAndereMensen)
+  var maxPer = d3.max(vertrouwen, d => d.totaal.Periode.VertrouwenInAndereMensen)
 
   // var minPer = d3.min(vertrouwen, d => console.log('jaja', d.VertrouwenInAndereMensen))
   // var minPer = d3.min(vertrouwen, function (d,i){ console.log('jjj', d.VertrouwenInAndereMensen, i)})
@@ -46,9 +46,12 @@ function makeLinegraphCanvas(vertrouwen){
   // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d[i]VertrouwenInAndereMensen))
   // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d.VertrouwenInAndereMensen, i))
 
-  // console.log("minper", minPer)
-  // console.log(maxPer)
-  // console.log(vertrouwen)
+  console.log("minyear", minYear)
+  console.log("maxyear", maxYear)
+  console.log("minper", minPer)
+  console.log("maxper", maxPer)
+
+
 
 
   // scaling for the width of the graph
@@ -92,8 +95,8 @@ function makeLinegraphCanvas(vertrouwen){
   //     .call(yAxis);
 
   var line = d3.line()
-      .x(d => xScale(d.Periode))
-      .y(d => yScale(d.VertrouwenInAndereMensen))
+      .x(d => xScale(d.totaal.Periode))
+      .y(d => yScale(d.totaal.Periode.VertrouwenInAndereMensen))
       .curve(d3.curveLinear);
 
   charts.append("path")
@@ -109,7 +112,6 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("g")
       .attr("class", "y-axis")
       .call(yAxis)
-  // console.log(vertrouwen.VertrouwenInAndereMensen)
 
 };
 

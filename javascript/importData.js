@@ -4,7 +4,7 @@ function importData(error, response){
   if (error) throw error;
 
   // creating one big array of all my objects
-  bigDatty = [];
+  var bigDatty = [];
 
   for(i = 0; i < 6; i ++){
     bigDatty.push(response[i])
@@ -12,7 +12,9 @@ function importData(error, response){
 
   console.log("bigDatty: ", bigDatty)
 
-  vertrouwen = (bigDatty[0]["vertrouwen"]);
+  var years = [2012, 2013, 2014, 2015, 2016, 2017];
+
+  var vertrouwen = (bigDatty[0]["vertrouwen"]);
 
   // for(var i = 0; i < vertrouwen.length; i ++){
   //   vertrouwen[i].ID = Number(vertrouwen[i].ID); // don't forget to store number value in current value
@@ -96,12 +98,13 @@ function importData(error, response){
   //   }
   // }
 
-  var years = [2012, 2013, 2014, 2015, 2016, 2017];
+  // create an array with all variables from vertrouwen dataset
+  var vertrouwenVars = Object.keys(vertrouwen[0])
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
-    for(var j = 0; j < 8; j ++){
+    for(var j = 0; j < vertrouwenVars.length; j ++){
       totaal[years[i]][Object.keys(vertrouwen[i])[j]] = Object.values(vertrouwen[i])[j]
     }
   }
@@ -109,7 +112,7 @@ function importData(error, response){
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
-    for(var j = 0; j < 8; j ++){
+    for(var j = 0; j < vertrouwenVars.length; j ++){
       nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] = Object.values(vertrouwen[i+6])[j]
     }
   }
@@ -117,7 +120,7 @@ function importData(error, response){
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
-    for(var j = 0; j < 8; j ++){
+    for(var j = 0; j < vertrouwenVars.length; j ++){
       westers[years[i]][Object.keys(vertrouwen[i+12])[j]] = Object.values(vertrouwen[i+12])[j]
     }
   }
@@ -125,7 +128,7 @@ function importData(error, response){
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
-    for(var j = 0; j < 8; j ++){
+    for(var j = 0; j < vertrouwenVars.length; j ++){
       nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j]
     }
   }
@@ -136,20 +139,27 @@ function importData(error, response){
   vertrouwen["westers"] = westers
   vertrouwen["nietWesters"] = nietWesters
 
-  // console.log('vertrouwendata',vertrouwen)
+  console.log('vertrouwendata',vertrouwen)
 
   // wat je kan doen om niet het aantal variabelen te hardcoden is de variabelen van de desbetreffende dict in een array pushen met objectkeys functie en daar dan de lengte van nemen
 
   var dienstverlening = (bigDatty[1]["dienstverlening"])
 
   for(var i = 0; i < dienstverlening.length; i ++){
-    dienstverlening[i].ID = Number(dienstverlening[i].ID);
+    delete(dienstverlening[i].ID)
+    delete(dienstverlening[i].Migratieachtergrond)
     dienstverlening[i].Periode = Number(dienstverlening[i].Periode);
     dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
     dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
     dienstverlening[i].ZoekenOpWebsitesPubliekeSector = Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
     dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
   }
+
+  console.log('dienstverlening', dienstverlening)
+
+  var dienstverleningVars = Object.keys(dienstverlening[0])
+  console.log(dienstverleningVars)
+
 
   var faciliteiten = (bigDatty[2]["faciliteiten"]);
 
@@ -205,6 +215,7 @@ function importData(error, response){
     participatie[i].MeegedaanPolitiekeActieViaInternet = Number(participatie[i].MeegedaanPolitiekeActieViaInternet);
     participatie[i].Anders = Number(participatie[i].Anders);
   };
+
 
   // console.log(vertrouwen)
 

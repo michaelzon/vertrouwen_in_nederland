@@ -69,3 +69,9 @@ path {
   fill: none;
 
 }
+
+#linechart {
+  padding: 20px;
+  border-style: dotted;
+  border-width: 2px;
+}

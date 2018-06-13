@@ -14,7 +14,6 @@ window.onload = function(){
 
   makeDendrogramCanvas()
 
-
 };
 
 
@@ -33,42 +32,31 @@ function makeLinegraphCanvas(vertrouwen){
   // parse the date / time
   // var parseTime = d3.timeParse("%Y");
 
-  // store 2012 and 2017 in variables
-  var minYear = d3.min(vertrouwen, d => d.totaal.Periode)
-  var maxYear = d3.max(vertrouwen, d => d.totaal.Periode)
+  // create an array of years with type of number
+  var years = (Object.keys(vertrouwen.totaal))
+  for(var i = 0; i < years.length; i ++){
+    years[i] = Number(years[i])
+  }
 
-  var minPer = d3.min(vertrouwen, d => d.totaal.Periode.VertrouwenInAndereMensen)
-  var maxPer = d3.max(vertrouwen, d => d.totaal.Periode.VertrouwenInAndereMensen)
-
-  // var minPer = d3.min(vertrouwen, d => console.log('jaja', d.VertrouwenInAndereMensen))
-  // var minPer = d3.min(vertrouwen, function (d,i){ console.log('jjj', d.VertrouwenInAndereMensen, i)})
-  // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d.VertrouwenInAndereMensen, i))
-  // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d[i]VertrouwenInAndereMensen))
-  // var minPer = d3.min(vertrouwen, (d,i) => console.log('jjj', d.VertrouwenInAndereMensen, i))
-
-  console.log("minyear", minYear)
-  console.log("maxyear", maxYear)
-  console.log("minper", minPer)
-  console.log("maxper", maxPer)
-
-
-
-
+  console.log(width)
+  console.log([d3.extent(years)])
   // scaling for the width of the graph
   var xScale = d3.scaleLinear()
-      .domain([minYear, maxYear])
+      .domain(d3.extent(years)) //returns 2012 and 2017 as min and max
       .range([0, width]);
+
+  // xScale = d3.scaleLinear()
+  //   .domain([2012, 2017])
+  //   .range([0, 500])
 
   // and for the height
   var yScale = d3.scaleLinear()
-      .domain([minPer, maxPer])
+      .domain([0, 100])
       .range([height, 0]);
 
   // function for creating x-axis later on
   var xAxis = d3.axisBottom(xScale)
-      // .tickFormat(d => d.Periode)
-      // .tickFormat(function (d){ console.log(d); return d.Periode})
-      // .tickFormat(d3.timeFormat("2000", "2001"))
+      .tickFormat(["yolo"])
       .ticks(6)
 
   // and also for the y-axis
@@ -84,23 +72,23 @@ function makeLinegraphCanvas(vertrouwen){
   var charts = svg.append("g")
       // .attr("transform", "translate(10, 10)");
 
-  // // put a x-axis on it
-  // svg.append("g")
-  //     .attr("class", "xaxis")
-  //     .call(xAxis);
-  //
-  // // and a y-axis
-  // svg.append("g")
-  //     .attr("class", "yaxis")
-  //     .call(yAxis);
+  // create an array with all values vertrouweninanderemensen of totaal bevgroep
+  // var mensen = (Object.keys(vertrouwen.totaal[2012]))
+  // var mensen = (vertrouwen.totaal[2012]['VertrouwenInAndereMensen'])
 
+  var mensenTot = [];
+  for(var i = 0; i < years.length; i ++){
+    mensenTot.push(vertrouwen.totaal[years[i]]['VertrouwenInAndereMensen'])
+  }
+  console.log('mensen',mensenTot)
+  console.log(xScale(2014))
   var line = d3.line()
-      .x(d => xScale(d.totaal.Periode))
-      .y(d => yScale(d.totaal.Periode.VertrouwenInAndereMensen))
+      .x(d => xScale(d))
+      .y((d,i) => yScale(mensenTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([vertrouwen])
+    .data([years])         //array with years
     .attr("class", "line")
     .attr("d", line);
 

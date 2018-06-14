@@ -351,6 +351,8 @@ function importData(error, response){
   console.log('interesse', interesse)
   console.log('participatie', participatie)
 
-  makeLinegraphCanvas(vertrouwen)
+
+  makeLinegraph(vertrouwen.nederlands)
+  updateLines(vertrouwen)
 
 };

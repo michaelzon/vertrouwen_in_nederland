@@ -14,6 +14,12 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title> TRUST. </title>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!-- Creating navigation bar -->
     <ul class="nav nav-tabs">
@@ -38,6 +44,19 @@
       <div class="col-md-auto" id="linegraph">
         <div class="text1">
           <!-- Hier komt mijn multiple-linegraph! -->
+        </div>
+      </div>
+    </div>
+    <div class = "row">
+        <div class = "col-sm-auto", id="description">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Kies bevolkingsgroep</button>
+            <ul class ="dropdown-menu", id="dropit=">
+              <li><a id ="selectTotaal" href="#totaal">Het totale gemiddelde van de bevolking</a></li>
+              <li><a id ="selectNederlands" href="#nederlands"> Mensen zonder migratieachtergrond</a></li>
+              <li><a id ="selectWesters" href="#westers"> Mensen met een westerse migratieachtergrond</a></li>
+              <li><a id ="selectNietWesters" href="#nietWesters"> Mensen met een niet-westerse migratieachtergrond</a></li>
+            </ul>
         </div>
       </div>
     </div>

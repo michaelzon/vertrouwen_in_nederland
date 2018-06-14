@@ -1,5 +1,4 @@
 // the following part will be triggered when the page is loaded
-var vertrouwen = [];
 window.onload = function(){
 
   // request for the queries
@@ -14,9 +13,55 @@ window.onload = function(){
 
   makeDendrogramCanvas()
 
+  // hier komt eventhandler
+
 };
 
-function makeLinegraphCanvas(vertrouwen){
+function updateLines(data){
+  console.log('verververver', data)
+
+  var butTotaal = document.getElementById("selectTotaal");
+  var butNederlands = document.getElementById("selectNederlands");
+  var butWesters = document.getElementById("selectWesters");
+  var butNietWesters = document.getElementById("selectNietWesters");
+
+  butTotaal.addEventListener("click", {
+    handleEvent: function (event){
+      makeLinegraph(data.totaal)
+    }
+  });
+
+  butNederlands.addEventListener("click", {
+    handleEvent: function (event){
+      makeLinegraph(data.nederlands)
+    }
+  });
+
+  butWesters.addEventListener("click", {
+    handleEvent: function (event) {
+      makeLinegraph(data.westers)
+    }
+  });
+
+  butNietWesters.addEventListener("click", {
+    handleEvent: function (event) {
+      makeLinegraph(data.nietWesters)
+    }
+  });
+
+}
+
+
+function makeLinegraph(data){
+
+  // remove current lines if others are added by clicking on dropdown
+  if (d3.select("#linegraph").select("svg")){
+    d3.select("#linegraph").select("svg").remove();
+  }
+
+  console.log(data)
+
+  // eventhandler > roept linegraph functie aan met de data die je wil hebben
 
   // console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -29,7 +74,7 @@ function makeLinegraphCanvas(vertrouwen){
       height = innerHeight - padding.top - padding.bottom;
 
   // create an array of years convert its type to number
-  var years = (Object.keys(vertrouwen.totaal))
+  var years = (Object.keys(data))
   for(var i = 0; i < years.length; i ++){
     years[i] = Number(years[i])
   }
@@ -53,7 +98,6 @@ function makeLinegraphCanvas(vertrouwen){
       .tickFormat((d,i) => years[i])
       .ticks(6);
 
-
   // and also for the y-axis
   var yAxis = d3.axisLeft(yScale)
       .tickFormat(function(d){return d+ "%"})
@@ -71,42 +115,42 @@ function makeLinegraphCanvas(vertrouwen){
       .attr("transform", "translate(10, 10)");
 
   // create an array with all values vertrouweninanderemensen of totaal bevgroep
-  // var mensen = (Object.keys(vertrouwen.totaal[2012]))
-  // var mensen = (vertrouwen.totaal[2012]['VertrouwenInAndereMensen'])
+  // var mensen = (Object.keys(data[2012]))
+  // var mensen = (data[2012]['VertrouwenInAndereMensen'])
 
   var mensenTot = [];
   for(var i = 0; i < years.length; i ++){
-    mensenTot.push(vertrouwen.totaal[years[i]]["VertrouwenInAndereMensen"])
+    mensenTot.push(data[years[i]]["VertrouwenInAndereMensen"])
   }
 
   var ambtTot = [];
   for(var i = 0; i < years.length; i ++){
-    ambtTot.push(vertrouwen.totaal[years[i]]["Ambtenaren"])
+    ambtTot.push(data[years[i]]["Ambtenaren"])
   }
 
   var euTot = [];
   for(var i = 0; i < years.length; i ++){
-    euTot.push(vertrouwen.totaal[years[i]]["EuropeseUnie"])
+    euTot.push(data[years[i]]["EuropeseUnie"])
   }
 
   var persTot = [];
   for(var i = 0; i < years.length; i ++){
-    persTot.push(vertrouwen.totaal[years[i]]["Pers"])
+    persTot.push(data[years[i]]["Pers"])
   }
 
   var politieTot = [];
   for(var i = 0; i < years.length; i ++){
-    politieTot.push(vertrouwen.totaal[years[i]]["Politie"])
+    politieTot.push(data[years[i]]["Politie"])
   }
 
   var rechtersTot = [];
   for(var i = 0; i < years.length; i ++){
-    rechtersTot.push(vertrouwen.totaal[years[i]]["Rechters"])
+    rechtersTot.push(data[years[i]]["Rechters"])
   }
 
   var tweedeKamerTot = [];
   for(var i = 0; i < years.length; i ++){
-    tweedeKamerTot.push(vertrouwen.totaal[years[i]]["TweedeKamer"])
+    tweedeKamerTot.push(data[years[i]]["TweedeKamer"])
   }
 
   var lineMen = d3.line()

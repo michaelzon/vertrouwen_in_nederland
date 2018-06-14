@@ -57,5 +57,6 @@
 
 ![](photo/image_7.jpg)
 
+* Ga nu basis maken van update functie met dropdown.
 
-* ga nu basis maken van update functie met dropdown. 
+* Vandaag update functie afgekregen. Heb deze keer een handleEvent functie gebruikt in tegenstelling tot de vorige opdrachten. Hierdoor heeft het opvullen van arrays met percentages in de makeLinegraph functie geen probleem opgeleverd.

@@ -25,6 +25,8 @@ function updateLines(data){
   var butWesters = document.getElementById("selectWesters");
   var butNietWesters = document.getElementById("selectNietWesters");
 
+  // eventhandler > roept linegraph functie aan met de data die je wil hebben
+
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
@@ -60,8 +62,6 @@ function makeLinegraph(data){
   }
 
   console.log(data)
-
-  // eventhandler > roept linegraph functie aan met de data die je wil hebben
 
   // console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -113,10 +113,6 @@ function makeLinegraph(data){
 
   var charts = svg.append("g")
       .attr("transform", "translate(10, 10)");
-
-  // create an array with all values vertrouweninanderemensen of totaal bevgroep
-  // var mensen = (Object.keys(data[2012]))
-  // var mensen = (data[2012]['VertrouwenInAndereMensen'])
 
   var mensenTot = [];
   for(var i = 0; i < years.length; i ++){
@@ -226,7 +222,7 @@ function makeLinegraph(data){
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
+    .data([years])
     .attr("class", "lineTweedeKamer")
     .attr("id", "lines")
     .attr("d", lineTweedeKamer);

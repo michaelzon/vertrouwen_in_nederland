@@ -53,4 +53,9 @@
 
 # dag 6 (14/6)
 
-* Deze 
+* Line graph al een stuk verder:
+
+![](photo/image_7.jpg)
+
+
+* ga nu basis maken van update functie met dropdown. 

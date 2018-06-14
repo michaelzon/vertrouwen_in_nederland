@@ -133,6 +133,7 @@ function makeLinegraphCanvas(vertrouwen){
 
   var lineEu = d3.line()
       .x(d => xScale(d))
+      .x(function(d) {return xScale(d)})
       .y((d,i) => yScale(euTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
       .curve(d3.curveLinear);
 

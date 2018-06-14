@@ -16,7 +16,6 @@ window.onload = function(){
 
 };
 
-
 function makeLinegraphCanvas(vertrouwen){
 
   // console.log('vertrouwen', vertrouwen)
@@ -39,6 +38,10 @@ function makeLinegraphCanvas(vertrouwen){
   var xScale = d3.scaleLinear()
       .domain(d3.extent(years))   //returns 2012 and 2017 as min and max
       .range([0, width]);
+
+  // var zColor = d3.scaleOrdinal()
+  //     .domain(independents)
+  //     .range(colorbrewer.BrBG[8]);
 
   // and for the height
   var yScale = d3.scaleLinear()
@@ -70,18 +73,108 @@ function makeLinegraphCanvas(vertrouwen){
 
   var mensenTot = [];
   for(var i = 0; i < years.length; i ++){
-    mensenTot.push(vertrouwen.totaal[years[i]]['VertrouwenInAndereMensen'])
+    mensenTot.push(vertrouwen.totaal[years[i]]["VertrouwenInAndereMensen"])
   }
 
-  var lineVer = d3.line()
+  var ambtTot = [];
+  for(var i = 0; i < years.length; i ++){
+    ambtTot.push(vertrouwen.totaal[years[i]]["Ambtenaren"])
+  }
+
+  var euTot = [];
+  for(var i = 0; i < years.length; i ++){
+    euTot.push(vertrouwen.totaal[years[i]]["EuropeseUnie"])
+  }
+
+  var persTot = [];
+  for(var i = 0; i < years.length; i ++){
+    persTot.push(vertrouwen.totaal[years[i]]["Pers"])
+  }
+
+  var politieTot = [];
+  for(var i = 0; i < years.length; i ++){
+    politieTot.push(vertrouwen.totaal[years[i]]["Politie"])
+  }
+
+  var rechtersTot = [];
+  for(var i = 0; i < years.length; i ++){
+    rechtersTot.push(vertrouwen.totaal[years[i]]["Rechters"])
+  }
+
+  var tweedeKamerTot = [];
+  for(var i = 0; i < years.length; i ++){
+    tweedeKamerTot.push(vertrouwen.totaal[years[i]]["TweedeKamer"])
+  }
+
+  var lineMen = d3.line()
       .x(d => xScale(d))
       .y((d,i) => yScale(mensenTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
       .curve(d3.curveLinear);
 
   charts.append("path")
     .data([years])         //array with years
-    .attr("class", "line")
-    .attr("d", lineVer);
+    .attr("class", "lineMen")
+    .attr("d", lineMen);
+
+  var lineAmbt = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(ambtTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "lineAmbt")
+    .attr("d", lineAmbt);
+
+  var lineEu = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(euTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "lineEu")
+    .attr("d", lineEu);
+
+  var linePers = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(persTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "linePers")
+    .attr("d", linePers);
+
+  var linePolitie = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(politieTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "linePolitie")
+    .attr("d", linePolitie);
+
+  var lineRechters = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(rechtersTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "lineRechters")
+    .attr("d", lineRechters);
+
+  var lineTweedeKamer = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(tweedeKamerTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .curve(d3.curveLinear);
+
+  charts.append("path")
+    .data([years])         //array with years
+    .attr("class", "lineTweedeKamer")
+    .attr("d", lineTweedeKamer);
 
   charts.append("g")
       .attr("class", "x-axis")

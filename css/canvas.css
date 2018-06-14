@@ -75,3 +75,9 @@ path {
   border-style: dotted;
   border-width: 2px;
 }
+
+.lineVer {
+  fill: none;
+  stroke: #d53e4f;
+  stroke-width: 2px;
+}

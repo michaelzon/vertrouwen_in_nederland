@@ -51,11 +51,14 @@ function makeLinegraphCanvas(vertrouwen){
   // function for creating x-axis later on
   var xAxis = d3.axisBottom(xScale)
       .tickFormat((d,i) => years[i])
-      .ticks(6)
+      .ticks(6);
+
 
   // and also for the y-axis
   var yAxis = d3.axisLeft(yScale)
-      .ticks(7)
+      .tickFormat(function(d){return d+ "%"})
+      .tickFormat(d => d+ "%")
+      .ticks(7);
 
   // draw my canvas for the linegraph
   var svg = d3.select("#linegraph")
@@ -114,6 +117,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "lineMen")
+    .attr("id", "lines")
     .attr("d", lineMen);
 
   var lineAmbt = d3.line()
@@ -124,6 +128,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "lineAmbt")
+    .attr("id", "lines")
     .attr("d", lineAmbt);
 
   var lineEu = d3.line()
@@ -134,6 +139,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "lineEu")
+    .attr("id", "lines")
     .attr("d", lineEu);
 
   var linePers = d3.line()
@@ -144,6 +150,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "linePers")
+    .attr("id", "lines")
     .attr("d", linePers);
 
   var linePolitie = d3.line()
@@ -154,6 +161,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "linePolitie")
+    .attr("id", "lines")
     .attr("d", linePolitie);
 
   var lineRechters = d3.line()
@@ -164,6 +172,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "lineRechters")
+    .attr("id", "lines")
     .attr("d", lineRechters);
 
   var lineTweedeKamer = d3.line()
@@ -174,6 +183,7 @@ function makeLinegraphCanvas(vertrouwen){
   charts.append("path")
     .data([years])         //array with years
     .attr("class", "lineTweedeKamer")
+    .attr("id", "lines")
     .attr("d", lineTweedeKamer);
 
   charts.append("g")
@@ -183,7 +193,6 @@ function makeLinegraphCanvas(vertrouwen){
 
   charts.append("g")
       .attr("class", "y-axis")
-      // .attr("transform", "translate (0," + width + ")")
       .call(yAxis)
 
 };

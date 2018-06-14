@@ -63,21 +63,99 @@ body {
 }
 
 /* for lines */
-path {
-  stroke: black;
-  stroke-width: 2px;
-  fill: none;
-
-}
 
 #linechart {
-  padding: 20px;
+  /* margin: 20px; */
+  padding: 60px;
   border-style: dotted;
   border-width: 2px;
 }
 
-.lineVer {
+#lines {
+ stroke-width: 3px;
+ fill: none;
+}
+
+.lineMen {
   fill: none;
   stroke: #d53e4f;
-  stroke-width: 2px;
+}
+
+.lineAmbt {
+  fill: none;
+  stroke: #fc8d59;
+}
+
+.lineEu {
+  fill: none;
+  stroke: #fee08b;
+}
+
+.linePers {
+  fill: none;
+  stroke: #ffffbf;
+}
+
+.linePolitie {
+  fill: none;
+  stroke: #e6f598;
+}
+
+.lineRechters {
+  fill: none;
+  stroke: #99d594;
+}
+
+.lineTweedeKamer {
+  fill: none;
+  stroke: #3288bd;
+}
+
+/* textual elements in linegraph */
+
+.ticks {
+  font-size: 10px;
+}
+
+.x-axis {
+
+  font-size: 15px;
+  font-family: avenir;
+
+}
+
+.y-axis {
+
+  font-size: 13px;
+  font-family: avenir;
+
+}
+
+.x-axis path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+}
+
+.x-axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+
+}
+
+.y-axis path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
+}
+
+.y-axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 2;
+    shape-rendering: crispEdges;
 }

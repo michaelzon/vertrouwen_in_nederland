@@ -60,3 +60,8 @@
 * Ga nu basis maken van update functie met dropdown.
 
 * Vandaag update functie afgekregen. Heb deze keer een handleEvent functie gebruikt in tegenstelling tot de vorige opdrachten. Hierdoor heeft het opvullen van arrays met percentages in de makeLinegraph functie geen probleem opgeleverd.
+
+
+# dag 7 (15/6)
+
+* Vandaag begin maken van dendogram, ben nu eerst het voorbeeld aan het volgen en console.logjes gooien in zijn code om te kijken wat waar gebeurd

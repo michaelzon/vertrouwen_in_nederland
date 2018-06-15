@@ -346,6 +346,7 @@ function importData(error, response){
   participatie["nietWesters"] = nietWesters
 
   console.log('vertrouwen', vertrouwen)
+  console.log('dienstverlening', dienstverlening)
   console.log('faciliteiten', faciliteiten)
   console.log('gebruik', gebruik)
   console.log('interesse', interesse)

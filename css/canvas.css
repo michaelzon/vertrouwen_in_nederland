@@ -37,9 +37,16 @@ body {
   transform: translate(-50%, -50%);
 }
 
+/* #description {
+  position: absolute;
+  top: 170%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
 #dendrogram {
   position: absolute;
-  top: 185%;
+  top: 200%;
   left: 50%;
   transform: translate(-50%, -50%);
 }

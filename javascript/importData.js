@@ -340,10 +340,10 @@ function importData(error, response){
   }
 
   var participatie = {};
-  participatie["totaal"] = totaal
-  participatie["nederlands"] = nederlands
-  participatie["westers"] = westers
-  participatie["nietWesters"] = nietWesters
+  participatie["totaal"] = totaal;
+  participatie["nederlands"] = nederlands;
+  participatie["westers"] = westers;
+  participatie["nietWesters"] = nietWesters;
 
   console.log('vertrouwen', vertrouwen)
   console.log('dienstverlening', dienstverlening)
@@ -353,17 +353,25 @@ function importData(error, response){
   console.log('participatie', participatie)
 
   var dendroData = {};
-  dendroData.push(gebruik)
-  dendroData.push(dienstverlening)
-  dendroData.push(participatie)
-  dendroData.push(interesse)
+  dendroData["internetgebruik"] = gebruik;
+  dendroData["dienstverlening"] = dienstverlening;
+  dendroData["participatie"] = participatie;
+  dendroData["interesse"] = interesse;
+
+  // dendroData.push(gebruik)
+  // dendroData.push(dienstverlening)
+  // dendroData.push(participatie)
+  // dendroData.push(interesse)
+
+  // var alles = (d,i => dendroData[i].nederlands);
+  // console.log(alles)
+
+  // for(var i = 0; i < )
 
   console.log('dendro',dendroData)
 
-
-
-
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)
+  makeDendrogramCanvas(dendroData)
 
 };

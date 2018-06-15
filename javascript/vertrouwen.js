@@ -238,7 +238,7 @@ function makeLinegraph(data){
 
 };
 
-function makeDendrogramCanvas(){
+function makeDendrogramCanvas(data){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 960,
@@ -247,6 +247,8 @@ function makeDendrogramCanvas(){
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
+
+  console.log('d', data)
 
   var svg = d3.select("#dendrogram")
       .append("svg")
@@ -269,8 +271,14 @@ function makeDendrogramCanvas(){
       .tickFormat(d => d+ "%")
       .ticks(10);
 
-  // create rootNode (bevolkingsgroep X)
-  var root = d3.hierarchy()
+  // create rootNode (bevolkingsgroep x)
+  var root = d3.hierarchy(data)
+
+  console.log(root)
+
+  // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo? 
+
+
 
 
 

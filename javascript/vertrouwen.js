@@ -268,7 +268,10 @@ function makeDendrogramCanvas(){
       .tickFormat(function(d){return d+ "%"})
       .tickFormat(d => d+ "%")
       .ticks(10);
-  
+
+  // create rootNode (bevolkingsgroep X)
+  var root = d3.hierarchy()
+
 
 
 };

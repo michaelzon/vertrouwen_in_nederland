@@ -339,7 +339,7 @@ function importData(error, response){
     }
   }
 
-  participatie = {};
+  var participatie = {};
   participatie["totaal"] = totaal
   participatie["nederlands"] = nederlands
   participatie["westers"] = westers
@@ -351,6 +351,16 @@ function importData(error, response){
   console.log('gebruik', gebruik)
   console.log('interesse', interesse)
   console.log('participatie', participatie)
+
+  var dendroData = {};
+  dendroData.push(gebruik)
+  dendroData.push(dienstverlening)
+  dendroData.push(participatie)
+  dendroData.push(interesse)
+
+  console.log('dendro',dendroData)
+
+
 
 
   makeLinegraph(vertrouwen.nederlands)

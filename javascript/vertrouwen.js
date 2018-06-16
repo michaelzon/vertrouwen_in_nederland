@@ -1,3 +1,4 @@
+data = {};
 // the following part will be triggered when the page is loaded
 window.onload = function(){
 
@@ -18,6 +19,7 @@ window.onload = function(){
 };
 
 function updateLines(data){
+
   console.log('verververver', data)
 
   var butTotaal = document.getElementById("selectTotaal");
@@ -61,7 +63,7 @@ function makeLinegraph(data){
     d3.select("#linegraph").select("svg").remove();
   }
 
-  // console.log(data)
+  console.log('dat',data)
 
   // console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -276,7 +278,7 @@ function makeDendrogramCanvas(data){
 
   console.log(root)
 
-  // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo? 
+  // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
 
 
 

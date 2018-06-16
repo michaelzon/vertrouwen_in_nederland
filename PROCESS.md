@@ -65,3 +65,7 @@
 # dag 7 (15/6)
 
 * Vandaag begin maken van dendogram, ben nu eerst het voorbeeld aan het volgen en console.logjes gooien in zijn code om te kijken wat waar gebeurd
+
+# dag 8 (16/6)
+
+* Ben nog niet ver met dendrogram en het lijkt er op dat mijn datastructuur weer niet juist is voor deze visualisatie.

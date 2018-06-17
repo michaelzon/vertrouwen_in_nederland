@@ -1,4 +1,3 @@
-data = {};
 // the following part will be triggered when the page is loaded
 window.onload = function(){
 
@@ -12,15 +11,13 @@ window.onload = function(){
   .defer(d3.json, "data_structure/json/politieke_participatie.json")    //[5]
   .awaitAll(importData);
 
-  makeDendrogramCanvas()
-
   // hier komt eventhandler
 
 };
 
 function updateLines(data){
 
-  console.log('verververver', data)
+  // console.log('verververver', data)
 
   var butTotaal = document.getElementById("selectTotaal");
   var butNederlands = document.getElementById("selectNederlands");
@@ -63,7 +60,7 @@ function makeLinegraph(data){
     d3.select("#linegraph").select("svg").remove();
   }
 
-  console.log('dat',data)
+  // console.log('dat', data)
 
   // console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
@@ -240,7 +237,7 @@ function makeLinegraph(data){
 
 };
 
-function makeDendrogramCanvas(data){
+function makeDendrogramCanvas(dendroData){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 960,
@@ -250,7 +247,29 @@ function makeDendrogramCanvas(data){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-  console.log('d', data)
+  // console.log(dendroData.dienstverlening.nederlands)
+  // var dataNederlanders = [];
+  // dataNederlanders.push(dendroData.internetgebruik.nederlands)
+  // dataNederlanders.push(dendroData.dienstverlening.nederlands)
+  // dataNederlanders.push(dendroData.participatie.nederlands)
+  // dataNederlanders.push(dendroData.interesse.nederlands)
+
+  var dataNederlanders = {}
+  dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
+  dataNederlanders["dienstverlening"] = dendroData.dienstverlening.nederlands;
+  dataNederlanders["participatie"] = dendroData.participatie.nederlands;
+  dataNederlanders["interesse"] = dendroData.interesse.nederlands;
+
+  var nl = [];
+  nl.push(dataNederlanders)
+
+  // d.dienstverlening.nederlands[2012].Migratieachtergrond > geeft key terug van migratie achtergrond, zorgt dat hij over elk jaar kan gaan! of iig dat daar een update functie mee gebruikt kan worden.
+
+  var nest = d3.nest()
+      .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
+      .entries(nl);
+
+  console.log('nest',nest)
 
   var svg = d3.select("#dendrogram")
       .append("svg")
@@ -274,10 +293,23 @@ function makeDendrogramCanvas(data){
       .ticks(10);
 
   // create rootNode (bevolkingsgroep x)
-  var root = d3.hierarchy(data)
+  var root = d3.hierarchy(nest)
 
   console.log(root)
 
+  var link = g.selectAll(".link")
+      .data(root.descendants().slice(1))
+      .enter()
+      .append("path")
+      .attr("class", "link")
+      .attr("d", d => "M" + d.y + "," + d.x
+              + "C" + (d.parent.y + 100) + "," + d.x
+              + " " + (d.parent.y + 100) + "," + d.parent.x
+              + " " + d.parent.y + "," + d.parent.x);
+
+  
+
+  console.log("link", link)
   // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
 
 

@@ -69,3 +69,9 @@
 # dag 8 (16/6)
 
 * Ben nog niet ver met dendrogram en het lijkt er op dat mijn datastructuur weer niet juist is voor deze visualisatie.
+
+* Ik heb de keuze gemaakt om de variabelen over faciliteiten niet meer te gebruiken omdat de gebruiker anders door de bomen het bos niet meer zien.
+
+# dag 9 (19/6)
+
+* Ga weer verder met mijn dendrogram. Hoop dat ik er een beetje uit kom qua structuur. 

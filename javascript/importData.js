@@ -1,3 +1,5 @@
+// var dendroData = {};
+
 function importData(error, response){
 
   // check if data gets loaded
@@ -76,7 +78,7 @@ function importData(error, response){
 
   for(var i = 0; i < dienstverlening.length; i ++){
     delete(dienstverlening[i].ID)
-    delete(dienstverlening[i].Migratieachtergrond)
+    // delete(dienstverlening[i].Migratieachtergrond)
     dienstverlening[i].Periode = Number(dienstverlening[i].Periode);
     dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
     dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
@@ -128,7 +130,7 @@ function importData(error, response){
 
   for(var i = 0; i < faciliteiten.length; i ++){
     delete(faciliteiten[i].ID)
-    delete(faciliteiten[i].Migratieachtergrond)
+    // delete(faciliteiten[i].Migratieachtergrond)
     faciliteiten[i].Periode = Number(faciliteiten[i].Periode);
     faciliteiten[i].ToegangTotInternet = Number(faciliteiten[i].ToegangTotInternet);
     faciliteiten[i].PersonalComputerPCOfDesktop = Number(faciliteiten[i].PersonalComputerPCOfDesktop);
@@ -183,7 +185,7 @@ function importData(error, response){
 
   for(var i = 0; i < gebruik.length; i ++){
     delete(gebruik[i].ID)
-    delete(gebruik[i].Migratieachtergrond)
+    // delete(gebruik[i].Migratieachtergrond)
     gebruik[i].Periode = Number(gebruik[i].Periode);
     gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
     gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
@@ -239,7 +241,7 @@ function importData(error, response){
 
   for(var i = 0; i < interesse.length; i ++){
     delete(interesse[i].ID)
-    delete(interesse[i].Migratieachtergrond)
+    // delete(interesse[i].Migratieachtergrond)
     interesse[i].Periode = Number(interesse[i].Periode);
     interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
     interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
@@ -292,7 +294,7 @@ function importData(error, response){
 
   for(var i = 0; i < participatie.length; i ++){
     delete(participatie[i].ID)
-    delete(participatie[i].Migratieachtergrond)
+    // delete(participatie[i].Migratieachtergrond)
     participatie[i].Periode = Number(participatie[i].Periode);
     participatie[i].RadioTelevisieOfKrantIngeschakeld = Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
     participatie[i].PolitiekeOrganisatieIngeschakeld = Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
@@ -305,6 +307,19 @@ function importData(error, response){
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
+  console.log('par', participatie[0].Migratieachtergrond)
+
+  var parData = d3.nest()
+      .key(d => participatie[0].Migratieachtergrond)
+      .entries(participatie)
+
+  // console.log('pardata',parData)
+
+
+  // var nest = d3.nest()
+  //     .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
+  //     .entries(nl);
+
   var participatieVars = Object.keys(participatie[0])
 
   var totaal = {};
@@ -314,6 +329,8 @@ function importData(error, response){
       totaal[years[i]][Object.keys(participatie[i])[j]] = Object.values(participatie[i])[j]
     }
   }
+
+  // console.log('tot',totaal)
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
@@ -345,18 +362,28 @@ function importData(error, response){
   participatie["westers"] = westers;
   participatie["nietWesters"] = nietWesters;
 
-  console.log('vertrouwen', vertrouwen)
-  console.log('dienstverlening', dienstverlening)
-  console.log('faciliteiten', faciliteiten)
-  console.log('gebruik', gebruik)
-  console.log('interesse', interesse)
-  console.log('participatie', participatie)
+  // console.log('vertrouwen', vertrouwen)
+  // console.log('dienstverlening', dienstverlening)
+  // console.log('faciliteiten', faciliteiten)
+  // console.log('gebruik', gebruik)
+  // console.log('interesse', interesse)
+  // console.log('participatie', participatie)
+
+  // bigMomma = [];
+  // bigMomma.push(gebruik)
+  // bigMomma.push(dienstverlening)
+  // bigMomma.push(participatie)
+  // bigMomma.push(interesse)
+  // console.log('mom', bigMomma)
 
   var dendroData = {};
   dendroData["internetgebruik"] = gebruik;
   dendroData["dienstverlening"] = dienstverlening;
   dendroData["participatie"] = participatie;
   dendroData["interesse"] = interesse;
+
+  console.log('dendro',dendroData)
+
 
   // dendroData.push(gebruik)
   // dendroData.push(dienstverlening)
@@ -367,8 +394,6 @@ function importData(error, response){
   // console.log(alles)
 
   // for(var i = 0; i < )
-
-  console.log('dendro',dendroData)
 
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)

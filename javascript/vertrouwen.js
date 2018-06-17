@@ -247,12 +247,18 @@ function makeDendrogramCanvas(dendroData){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-  // console.log(dendroData.dienstverlening.nederlands)
-  // var dataNederlanders = [];
-  // dataNederlanders.push(dendroData.internetgebruik.nederlands)
-  // dataNederlanders.push(dendroData.dienstverlening.nederlands)
-  // dataNederlanders.push(dendroData.participatie.nederlands)
-  // dataNederlanders.push(dendroData.interesse.nederlands)
+  var dataTotaal = {}
+  dataTotaal["internetgebruik"] = dendroData.internetgebruik.totaal;
+  dataTotaal["dienstverlening"] = dendroData.dienstverlening.totaal;
+  dataTotaal["participatie"] = dendroData.participatie.totaal;
+  dataTotaal["interesse"] = dendroData.interesse.totaal;
+
+  var totaal = [];
+  totaal.push(dataTotaal)
+
+  var nestTotaal = d3.nest()
+      .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
+      .entries(totaal);
 
   var dataNederlanders = {}
   dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
@@ -263,13 +269,11 @@ function makeDendrogramCanvas(dendroData){
   var nl = [];
   nl.push(dataNederlanders)
 
-  // d.dienstverlening.nederlands[2012].Migratieachtergrond > geeft key terug van migratie achtergrond, zorgt dat hij over elk jaar kan gaan! of iig dat daar een update functie mee gebruikt kan worden.
-
-  var nest = d3.nest()
+  var nestNL = d3.nest()
       .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
       .entries(nl);
 
-  console.log('nest',nest)
+  console.log('nestNL',nestNL)
 
   var svg = d3.select("#dendrogram")
       .append("svg")
@@ -293,9 +297,9 @@ function makeDendrogramCanvas(dendroData){
       .ticks(10);
 
   // create rootNode (bevolkingsgroep x)
-  var root = d3.hierarchy(nest)
+  var root = d3.hierarchy(nestNL)
 
-  console.log(root)
+  console.log('root',root)
 
   var link = g.selectAll(".link")
       .data(root.descendants().slice(1))
@@ -307,13 +311,10 @@ function makeDendrogramCanvas(dendroData){
               + " " + (d.parent.y + 100) + "," + d.parent.x
               + " " + d.parent.y + "," + d.parent.x);
 
-  
+
 
   console.log("link", link)
   // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
-
-
-
 
 
 };

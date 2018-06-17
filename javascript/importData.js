@@ -206,6 +206,8 @@ function importData(error, response){
     }
   }
 
+  console.log(totaal)
+
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};

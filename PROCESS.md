@@ -87,3 +87,9 @@
 ![](photo/image_10.jpg)
 
 ![](photo/image_11.jpg)
+
+* Hierarchische data structuur bereikt voor 2012 alle nederlanders (zie onderstaande afbeeldingen). moet dit later in een for loop verwerken zodat ik het cross-sectioneel heb voor alle datapunten en bevolkingsgroepen. Nu heb ik een opzet qua data om daadwerkelijk een dendrogram te maken (hopelijk). Dit was eerst niet mogelijk omdat mijn data te "plat" was.
+
+![](photo/image_12.jpg)
+![](photo/image_13.jpg)
+![](photo/image_14.jpg)

@@ -206,8 +206,6 @@ function importData(error, response){
     }
   }
 
-  console.log(totaal)
-
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
@@ -309,7 +307,7 @@ function importData(error, response){
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
-  console.log('par', participatie[0].Migratieachtergrond)
+  // console.log('par', participatie[0].Migratieachtergrond)
 
   var parData = d3.nest()
       .key(d => participatie[0].Migratieachtergrond)
@@ -396,6 +394,20 @@ function importData(error, response){
   // console.log(alles)
 
   // for(var i = 0; i < )
+
+  // var dataTotaal = {}
+  // dataTotaal["internetgebruik"] = dendroData.internetgebruik.totaal;
+  // dataTotaal["dienstverlening"] = dendroData.dienstverlening.totaal;
+  // dataTotaal["participatie"] = dendroData.participatie.totaal;
+  // dataTotaal["interesse"] = dendroData.interesse.totaal;
+  //
+  // var totaal = [];
+  // totaal.push(dataTotaal)
+  //
+  // var nestTotaal = d3.nest()
+  //     .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
+  //     .entries(totaal);
+  // console.log(nestTotaal)
 
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)

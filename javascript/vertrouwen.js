@@ -306,7 +306,9 @@ function makeDendrogramCanvas(dendroData){
 
   console.log("tree", tree)
   console.log('root',root)
-  console.log('rootdescendants', root.descendants())
+
+  // var descendants = d3.zip(root.descendants);
+  // console.log(descendants)
 
   // make a path between nodes in the tree.
   var link = g.selectAll(".link")
@@ -322,7 +324,20 @@ function makeDendrogramCanvas(dendroData){
   console.log("link", link)
   // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
 
-  // determine position for every variable in the dendrogram
+  // // determine position for every variable in the dendrogram
   var node = g.selectAll(".node")
-      data.()
+      .data(root.descendants())
+      .enter()
+      .append("g")
+      .attr("class", d => "node" + (d.children ? "node--internal" : "node--leaf")) // the ? is a shortcut for an if statement, return de data een klas van 'node' als de kinderen een internal of leaf zijn. hiermee wordt g class van _group gedefineerd
+      .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+
+  console.log('node', node)
+  console.log('rootdescendants', root.descendants())
+
+
+
+
+
+
 };

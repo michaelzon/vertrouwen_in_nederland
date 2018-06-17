@@ -166,3 +166,12 @@ body {
     stroke-width: 2;
     shape-rendering: crispEdges;
 }
+
+
+/* dendrogram  */
+
+.link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1px;

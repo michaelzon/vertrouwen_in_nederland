@@ -299,8 +299,16 @@ function makeDendrogramCanvas(dendroData){
   // create rootNode (bevolkingsgroep x)
   var root = d3.hierarchy(nestNL)
 
-  console.log('root',root)
+  // create a cluster layout for dendrogram visualisation
+  var tree = d3.cluster()
+      .size([height, width - 460])
+      .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
 
+  console.log("tree", tree)
+  console.log('root',root)
+  console.log('rootdescendants', root.descendants())
+
+  // make a path between nodes in the tree.
   var link = g.selectAll(".link")
       .data(root.descendants().slice(1))
       .enter()
@@ -311,10 +319,10 @@ function makeDendrogramCanvas(dendroData){
               + " " + (d.parent.y + 100) + "," + d.parent.x
               + " " + d.parent.y + "," + d.parent.x);
 
-
-
   console.log("link", link)
   // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
 
-
+  // determine position for every variable in the dendrogram
+  var node = g.selectAll(".node")
+      data.()
 };

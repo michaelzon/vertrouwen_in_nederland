@@ -77,3 +77,9 @@
 * Ga weer verder met mijn dendrogram. Hoop dat ik er een beetje uit kom qua structuur.
 
 * De documentatie van o.a. cluster en hierarchy bekijken: http://d3-wiki.readthedocs.io/zh_CN/master/Cluster-Layout/
+
+* Verschil in datastructuur van root.descendants ten opzichte van mijn voorbeeld:
+
+![](photo/image_8.jpg)
+
+![](photo/image_9.jpg)

@@ -340,27 +340,96 @@ function makeDendrogramCanvas(dendroData){
 
 
  // // van de tutorial:
- //
- //    // declare tree layout
- //    var tree = d3.tree()
- //        .size([height, width])
- //
- //    // console.log('tree',tree)
- //
- //
- //    var kids = Object.keys(nl[2012].Nederlanders)
- //    console.log('kids',kids)
- //
- //    // assign variable to the root node
- //    // var root = d3.hierarchy(nl, d => d[2012].Nederlanders)
- //    var root = d3.hierarchy(nl, d => kids)
- //
- //    console.log('root',root)
- //
- //    console.log('data',nl[2012].Nederlanders)
- //    console.log('data',nl[2012])
 
+    // declare tree layout
+    var tree = d3.tree()
+        .size([height, width])
 
+    // console.log('tree',tree)
+
+    var treeData =
+      {
+        "name": "Top Level",
+        "children": [
+          {
+            "name": "Level 2: A",
+            "children": [
+              { "name": "Son of A" },
+              { "name": "Daughter of A" }
+            ]
+          },
+          { "name": "Level 2: B" }
+        ]
+      };
+
+    var treeNL =
+    {
+    "2012": {
+      "name": "Nederlanders",
+      "children": [
+        {
+        "name": "internetgebruik",
+          "children": [
+        {
+          "MinderDan3MaandenGeleden": 88.4,
+          "drieTotTwaalfMaandenGeleden": 0.6,
+          "MeerDan12MaandenGeleden": 0.8,
+          "NooitInternetGebruikt": 10,
+          "BijnaElkeDag": 76,
+          "MinstensEenKeerPerWeek": 10.4,
+          "MinderDanEenKeerPerWeek": 1.5
+        }]},
+        {
+        "name": "dienstverlening",
+          "children": [
+        {
+          "ZoekenOpWebsitesOverheid": 54.9,
+          "OfficieleDocumentenDownloadenOverheid": 43.4,
+          "ZoekenOpWebsitesPubliekeSector": 0,
+          "OfficieleDocumentenDownloadenPubliekeSector": 0
+        }]},
+        {
+        "name": "participatie",
+          "children": [
+        {
+          "RadioTelevisieOfKrantIngeschakeld": 15.9,
+          "PolitiekeOrganisatieIngeschakeld": 3.9,
+          "MeegedaanAanBijeenkomstOverheid": 7.6,
+          "ContactOpgenomenMetPoliticus": 10.3,
+          "MeegedaanAanActiegroep": 3.3,
+          "MeegedaanAanProtestactie": 5,
+          "MeegedaanAanHandtekeningenactie": 26.3,
+          "MeegedaanPolitiekeActieViaInternet": 11.3,
+          "Anders": 5.9
+        }]},
+        {
+        "name": "interesse",
+          "children": [
+        {
+          "ZeerGeinteresseerd": 12.3,
+          "TamelijkGeinteresseerd": 44,
+          "WeinigGeinteresseerd": 28.7,
+          "NietGeinteresseerd": 15
+        }]}
+      ]
+      }
+    }
+
+    // var kids = Object.keys(nl[2012].Nederlanders)
+    // console.log('kids',kids)
+
+    console.log('treeNL',typeof(treeNL["2012"].children))
+
+    // assign variable to the root node
+    var root = d3.hierarchy(treeNL, d => d["2012"].children.name)
+    // var root = d3.hierarchy(nl, d => kids)
+
+    console.log('root',root)
+
+    // console.log('data',nl[2012].Nederlanders)
+
+    var str = JSON.stringify(nl, null, 2); // spacing level = 2
+    // console.log(str)
 
 
 };

@@ -80,7 +80,7 @@
 
 * Verschil in datastructuur van root.descendants ten opzichte van mijn voorbeeld:
 
-![](photo/image_8.jpg)
+![](photo/image_8.jpg) 
 
 ![](photo/image_9.jpg)
 

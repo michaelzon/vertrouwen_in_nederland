@@ -256,19 +256,17 @@ function makeDendrogramCanvas(dendroData){
 
   // construct it in hierarchy with only the year 2012
   var nieuweDataNL = {};
-  nieuweDataNL["Nederlands"] = dataNederlanders;
-  nieuweDataNL["Nederlands"].internetgebruik = nieuweDataNL["Nederlands"].internetgebruik["2012"]
-  nieuweDataNL["Nederlands"].dienstverlening = nieuweDataNL["Nederlands"].dienstverlening["2012"]
-  nieuweDataNL["Nederlands"].participatie = nieuweDataNL["Nederlands"].participatie["2012"]
-  nieuweDataNL["Nederlands"].interesse = nieuweDataNL["Nederlands"].interesse["2012"]
-
+  nieuweDataNL["Nederlanders"] = dataNederlanders;
+  nieuweDataNL["Nederlanders"].internetgebruik = nieuweDataNL["Nederlanders"].internetgebruik["2012"]
+  nieuweDataNL["Nederlanders"].dienstverlening = nieuweDataNL["Nederlanders"].dienstverlening["2012"]
+  nieuweDataNL["Nederlanders"].participatie = nieuweDataNL["Nederlanders"].participatie["2012"]
+  nieuweDataNL["Nederlanders"].interesse = nieuweDataNL["Nederlanders"].interesse["2012"]
 
   // give this new construct the key "2012" for the sake of the update function, 2012 is the invisible node BEFORE the root node Nederlanders
   var nl = {};
   nl["2012"] = nieuweDataNL
 
-  console.log('nl',nl)
-
+  var children = ["internetgebruik", "dienstverlening", "participatie", "interesse"];
 
   var svg = d3.select("#dendrogram")
       .append("svg")
@@ -291,57 +289,76 @@ function makeDendrogramCanvas(dendroData){
       .tickFormat(d => d+ "%")
       .ticks(10);
 
-  // create a cluster layout for dendrogram visualisation
-  var tree = d3.cluster()
-      .size([height, width - 460])
-      // .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
-      .separation(function separate(a, b) {
-          return a.parent == b.parent            // 2 levels tree grouping for category
-          || a.parent.parent == b.parent
-          || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
-      });
+  // // create a cluster layout for dendrogram visualisation
+  // var tree = d3.cluster()
+  //     .size([height, width - 460])
+  //     .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
+  //     // .separation(function separate(a, b) {
+  //     //     return a.parent == b.parent            // 2 levels tree grouping for category
+  //     //     || a.parent.parent == b.parent
+  //     //     || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
+  //     // });
 
-  // create rootNode (bevolkingsgroep x)
-  // var root = d3.hierarchy(nestNL)
+//   console.log("tree", tree)
+//
+//   // create rootNode (bevolkingsgroep x)
+//   var root = d3.hierarchy(nl)
+//   tree(root)
+//
+//   function children(nl) {
+//   console.log('heu', nl)
+//   // return d.children;
+// }
+//
+//   console.log('root',root)
+//   console.log('tree(root)',tree(root))
+//
+//   // make a path between nodes in the tree.
+//   var link = g.selectAll(".link")
+//       .data(root.descendants().slice(1))
+//       .enter()
+//       .append("path")
+//       .attr("class", "link")
+//       .attr("d", d => "M" + d.y + "," + d.x
+//               + "C" + (d.parent.y + 100) + "," + d.x
+//               + " " + (d.parent.y + 100) + "," + d.parent.x
+//               + " " + d.parent.y + "," + d.parent.x);
+//
+//   console.log("link", link)
+//
+//   // // determine position for every variable in the dendrogram
+//   var node = g.selectAll(".node")
+//       .data(root.descendants())
+//       .enter()
+//       .append("g")
+//       .attr("class", d => "node" + (d.children ? "node--internal" : "node--leaf")) // the ? is a shortcut for an if statement, return de data een klas van 'node' als de kinderen een internal of leaf zijn. hiermee wordt g class van _group gedefineerd
+//       // .attr("transform", d => console.log(d))
+//       .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
+//
+//   // console.log('node', node)
+//   console.log('rootdescendants', root.descendants())
 
-  // tree(root)
 
-  // console.log("tree", tree)
-  // console.log('root',root)
-  // console.log('tree(root)',tree(root))
-
-  // var descendants = d3.zip(root.descendants);
-  // console.log(descendants)
-
-  // make a path between nodes in the tree.
-  // var link = g.selectAll(".link")
-  //     .data(root.descendants().slice(1))
-  //     .enter()
-  //     .append("path")
-  //     .attr("class", "link")
-  //     .attr("d", d => "M" + d.y + "," + d.x
-  //             + "C" + (d.parent.y + 100) + "," + d.x
-  //             + " " + (d.parent.y + 100) + "," + d.parent.x
-  //             + " " + d.parent.y + "," + d.parent.x);
-  //
-  // console.log("link", link)
-  // // data is nu de root node, maar dit moet eigenlijk bevolkingsgroep worden dus maybe jsons opslitsen ofzo?
-  //
-  //
-  //
-  // // // determine position for every variable in the dendrogram
-  // var node = g.selectAll(".node")
-  //     .data(root.descendants())
-  //     .enter()
-  //     .append("g")
-  //     .attr("class", d => "node" + (d.children ? "node--internal" : "node--leaf")) // the ? is a shortcut for an if statement, return de data een klas van 'node' als de kinderen een internal of leaf zijn. hiermee wordt g class van _group gedefineerd
-  //     .attr("transform", d => console.log(d))
-  //     .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
-  //
-  // console.log('node', node)
-  // console.log('rootdescendants', root.descendants())
-
-
+ // // van de tutorial:
+ //
+ //    // declare tree layout
+ //    var tree = d3.tree()
+ //        .size([height, width])
+ //
+ //    // console.log('tree',tree)
+ //
+ //
+ //    var kids = Object.keys(nl[2012].Nederlanders)
+ //    console.log('kids',kids)
+ //
+ //    // assign variable to the root node
+ //    // var root = d3.hierarchy(nl, d => d[2012].Nederlanders)
+ //    var root = d3.hierarchy(nl, d => kids)
+ //
+ //    console.log('root',root)
+ //
+ //    console.log('data',nl[2012].Nederlanders)
+ //    console.log('data',nl[2012])
 
 
 

@@ -247,6 +247,7 @@ function makeDendrogramCanvas(dendroData){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
+  console.log(dendroData)
   // get al the data from bevolkingsgroep nederlanders relevant for this graph
   var dataNederlanders = {}
   dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
@@ -265,7 +266,7 @@ function makeDendrogramCanvas(dendroData){
   // give this new construct the key "2012" for the sake of the update function, 2012 is the invisible node BEFORE the root node Nederlanders
   var nl = {};
   nl["2012"] = nieuweDataNL
-
+  console.log("nl",nl)
   var children = ["internetgebruik", "dienstverlening", "participatie", "interesse"];
 
   var svg = d3.select("#dendrogram")
@@ -362,7 +363,23 @@ function makeDendrogramCanvas(dendroData){
         ]
       };
 
-    var treeNL =
+      // treeData = {
+      //   "name": 2012,
+      //   "children": [
+      //     {
+      //       "name": "participatie",
+      //       "children": [
+      //         {
+      //           "name":
+      //         }
+      //       ]
+      //     }
+      //   ]
+      // }
+
+      console.log(d3.hierarchy(treeData))
+
+    var treeData =
     {
     "2012": {
       "name": "Nederlanders",
@@ -371,6 +388,9 @@ function makeDendrogramCanvas(dendroData){
         "name": "internetgebruik",
           "children": [
         {
+          "name": "MinderDanEenKeerPerWeek",
+          "value": 88.4
+        },{
           "MinderDan3MaandenGeleden": 88.4,
           "drieTotTwaalfMaandenGeleden": 0.6,
           "MeerDan12MaandenGeleden": 0.8,
@@ -415,21 +435,44 @@ function makeDendrogramCanvas(dendroData){
       }
     }
 
+    console.log(d3.hierarchy(treeData["2012"]))
+
     // var kids = Object.keys(nl[2012].Nederlanders)
     // console.log('kids',kids)
 
-    console.log('treeNL',typeof(treeNL["2012"].children))
+    // // console.log('data',nl[2012].Nederlanders)
+    //
+    // var str = JSON.stringify(nl, null, 2); // spacing level = 2
+    // // console.log(str)
+
+
+    console.log('treeNL',treeData["2012"].children)
 
     // assign variable to the root node
-    var root = d3.hierarchy(treeNL, d => d["2012"].children.name)
-    // var root = d3.hierarchy(nl, d => kids)
+    var root = d3.hierarchy(treeData, d => d["2012"].children.name)
+    root.x0 = height / 2;
+    root.y0 = 0;
 
     console.log('root',root)
 
-    // console.log('data',nl[2012].Nederlanders)
+    //collapse
+    root.children.forEach(collapse);
 
-    var str = JSON.stringify(nl, null, 2); // spacing level = 2
-    // console.log(str)
+    update(root);
+
+    // Collapse the node and all it's children
+    function collapse(d) {
+      if(d.children) {
+        d._children = d.children
+        d._children.forEach(collapse)
+        d.children = null
+      }
+    }
+
+    var treeData = treemap(root)
+
+
+
 
 
 };

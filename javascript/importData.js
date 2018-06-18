@@ -1,4 +1,4 @@
-// var dendroData = {};
+var dendroData = {};
 
 function importData(error, response){
 
@@ -126,6 +126,59 @@ function importData(error, response){
   dienstverlening["nederlands"] = nederlands
   dienstverlening["westers"] = westers
   dienstverlening["nietWesters"] = nietWesters
+
+  console.log(nietWesters);
+
+  var superKeys = Object.keys(dienstverlening);
+
+  var dendroData = {};
+
+
+
+// superKeys.forEach(function(superKey){
+//
+//   var superTempObject = {};
+//
+//   years.forEach(function(year){
+//     keys = Object.keys(nietWesters[year]);
+//     tempArray = [];
+//     keys.forEach(function(key) {
+//       tempObject = {};
+//       tempObject["name"] = key;
+//       console.log(nietWesters[year][key])
+//       tempObject["value"] = nietWesters[year][key];
+//       tempArray.push(tempObject);
+//     })
+//     superTempArray.push({"name": superKey, "children": tempArray})
+//   })
+//   superTempObject["name"] = year;
+//   superTempObject["children"] = superTempArray;
+//   dendroData[year] = superTempObject;
+// })
+
+var dendroData = {};
+
+years.forEach(function(year){
+  var superTempArray = [];
+  superKeys.forEach(function(superKey){
+    var tempArray = [];
+    console.log(superKey);
+    keys = Object.keys(dienstverlening[superKey][year]);
+    var uberArray = [];
+    keys.forEach(function(key){
+      console.log(key)
+      uberArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
+    })
+    tempArray = {"name": "dienstverlening", "children": uberArray};
+    superTempArray.push({"name": superKey, "children": [tempArray]});
+  })
+  dendroData[year] = {"name": year, "children": superTempArray}
+})
+
+
+
+  console.log(d3.hierarchy(dendroData["2012"]));
+  console.log(dendroData);
 
   var faciliteiten = (bigDatty[2]["faciliteiten"]);
 

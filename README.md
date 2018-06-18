@@ -1,5 +1,5 @@
 # Project
-[My site!](https://github.com/michaelzon/vertrouwen_in_nederland.git)
+[My site!](https://michaelzon.github.io/vertrouwen_in_nederland/)
 
 ## Probleemstelling
 

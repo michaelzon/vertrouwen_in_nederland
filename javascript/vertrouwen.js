@@ -279,7 +279,6 @@ function makeDendrogramCanvas(data){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-  console.log(data)
 
   // // get al the data from bevolkingsgroep nederlanders relevant for this graph
   // var dataNederlanders = {}
@@ -333,30 +332,29 @@ function makeDendrogramCanvas(data){
       //     || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
       // });
 
+
+  console.log('data',data.children)
+
   // create rootNode (bevolkingsgroep x)
-  var root = d3.hierarchy(data)
+  var root = d3.hierarchy(data, d => d.children)
+      // .parentId(function(d) {return d.name.substring(0, d.id.lastIndexOf(".")); });
+
   tree(root)
+  console.log('root',root)
+  // console.log(root.descendants())
 
 
-//   function children(nl) {
-//   console.log('heu', nl)
-//   // return d.children;
-// }
-//
-//   console.log('root',root)
-//   console.log('tree(root)',tree(root))
-//
-//   // make a path between nodes in the tree.
-//   var link = g.selectAll(".link")
-//       .data(root.descendants().slice(1))
-//       .enter()
-//       .append("path")
-//       .attr("class", "link")
-//       .attr("d", d => "M" + d.y + "," + d.x
-//               + "C" + (d.parent.y + 100) + "," + d.x
-//               + " " + (d.parent.y + 100) + "," + d.parent.x
-//               + " " + d.parent.y + "," + d.parent.x);
-//
+  // // make a path between nodes in the tree.
+  // var link = g.selectAll(".link")
+  //     .data(root.descendants().slice(1))
+  //     .enter()
+  //     .append("path")
+  //     .attr("class", "link")
+  //     .attr("d", d => "M" + d.y + "," + d.x
+  //             + "C" + (d.parent.y + 100) + "," + d.x
+  //             + " " + (d.parent.y + 100) + "," + d.parent.x
+  //             + " " + d.parent.y + "," + d.parent.x);
+
 //   console.log("link", link)
 //
 //   // // determine position for every variable in the dendrogram

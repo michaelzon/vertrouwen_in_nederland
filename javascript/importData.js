@@ -281,7 +281,7 @@ function importData(error, response){
         // console.log(key)
         uberArray.push({"name": key, "value": gebruik[superKey][year][key]})
       })
-      tempArray = {"name": "gebruik", "children": uberArray};
+      tempArray = {"name": "internetgebruik", "children": uberArray};
       superTempArray.push({"name": superKey, "children": [tempArray]});
     })
     dataGebruik[year] = {"name": year, "children": superTempArray}
@@ -467,10 +467,14 @@ function importData(error, response){
 
   // console.log('hee',d3.hierarchy(dataParticipatie["2012"]));
 
-  console.log("dataGebruik", dataGebruik)
+  // het totaal van 2012
+  console.log("dataGebruik", dataGebruik['2012'].children[0])
+
   // console.log("dataDienstverlening", dataDienstverlening)
   // console.log("dataParticipatie", dataParticipatie)
   // console.log("dataInteresse", dataInteresse)
+
+  // this[0].name
 
   var groups = ["totaal", "nederlands", "westers", "nietWesters"];
 
@@ -530,6 +534,6 @@ function importData(error, response){
 
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)
-  makeDendrogramCanvas(dataGebruik)
+  makeDendrogramCanvas(dataGebruik["2012"].children[0])
 
 };

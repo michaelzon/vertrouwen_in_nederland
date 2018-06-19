@@ -127,58 +127,33 @@ function importData(error, response){
   dienstverlening["westers"] = westers
   dienstverlening["nietWesters"] = nietWesters
 
-  console.log(nietWesters);
+  // console.log(nietWesters);
 
   var superKeys = Object.keys(dienstverlening);
 
-  var dendroData = {};
+  var dataDienstverlening = {};
 
-
-
-// superKeys.forEach(function(superKey){
-//
-//   var superTempObject = {};
-//
-//   years.forEach(function(year){
-//     keys = Object.keys(nietWesters[year]);
-//     tempArray = [];
-//     keys.forEach(function(key) {
-//       tempObject = {};
-//       tempObject["name"] = key;
-//       console.log(nietWesters[year][key])
-//       tempObject["value"] = nietWesters[year][key];
-//       tempArray.push(tempObject);
-//     })
-//     superTempArray.push({"name": superKey, "children": tempArray})
-//   })
-//   superTempObject["name"] = year;
-//   superTempObject["children"] = superTempArray;
-//   dendroData[year] = superTempObject;
-// })
-
-var dendroData = {};
-
-years.forEach(function(year){
-  var superTempArray = [];
-  superKeys.forEach(function(superKey){
-    var tempArray = [];
-    console.log(superKey);
-    keys = Object.keys(dienstverlening[superKey][year]);
-    var uberArray = [];
-    keys.forEach(function(key){
-      console.log(key)
-      uberArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
+  years.forEach(function(year){
+    var superTempArray = [];
+    superKeys.forEach(function(superKey){
+      var tempArray = [];
+      // console.log(superKey);
+      keys = Object.keys(dienstverlening[superKey][year]);
+      var uberArray = [];
+      keys.forEach(function(key){
+        // console.log(key)
+        uberArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
+      })
+      tempArray = {"name": "dienstverlening", "children": uberArray};
+      superTempArray.push({"name": superKey, "children": [tempArray]});
     })
-    tempArray = {"name": "dienstverlening", "children": uberArray};
-    superTempArray.push({"name": superKey, "children": [tempArray]});
+    dataDienstverlening[year] = {"name": year, "children": superTempArray}
   })
-  dendroData[year] = {"name": year, "children": superTempArray}
-})
 
 
 
-  console.log(d3.hierarchy(dendroData["2012"]));
-  console.log(dendroData);
+  // console.log('hee',d3.hierarchy(dataDienstverlening["2012"]));
+  // console.log('diens',dataDienstverlening);
 
   var faciliteiten = (bigDatty[2]["faciliteiten"]);
 
@@ -291,6 +266,31 @@ years.forEach(function(year){
   gebruik["westers"] = westers
   gebruik["nietWesters"] = nietWesters
 
+  var superKeys = Object.keys(gebruik);
+
+  var dataGebruik = {};
+
+  years.forEach(function(year){
+    var superTempArray = [];
+    superKeys.forEach(function(superKey){
+      var tempArray = [];
+      // console.log(superKey);
+      keys = Object.keys(gebruik[superKey][year]);
+      var uberArray = [];
+      keys.forEach(function(key){
+        // console.log(key)
+        uberArray.push({"name": key, "value": gebruik[superKey][year][key]})
+      })
+      tempArray = {"name": "gebruik", "children": uberArray};
+      superTempArray.push({"name": superKey, "children": [tempArray]});
+    })
+    dataGebruik[year] = {"name": year, "children": superTempArray}
+  })
+
+
+
+  // console.log('hee',d3.hierarchy(dataGebruik["2012"]));
+  // console.log('geb',dataGebruik);
 
   var interesse = (bigDatty[4]["interesse"]);
 
@@ -345,6 +345,31 @@ years.forEach(function(year){
   interesse["nederlands"] = nederlands
   interesse["westers"] = westers
   interesse["nietWesters"] = nietWesters
+
+  var superKeys = Object.keys(interesse);
+
+  var dataInteresse = {};
+
+  years.forEach(function(year){
+    var superTempArray = [];
+    superKeys.forEach(function(superKey){
+      var tempArray = [];
+      // console.log(superKey);
+      keys = Object.keys(interesse[superKey][year]);
+      var uberArray = [];
+      keys.forEach(function(key){
+        // console.log(key)
+        uberArray.push({"name": key, "value": interesse[superKey][year][key]})
+      })
+      tempArray = {"name": "interesse", "children": uberArray};
+      superTempArray.push({"name": superKey, "children": [tempArray]});
+    })
+    dataInteresse[year] = {"name": year, "children": superTempArray}
+  })
+
+  // console.log('hee',d3.hierarchy(dataInteresse["2012"]));
+  // console.log('int',dataInteresse);
+
 
   var participatie = (bigDatty[5]["participatie"]);
 
@@ -419,6 +444,49 @@ years.forEach(function(year){
   participatie["westers"] = westers;
   participatie["nietWesters"] = nietWesters;
 
+  var superKeys = Object.keys(participatie);
+
+  var dataParticipatie = {};
+
+  years.forEach(function(year){
+    var superTempArray = [];
+    superKeys.forEach(function(superKey){
+      var tempArray = [];
+      // console.log(superKey);
+      keys = Object.keys(participatie[superKey][year]);
+      var uberArray = [];
+      keys.forEach(function(key){
+        // console.log(key)
+        uberArray.push({"name": key, "value": participatie[superKey][year][key]})
+      })
+      tempArray = {"name": "participatie", "children": uberArray};
+      superTempArray.push({"name": superKey, "children": [tempArray]});
+    })
+    dataParticipatie[year] = {"name": year, "children": superTempArray}
+  })
+
+  // console.log('hee',d3.hierarchy(dataParticipatie["2012"]));
+
+  console.log("dataGebruik", dataGebruik)
+  // console.log("dataDienstverlening", dataDienstverlening)
+  // console.log("dataParticipatie", dataParticipatie)
+  // console.log("dataInteresse", dataInteresse)
+
+  var groups = ["totaal", "nederlands", "westers", "nietWesters"];
+
+  var children = ["gebruik", "dienstverlening", "participatie", "interesse"];
+
+  // years.forEach(function(year){
+  //   groups.forEach(function(group){
+  //       // console.log(child)
+  //       // console.log('sdfsdfs',dataGebruik[year]["name"])
+  //     console.log('ksdfaewk',dataGebruik[year].children)
+  //     dataGebruik[year]["children"][group].push(dataDienstverlening[year]["children"][group])
+  //   })
+  // });
+
+  //
+
   // console.log('vertrouwen', vertrouwen)
   // console.log('dienstverlening', dienstverlening)
   // console.log('faciliteiten', faciliteiten)
@@ -426,18 +494,12 @@ years.forEach(function(year){
   // console.log('interesse', interesse)
   // console.log('participatie', participatie)
 
-  // bigMomma = [];
-  // bigMomma.push(gebruik)
-  // bigMomma.push(dienstverlening)
-  // bigMomma.push(participatie)
-  // bigMomma.push(interesse)
-  // console.log('mom', bigMomma)
-
-  var dendroData = {};
-  dendroData["internetgebruik"] = gebruik;
-  dendroData["dienstverlening"] = dienstverlening;
-  dendroData["participatie"] = participatie;
-  dendroData["interesse"] = interesse;
+  // niet verwijderen, dit was mijn struct voordat tim ging helpen
+  // var dendroData = {};
+  // dendroData["internetgebruik"] = gebruik;
+  // dendroData["dienstverlening"] = dienstverlening;
+  // dendroData["participatie"] = participatie;
+  // dendroData["interesse"] = interesse;
 
   // console.log('dendro',dendroData)
 
@@ -468,6 +530,6 @@ years.forEach(function(year){
 
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)
-  makeDendrogramCanvas(dendroData)
+  makeDendrogramCanvas(dataGebruik)
 
 };

@@ -80,7 +80,7 @@
 
 * Verschil in datastructuur van root.descendants ten opzichte van mijn voorbeeld:
 
-![](photo/image_8.jpg) 
+![](photo/image_8.jpg)
 
 ![](photo/image_9.jpg)
 
@@ -93,3 +93,7 @@
 ![](photo/image_12.jpg)
 ![](photo/image_13.jpg)
 ![](photo/image_14.jpg)
+
+# dag 10 (20/6)
+
+* Moeite met for loop voor data children/parents. wacht even op TA's en ondertussen doe ik wat andere dingen (legenda/crosshair etc.)

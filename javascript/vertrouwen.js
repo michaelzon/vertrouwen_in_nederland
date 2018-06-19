@@ -58,6 +58,8 @@ function makeLinegraph(data){
   // remove current lines if others are added by clicking on dropdown
   if (d3.select("#linegraph").select("svg")){
     d3.select("#linegraph").select("svg").remove();
+    d3.select("#linegraphDes").select("svg").remove();
+
   }
 
   // console.log('dat', data)
@@ -71,6 +73,8 @@ function makeLinegraph(data){
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
+      legendHeight = 230;
+      legendWidth = 220;
 
   // create an array of years convert its type to number
   var years = (Object.keys(data))
@@ -82,10 +86,6 @@ function makeLinegraph(data){
   var xScale = d3.scaleLinear()
       .domain(d3.extent(years))   //returns 2012 and 2017 as min and max
       .range([0, width]);
-
-  // var zColor = d3.scaleOrdinal()
-  //     .domain(independents)
-  //     .range(colorbrewer.BrBG[8]);
 
   // and for the height
   var yScale = d3.scaleLinear()
@@ -235,9 +235,41 @@ function makeLinegraph(data){
       .attr("class", "y-axis")
       .call(yAxis)
 
+      // mensenTot
+      // ambtTot
+      // euTot
+      // persTot
+      // politieTot
+      // rechtersTot
+      // tweedeKamerTot
+
+  // create extra function to show full variablenames in legend.
+  var legendLines = d3.scaleOrdinal()
+      .domain(["Vertrouwen in Andere Mensen", "Ambtenaren", "Europese Unie", "de Pers", "Politie", "Rechters", "de Tweede Kamer"])
+      .range(colorbrewer.Spectral[7])
+
+  var graphLegend = d3.legendColor()
+      .shape("path", d3.symbol()
+      .type(d3.symbolSquare)
+      .size(700)())
+      .labelOffset(12)
+      .scale(legendLines);
+
+  //placing legend
+  var svgGraphDes = d3.select("#linegraphDes")
+      .append("svg")
+      .attr("width", legendWidth)
+      .attr("height", legendHeight)
+
+  svgGraphDes.append("g")
+      .attr("id", "graphLegend")
+      .attr("transform", "translate(20,20)");
+
+  svgGraphDes.select("#graphLegend")
+      .call(graphLegend);
 };
 
-function makeDendrogramCanvas(dendroData){
+function makeDendrogramCanvas(data){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 960,
@@ -247,27 +279,28 @@ function makeDendrogramCanvas(dendroData){
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-  console.log(dendroData)
-  // get al the data from bevolkingsgroep nederlanders relevant for this graph
-  var dataNederlanders = {}
-  dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
-  dataNederlanders["dienstverlening"] = dendroData.dienstverlening.nederlands;
-  dataNederlanders["participatie"] = dendroData.participatie.nederlands;
-  dataNederlanders["interesse"] = dendroData.interesse.nederlands;
+  console.log(data)
 
-  // construct it in hierarchy with only the year 2012
-  var nieuweDataNL = {};
-  nieuweDataNL["Nederlanders"] = dataNederlanders;
-  nieuweDataNL["Nederlanders"].internetgebruik = nieuweDataNL["Nederlanders"].internetgebruik["2012"]
-  nieuweDataNL["Nederlanders"].dienstverlening = nieuweDataNL["Nederlanders"].dienstverlening["2012"]
-  nieuweDataNL["Nederlanders"].participatie = nieuweDataNL["Nederlanders"].participatie["2012"]
-  nieuweDataNL["Nederlanders"].interesse = nieuweDataNL["Nederlanders"].interesse["2012"]
-
-  // give this new construct the key "2012" for the sake of the update function, 2012 is the invisible node BEFORE the root node Nederlanders
-  var nl = {};
-  nl["2012"] = nieuweDataNL
-  console.log("nl",nl)
-  var children = ["internetgebruik", "dienstverlening", "participatie", "interesse"];
+  // // get al the data from bevolkingsgroep nederlanders relevant for this graph
+  // var dataNederlanders = {}
+  // dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
+  // dataNederlanders["dienstverlening"] = dendroData.dienstverlening.nederlands;
+  // dataNederlanders["participatie"] = dendroData.participatie.nederlands;
+  // dataNederlanders["interesse"] = dendroData.interesse.nederlands;
+  //
+  // // construct it in hierarchy with only the year 2012
+  // var nieuweDataNL = {};
+  // nieuweDataNL["Nederlanders"] = dataNederlanders;
+  // nieuweDataNL["Nederlanders"].internetgebruik = nieuweDataNL["Nederlanders"].internetgebruik["2012"]
+  // nieuweDataNL["Nederlanders"].dienstverlening = nieuweDataNL["Nederlanders"].dienstverlening["2012"]
+  // nieuweDataNL["Nederlanders"].participatie = nieuweDataNL["Nederlanders"].participatie["2012"]
+  // nieuweDataNL["Nederlanders"].interesse = nieuweDataNL["Nederlanders"].interesse["2012"]
+  //
+  // // give this new construct the key "2012" for the sake of the update function, 2012 is the invisible node BEFORE the root node Nederlanders
+  // var nl = {};
+  // nl["2012"] = nieuweDataNL
+  //
+  // // console.log("nl",nl)
 
   var svg = d3.select("#dendrogram")
       .append("svg")
@@ -290,22 +323,21 @@ function makeDendrogramCanvas(dendroData){
       .tickFormat(d => d+ "%")
       .ticks(10);
 
-  // // create a cluster layout for dendrogram visualisation
-  // var tree = d3.cluster()
-  //     .size([height, width - 460])
-  //     .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
-  //     // .separation(function separate(a, b) {
-  //     //     return a.parent == b.parent            // 2 levels tree grouping for category
-  //     //     || a.parent.parent == b.parent
-  //     //     || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
-  //     // });
+  // create a cluster layout for dendrogram visualisation
+  var tree = d3.cluster()
+      .size([height, width - 460])
+      .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
+      // .separation(function separate(a, b) {
+      //     return a.parent == b.parent            // 2 levels tree grouping for category
+      //     || a.parent.parent == b.parent
+      //     || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
+      // });
 
-//   console.log("tree", tree)
-//
-//   // create rootNode (bevolkingsgroep x)
-//   var root = d3.hierarchy(nl)
-//   tree(root)
-//
+  // create rootNode (bevolkingsgroep x)
+  var root = d3.hierarchy(data)
+  tree(root)
+
+
 //   function children(nl) {
 //   console.log('heu', nl)
 //   // return d.children;
@@ -377,7 +409,7 @@ function makeDendrogramCanvas(dendroData){
       //   ]
       // }
 
-      console.log(d3.hierarchy(treeData))
+      // console.log(d3.hierarchy(treeData))
 
     var treeData =
     {
@@ -435,7 +467,7 @@ function makeDendrogramCanvas(dendroData){
       }
     }
 
-    console.log(d3.hierarchy(treeData["2012"]))
+    // console.log(d3.hierarchy(treeData["2012"]))
 
     // var kids = Object.keys(nl[2012].Nederlanders)
     // console.log('kids',kids)
@@ -446,19 +478,19 @@ function makeDendrogramCanvas(dendroData){
     // // console.log(str)
 
 
-    console.log('treeNL',treeData["2012"].children)
+    // console.log('treeNL',treeData["2012"].children)
 
     // assign variable to the root node
     var root = d3.hierarchy(treeData, d => d["2012"].children.name)
     root.x0 = height / 2;
     root.y0 = 0;
 
-    console.log('root',root)
+    // console.log('root',root)
 
     //collapse
-    root.children.forEach(collapse);
+    // root.children.forEach(collapse);
 
-    update(root);
+    // update(root);
 
     // Collapse the node and all it's children
     function collapse(d) {
@@ -469,7 +501,7 @@ function makeDendrogramCanvas(dendroData){
       }
     }
 
-    var treeData = treemap(root)
+    // var treeData = treemap(root)
 
 
 

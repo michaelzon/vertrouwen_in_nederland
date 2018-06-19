@@ -1,15 +1,13 @@
 #linegraph {
-  position: absolute;
-  top: 85%;
+  /* position: absolute; */
+  /* top: 85%;
   left: 58%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 
 #dendrogram {
-  position: absolute;
-  top: 200%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 2%;
+  border-style: dotted;
 }
 
 .text2 {
@@ -115,15 +113,15 @@
 }
 
 /* dendrogram  */
-
+/* 
 .link {
     fill: none;
     stroke: #555;
     stroke-opacity: 0.4;
-    stroke-width: 1px;
+    stroke-width: 1px; */
 }
 
-.node circle {
+/* .node circle {
     fill: #999;
 }
 
@@ -136,4 +134,20 @@
 }
 .node--leaf text {
     fill: white;
+} */
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+
+.node text {
+  font: 12px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 2px;
 }

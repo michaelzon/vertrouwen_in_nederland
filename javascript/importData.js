@@ -391,9 +391,9 @@ function importData(error, response){
 
   // console.log('par', participatie[0].Migratieachtergrond)
 
-  var parData = d3.nest()
-      .key(d => participatie[0].Migratieachtergrond)
-      .entries(participatie)
+  // var parData = d3.nest()
+  //     .key(d => participatie[0].Migratieachtergrond)
+  //     .entries(participatie)
 
   // console.log('pardata',parData)
 
@@ -448,9 +448,11 @@ function importData(error, response){
 
   var dataParticipatie = {};
 
+  // thanks Tim
   years.forEach(function(year){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
+      var bevolkingArray = [];
       var tempArray = [];
       // console.log(superKey);
       keys = Object.keys(participatie[superKey][year]);
@@ -460,7 +462,39 @@ function importData(error, response){
         uberArray.push({"name": key, "value": participatie[superKey][year][key]})
       })
       tempArray = {"name": "participatie", "children": uberArray};
-      superTempArray.push({"name": superKey, "children": [tempArray]});
+      bevolkingArray.push(tempArray);
+
+      // dienstverlening variables aan bevolkingArray pushen
+      var dienstKeys = Object.keys(dienstverlening[superKey][year]);
+      var dienstArray = [];
+      dienstKeys.forEach(function(key){
+        // console.log(key)
+        dienstArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
+      })
+      tempArray = {"name": "dienstverlening", "children": dienstArray};
+      bevolkingArray.push(tempArray);
+
+      // internetgebruik variabelen aan bevolkingArray pushen
+      var gebruikKeys = Object.keys(gebruik[superKey][year]);
+      var gebruikArray = [];
+      gebruikKeys.forEach(function(key){
+        // console.log(key)
+        gebruikArray.push({"name": key, "value": gebruik[superKey][year][key]})
+      })
+      tempArray = {"name": "internetgebruik", "children": gebruikArray};
+      bevolkingArray.push(tempArray);
+
+      // internetgebruik variabelen aan bevolkingArray pushen
+      var interesseKeys = Object.keys(interesse[superKey][year]);
+      var interesseArray = [];
+      interesseKeys.forEach(function(key){
+        // console.log(key)
+        interesseArray.push({"name": key, "value": interesse[superKey][year][key]})
+      })
+      tempArray = {"name": "interesse", "children": gebruikArray};
+      bevolkingArray.push(tempArray);
+
+      superTempArray.push({"name": superKey, "children": bevolkingArray});
     })
     dataParticipatie[year] = {"name": year, "children": superTempArray}
   })
@@ -468,7 +502,7 @@ function importData(error, response){
   // console.log('hee',d3.hierarchy(dataParticipatie["2012"]));
 
   // het totaal van 2012
-  console.log("dataGebruik", dataGebruik['2012'].children[0])
+  // console.log("dataGebruik", dataGebruik['2012'].children[0])
 
   // console.log("dataDienstverlening", dataDienstverlening)
   // console.log("dataParticipatie", dataParticipatie)
@@ -534,6 +568,6 @@ function importData(error, response){
 
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)
-  makeDendrogramCanvas(dataGebruik["2012"].children[0])
+  makeDendrogramCanvas(dataParticipatie["2012"].children[0])
 
 };

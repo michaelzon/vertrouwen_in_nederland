@@ -272,44 +272,19 @@ function makeLinegraph(data){
 function makeDendrogramCanvas(data){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
-      outerWidth = 960,
+      outerWidth = 1300,
       outerHeight = 1100,
       innerWidth = outerWidth - margin.left - margin.right,
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
       height = innerHeight - padding.top - padding.bottom;
 
-
-  // // get al the data from bevolkingsgroep nederlanders relevant for this graph
-  // var dataNederlanders = {}
-  // dataNederlanders["internetgebruik"] = dendroData.internetgebruik.nederlands;
-  // dataNederlanders["dienstverlening"] = dendroData.dienstverlening.nederlands;
-  // dataNederlanders["participatie"] = dendroData.participatie.nederlands;
-  // dataNederlanders["interesse"] = dendroData.interesse.nederlands;
-  //
-  // // construct it in hierarchy with only the year 2012
-  // var nieuweDataNL = {};
-  // nieuweDataNL["Nederlanders"] = dataNederlanders;
-  // nieuweDataNL["Nederlanders"].internetgebruik = nieuweDataNL["Nederlanders"].internetgebruik["2012"]
-  // nieuweDataNL["Nederlanders"].dienstverlening = nieuweDataNL["Nederlanders"].dienstverlening["2012"]
-  // nieuweDataNL["Nederlanders"].participatie = nieuweDataNL["Nederlanders"].participatie["2012"]
-  // nieuweDataNL["Nederlanders"].interesse = nieuweDataNL["Nederlanders"].interesse["2012"]
-  //
-  // // give this new construct the key "2012" for the sake of the update function, 2012 is the invisible node BEFORE the root node Nederlanders
-  // var nl = {};
-  // nl["2012"] = nieuweDataNL
-  //
-  // // console.log("nl",nl)
-
-  var svg = d3.select("#dendrogram")
-      .append("svg")
+  var svg = d3.select("#dendrogram").append("svg")
       .attr("width", outerWidth)
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
-
-  // append 20 pixels to the right
-  var g = svg.append("g")
-      .attr("transform", "translate(20,0)");
+    .append("g")
+      .attr("transform", "translate(50,0)");
 
   // creating axis and scale
   var xScale = d3.scaleLinear()
@@ -322,184 +297,108 @@ function makeDendrogramCanvas(data){
       .tickFormat(d => d+ "%")
       .ticks(10);
 
-  // create a cluster layout for dendrogram visualisation
-  var tree = d3.cluster()
-      .size([height, width - 460])
-      .separation((a, b) => ((a.parent == b.parent ? 1 : 2) / a.depth))
-      // .separation(function separate(a, b) {
-      //     return a.parent == b.parent            // 2 levels tree grouping for category
-      //     || a.parent.parent == b.parent
-      //     || a.parent == b.parent.parent ? 0.4 : 0.8; // dit fokt oa met verticale positie/ ruimte tussen leafs
-      // });
+  // the root is the ith node, starting at zero
+  var i = 0,
+      duration = 500,
+      root;
 
+  // declare tree layout
+  var tree = d3.tree()
+      .size([height, width])
 
-  console.log('data',data.children)
-
-  // create rootNode (bevolkingsgroep x)
+  // assign variable to the root node
   var root = d3.hierarchy(data, d => d.children)
-      // .parentId(function(d) {return d.name.substring(0, d.id.lastIndexOf(".")); });
+  root.x0 = height / 2;
+  root.y0 = 0;
 
-  tree(root)
   console.log('root',root)
-  // console.log(root.descendants())
 
+  // collapse
+  root.children.forEach(collapse);
 
-  // // make a path between nodes in the tree.
-  // var link = g.selectAll(".link")
-  //     .data(root.descendants().slice(1))
-  //     .enter()
-  //     .append("path")
-  //     .attr("class", "link")
-  //     .attr("d", d => "M" + d.y + "," + d.x
-  //             + "C" + (d.parent.y + 100) + "," + d.x
-  //             + " " + (d.parent.y + 100) + "," + d.parent.x
-  //             + " " + d.parent.y + "," + d.parent.x);
+  update(root);
 
-//   console.log("link", link)
-//
-//   // // determine position for every variable in the dendrogram
-//   var node = g.selectAll(".node")
-//       .data(root.descendants())
-//       .enter()
-//       .append("g")
-//       .attr("class", d => "node" + (d.children ? "node--internal" : "node--leaf")) // the ? is a shortcut for an if statement, return de data een klas van 'node' als de kinderen een internal of leaf zijn. hiermee wordt g class van _group gedefineerd
-//       // .attr("transform", d => console.log(d))
-//       .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
-//
-//   // console.log('node', node)
-//   console.log('rootdescendants', root.descendants())
-
-
- // // van de tutorial:
-
-    // declare tree layout
-    var tree = d3.tree()
-        .size([height, width])
-
-    // console.log('tree',tree)
-
-    var treeData =
-      {
-        "name": "Top Level",
-        "children": [
-          {
-            "name": "Level 2: A",
-            "children": [
-              { "name": "Son of A" },
-              { "name": "Daughter of A" }
-            ]
-          },
-          { "name": "Level 2: B" }
-        ]
-      };
-
-      // treeData = {
-      //   "name": 2012,
-      //   "children": [
-      //     {
-      //       "name": "participatie",
-      //       "children": [
-      //         {
-      //           "name":
-      //         }
-      //       ]
-      //     }
-      //   ]
-      // }
-
-      // console.log(d3.hierarchy(treeData))
-
-    var treeData =
-    {
-    "2012": {
-      "name": "Nederlanders",
-      "children": [
-        {
-        "name": "internetgebruik",
-          "children": [
-        {
-          "name": "MinderDanEenKeerPerWeek",
-          "value": 88.4
-        },{
-          "MinderDan3MaandenGeleden": 88.4,
-          "drieTotTwaalfMaandenGeleden": 0.6,
-          "MeerDan12MaandenGeleden": 0.8,
-          "NooitInternetGebruikt": 10,
-          "BijnaElkeDag": 76,
-          "MinstensEenKeerPerWeek": 10.4,
-          "MinderDanEenKeerPerWeek": 1.5
-        }]},
-        {
-        "name": "dienstverlening",
-          "children": [
-        {
-          "ZoekenOpWebsitesOverheid": 54.9,
-          "OfficieleDocumentenDownloadenOverheid": 43.4,
-          "ZoekenOpWebsitesPubliekeSector": 0,
-          "OfficieleDocumentenDownloadenPubliekeSector": 0
-        }]},
-        {
-        "name": "participatie",
-          "children": [
-        {
-          "RadioTelevisieOfKrantIngeschakeld": 15.9,
-          "PolitiekeOrganisatieIngeschakeld": 3.9,
-          "MeegedaanAanBijeenkomstOverheid": 7.6,
-          "ContactOpgenomenMetPoliticus": 10.3,
-          "MeegedaanAanActiegroep": 3.3,
-          "MeegedaanAanProtestactie": 5,
-          "MeegedaanAanHandtekeningenactie": 26.3,
-          "MeegedaanPolitiekeActieViaInternet": 11.3,
-          "Anders": 5.9
-        }]},
-        {
-        "name": "interesse",
-          "children": [
-        {
-          "ZeerGeinteresseerd": 12.3,
-          "TamelijkGeinteresseerd": 44,
-          "WeinigGeinteresseerd": 28.7,
-          "NietGeinteresseerd": 15
-        }]}
-      ]
-      }
+  // Collapse the node and all it's children
+  function collapse(d) {
+    if(d.children) {
+      d._children = d.children
+      d._children.forEach(collapse)
+      d.children = null
     }
+  }
 
-    // console.log(d3.hierarchy(treeData["2012"]))
+  function update(source){
 
-    // var kids = Object.keys(nl[2012].Nederlanders)
-    // console.log('kids',kids)
+    // determine x and y position for nodes
+    var data = tree(root)
 
-    // // console.log('data',nl[2012].Nederlanders)
-    //
-    // var str = JSON.stringify(nl, null, 2); // spacing level = 2
-    // // console.log(str)
+    // and the new tree layout
+    var nodes = data.descendants(),
+
+        // links are the same as above minus the root node (bevolkingsgroep)
+        links = data.descendants().slice(1)
+
+    console.log('nodes', nodes)
+    console.log('links', links)
+
+    // ensure nodes and links are not spread across the webpage
+    nodes.forEach(d => d.y = d.depth * 180);;
+
+    // update nodes and recursive assigns id's
+    var node = svg.selectAll("g.node")
+        .data(nodes, d => d.id || (d.id = ++i));
+
+    console.log("node", node)
+
+    // a new child is born and birth takes place at position of the parent
+    var nodeBirth = node.enter().append("g")
+        .attr("class", "node")
+        .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+        // .on("click", click); //click function need to be implemented
+
+    // add circles to visualize the nodes
+    nodeBirth.append("cirle")
+        .attr("class", "nodes")
+        .attr("r", 24)
+        .style("fill", d => d._children ? "lightsteelblue" : "#fff");
 
 
-    // console.log('treeNL',treeData["2012"].children)
+    // (conditie = true) ? (dan dit) : (anders dit)
+    console.log(data.data.name)
 
-    // assign variable to the root node
-    var root = d3.hierarchy(treeData, d => d["2012"].children.name)
-    root.x0 = height / 2;
-    root.y0 = 0;
+    // adding labels
+    nodeBirth.append("text")
+        .attr("dy", ".35em")
+        .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
+        .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+        .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
-    // console.log('root',root)
+    var nodeUpdate = nodeBirth.merge(node);
 
-    //collapse
-    // root.children.forEach(collapse);
+    console.log('upd', nodeUpdate)
 
-    // update(root);
+    // transition to the right position
+    nodeUpdate.transition()
+        .duration(duration)
+        .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-    // Collapse the node and all it's children
-    function collapse(d) {
-      if(d.children) {
-        d._children = d.children
-        d._children.forEach(collapse)
-        d.children = null
-      }
-    }
+    // update node attributes and style
+    nodeUpdate.select("circle.node")
+        .attr("r", 10)
+        .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+        .attr("cursor", "pointer");
 
-    // var treeData = treemap(root)
+
+
+
+
+
+
+
+
+
+  }
+
 
 
 

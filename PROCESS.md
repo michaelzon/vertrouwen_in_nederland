@@ -97,3 +97,11 @@
 # dag 10 (20/6)
 
 * Moeite met for loop voor data children/parents. wacht even op TA's en ondertussen doe ik wat andere dingen (legenda/crosshair etc.)
+
+* Ben al een stuk verder met dendrogram alleen staat er nog weining op blad. Wel veel code op basis van voorbeeld maar er is een bug waar ik niet uit kom en dat is dat er geen cirkles worden geplaatst bij de nodes.
+
+![](photo/image_15.jpg)
+
+* al een stuk verder, ga nu proberen rectangles met de waarde van de variabelen erachter te laten appenden. 
+
+![](photo/image_16.jpg)

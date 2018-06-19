@@ -235,14 +235,6 @@ function makeLinegraph(data){
       .attr("class", "y-axis")
       .call(yAxis)
 
-      // mensenTot
-      // ambtTot
-      // euTot
-      // persTot
-      // politieTot
-      // rechtersTot
-      // tweedeKamerTot
-
   // create extra function to show full variablenames in legend.
   var legendLines = d3.scaleOrdinal()
       .domain(["Vertrouwen in Andere Mensen", "Ambtenaren", "Europese Unie", "de Pers", "Politie", "Rechters", "de Tweede Kamer"])
@@ -331,17 +323,18 @@ function makeDendrogramCanvas(data){
 
     // determine x and y position for nodes
     var data = tree(root)
+    console.log(data)
 
     // and the new tree layout
     var nodes = data.descendants(),
 
-        // links are the same as above minus the root node (bevolkingsgroep)
-        links = data.descendants().slice(1)
+    // links are the same as above minus the root node (bevolkingsgroep)
+    links = data.descendants().slice(1)
 
     console.log('nodes', nodes)
     console.log('links', links)
 
-    // ensure nodes and links are not spread across the webpage
+    // ensure nodes and links are spread across half of the dendrosvg
     nodes.forEach(d => d.y = d.depth * 180);;
 
     // update nodes and recursive assigns id's
@@ -354,14 +347,15 @@ function makeDendrogramCanvas(data){
     var nodeBirth = node.enter().append("g")
         .attr("class", "node")
         .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
-        // .on("click", click); //click function need to be implemented
+        .on("click", click); //click function need to be implemented
 
     // add circles to visualize the nodes
     nodeBirth.append("cirle")
-        .attr("class", "nodes")
-        .attr("r", 24)
-        .style("fill", d => d._children ? "lightsteelblue" : "#fff");
-
+        .attr("class", "node")
+        .attr("x", width/2)
+        .attr("y", height/2)
+        .attr('r', 10)
+        .style("fill", d => console.log('hier',d.children));// d._children ? "#000000" : "#000000");
 
     // (conditie = true) ? (dan dit) : (anders dit)
     console.log(data.data.name)
@@ -385,23 +379,87 @@ function makeDendrogramCanvas(data){
     // update node attributes and style
     nodeUpdate.select("circle.node")
         .attr("r", 10)
-        .style("fill", d => d._children ? "lightsteelblue" : "#fff")
+        .attr("x", width/2)
+        .attr("y", height/2)
+        .style("fill", d => d._children ? "#000000" : "#000000")
         .attr("cursor", "pointer");
 
+    // snap deze nog niet heeel goed
+    var nodeExit = node.exit().transition()
+        .duration(duration)
+        .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
+        .remove();
 
+    // ik snap niet waarom er geen cirkels komen maar hierboven was het ook al niet
 
+    nodeExit.select("cirkle")
+        .attr("r", 10);
 
+    nodeExit.select("text")
+        .style("fill-opacity", 2);
 
+    console.log("nodeExit", nodeExit)
 
+    // continue
 
+    // ****************** links section ***************************
 
+    // make update function for the links, returns id's from collapsed nodes
+    var link = svg.selectAll("path.link")
+        .data(links, function(d) { console.log("id", d.id); return d.id; });
 
+    var linkIt = link.enter().insert("path", "g")
+        .attr("class", "link")
+        .attr('d', function(d){
+          var position = {x: source.x0, y: source.y0}
+          console.log(diagonal(position, position))
+          return diagonal(position, position)
+        });
 
+    var linkUpdate = linkIt.merge(link);
+
+    // transition to parent position
+    linkUpdate.transition()
+        .duration(duration)
+        .attr("d", d => diagonal(d, d.parent));
+
+    // delete current links
+    var linkDelete = link.exit().transition()
+        .duration(duration)
+        .attr('d', function(d) {
+          var position = {x: source.x, y: source.y}
+          return diagonal(position, position)
+        })
+        .remove();
+
+    // Store the old positions for transition.
+    nodes.forEach(function(d){
+      d.x0 = d.x;
+      d.y0 = d.y;
+    });
+
+    // Creates a curved (diagonal) path from parent to the child nodes
+    function diagonal(s, d) {
+
+      path = `M ${s.y} ${s.x}
+              C ${(s.y + d.y) / 2} ${s.x},
+                ${(s.y + d.y) / 2} ${d.x},
+                ${d.y} ${d.x}`
+
+      return path
+    }
+
+    // Toggle children on click.
+    function click(d) {
+      if (d.children) {
+          d._children = d.children;
+          d.children = null;
+        } else {
+          d.children = d._children;
+          d._children = null;
+        }
+      update(d);
+    }
   }
-
-
-
-
-
 
 };

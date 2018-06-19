@@ -113,32 +113,10 @@
 }
 
 /* dendrogram  */
-/* 
-.link {
-    fill: none;
-    stroke: #555;
-    stroke-opacity: 0.4;
-    stroke-width: 1px; */
-}
-
-/* .node circle {
-    fill: #999;
-}
-
-.node--internal circle {
-    fill: #555;
-}
-.node--internal text {
-    font-size: 16px;
-    text-shadow: 0 2px 0 #fff, 0 -2px 0 #fff, 2px 0 0 #fff, -2px 0 0 #fff;
-}
-.node--leaf text {
-    fill: white;
-} */
 
 .node circle {
-  fill: #fff;
-  stroke: steelblue;
+  fill: #000000;
+  stroke: #000000;
   stroke-width: 3px;
 }
 
@@ -148,6 +126,6 @@
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: #000000;
   stroke-width: 2px;
 }

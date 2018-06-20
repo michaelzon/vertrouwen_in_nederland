@@ -1,5 +1,3 @@
-  // var dendroData = {};
-
 function importData(error, response){
 
   // check if data gets loaded
@@ -11,8 +9,6 @@ function importData(error, response){
   for(i = 0; i < 6; i ++){
     bigDatty.push(response[i])
   }
-
-  // console.log("bigDatty: ", bigDatty)
 
   var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
@@ -72,15 +68,12 @@ function importData(error, response){
   vertrouwen["westers"] = westers
   vertrouwen["nietWesters"] = nietWesters
 
-  // wat je kan doen om niet het aantal variabelen te hardcoden is de variabelen van de desbetreffende dict in een array pushen met objectkeys functie en daar dan de lengte van nemen
-
   var dienstverlening = (bigDatty[1]["dienstverlening"])
 
   for(var i = 0; i < dienstverlening.length; i ++){
     delete(dienstverlening[i].ID)
     delete(dienstverlening[i].Migratieachtergrond)
     delete(dienstverlening[i].Periode)
-    // dienstverlening[i].Periode = Number(dienstverlening[i].Periode);
     dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
     dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
     dienstverlening[i].ZoekenOpWebsitesPubliekeSector = Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
@@ -127,8 +120,6 @@ function importData(error, response){
   dienstverlening["westers"] = westers
   dienstverlening["nietWesters"] = nietWesters
 
-  // console.log(nietWesters);
-
   var superKeys = Object.keys(dienstverlening);
 
   var dataDienstverlening = {};
@@ -137,11 +128,9 @@ function importData(error, response){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
       var tempArray = [];
-      // console.log(superKey);
       keys = Object.keys(dienstverlening[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        // console.log(key)
         uberArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
       })
       tempArray = {"name": "dienstverlening", "children": uberArray};
@@ -150,14 +139,12 @@ function importData(error, response){
     dataDienstverlening[year] = {"name": year, "children": superTempArray}
   })
 
-
   var gebruik = (bigDatty[3]["gebruik"]);
 
   for(var i = 0; i < gebruik.length; i ++){
     delete(gebruik[i].ID)
     delete(gebruik[i].Migratieachtergrond)
     delete(gebruik[i].Periode)
-    // gebruik[i].Periode = Number(gebruik[i].Periode);
     gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
     gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
     gebruik[i].MeerDan12MaandenGeleden = Number(gebruik[i].MeerDan12MaandenGeleden);
@@ -167,7 +154,7 @@ function importData(error, response){
     gebruik[i].MinderDanEenKeerPerWeek = Number(gebruik[i].MinderDanEenKeerPerWeek);
   };
 
-  var gebruikVars = Object.keys(gebruik[0])
+  var gebruikVars = Object.keys(gebruik[0]);
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
@@ -215,11 +202,9 @@ function importData(error, response){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
       var tempArray = [];
-      // console.log(superKey);
       keys = Object.keys(gebruik[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        // console.log(key)
         uberArray.push({"name": key, "value": gebruik[superKey][year][key]})
       })
       tempArray = {"name": "internetgebruik", "children": uberArray};
@@ -228,24 +213,17 @@ function importData(error, response){
     dataGebruik[year] = {"name": year, "children": superTempArray}
   })
 
-
-
-  // console.log('hee',d3.hierarchy(dataGebruik["2012"]));
-  // console.log('geb',dataGebruik);
-
   var interesse = (bigDatty[4]["interesse"]);
 
   for(var i = 0; i < interesse.length; i ++){
     delete(interesse[i].ID)
     delete(interesse[i].Migratieachtergrond)
     delete(interesse[i].Periode)
-    // interesse[i].Periode = Number(interesse[i].Periode);
     interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
     interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
     interesse[i].WeinigGeinteresseerd = Number(interesse[i].WeinigGeinteresseerd);
     interesse[i].NietGeinteresseerd = Number(interesse[i].NietGeinteresseerd);
   };
-
 
   var interesseVars = Object.keys(interesse[0])
 
@@ -295,11 +273,9 @@ function importData(error, response){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
       var tempArray = [];
-      // console.log(superKey);
       keys = Object.keys(interesse[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        // console.log(key)
         uberArray.push({"name": key, "value": interesse[superKey][year][key]})
       })
       tempArray = {"name": "interesse", "children": uberArray};
@@ -308,17 +284,12 @@ function importData(error, response){
     dataInteresse[year] = {"name": year, "children": superTempArray}
   })
 
-  // console.log('hee',d3.hierarchy(dataInteresse["2012"]));
-  // console.log('int',dataInteresse);
-
-
   var participatie = (bigDatty[5]["participatie"]);
 
   for(var i = 0; i < participatie.length; i ++){
     delete(participatie[i].ID)
     delete(participatie[i].Migratieachtergrond)
     delete(participatie[i].Periode)
-    // participatie[i].Periode = Number(participatie[i].Periode);
     participatie[i].RadioTelevisieOfKrantIngeschakeld = Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
     participatie[i].PolitiekeOrganisatieIngeschakeld = Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
     participatie[i].MeegedaanAanBijeenkomstOverheid = Number(participatie[i].MeegedaanAanBijeenkomstOverheid);
@@ -330,19 +301,6 @@ function importData(error, response){
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
-  // console.log('par', participatie[0].Migratieachtergrond)
-
-  // var parData = d3.nest()
-  //     .key(d => participatie[0].Migratieachtergrond)
-  //     .entries(participatie)
-
-  // console.log('pardata',parData)
-
-
-  // var nest = d3.nest()
-  //     .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
-  //     .entries(nl);
-
   var participatieVars = Object.keys(participatie[0])
 
   var totaal = {};
@@ -352,8 +310,6 @@ function importData(error, response){
       totaal[years[i]][Object.keys(participatie[i])[j]] = Object.values(participatie[i])[j]
     }
   }
-
-  // console.log('tot',totaal)
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
@@ -395,11 +351,9 @@ function importData(error, response){
     superKeys.forEach(function(superKey){
       var bevolkingArray = [];
       var tempArray = [];
-      // console.log(superKey);
       keys = Object.keys(participatie[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        // console.log(key)
         uberArray.push({"name": key, "value": participatie[superKey][year][key]})
       })
       tempArray = {"name": "participatie", "children": uberArray};
@@ -440,23 +394,27 @@ function importData(error, response){
     dataParticipatie[year] = {"name": year, "children": superTempArray}
   })
 
-
   var dendrogramData = dataParticipatie;
-  var dendrotot = {};
-  years.forEach(function(year){
-    console.log(dendrogramData[year].children[0])
-    dendrotot[year] = (dendrogramData[year].children[0])
-  })
-  console.log(dendrotot);
-  var dendroTotaal = dendrogramData["2012"].children[0];
-  var dendroNederlands = dendrogramData["2012"].children[1];
-  var dendroWesters = dendrogramData["2012"].children[2];
-  var dendroNietWesters = dendrogramData["2012"].children[3];
 
-  console.log(dendroTotaal)
-  // console.log(dendroNederlands)
-  // console.log(dendroWesters)
-  // console.log(dendroNietWesters)
+  console.log(dendrogramData)
+
+  var dendroTotaal = {};
+  var dendroNederlands = {};
+  var dendroWesters = {};
+  var dendroNietWesters = {};
+
+  years.forEach(function(year){
+    dendroTotaal[year] = (dendrogramData[year].children[0])
+    dendroNederlands[year] = dendrogramData[year].children[1];
+    dendroWesters[year] = dendrogramData[year].children[2];
+    dendroNietWesters[year] = dendrogramData[year].children[3];
+  })
+
+  // var dendroTotaal = dendrogramData["2012"].children[0];
+  // var dendroNederlands = dendrogramData["2012"].children[1];
+  // var dendroWesters = dendrogramData["2012"].children[2];
+  // var dendroNietWesters = dendrogramData["2012"].children[3];
+
 
   var dendroData = {};
   dendroData["totaal"] = dendroTotaal;
@@ -464,86 +422,8 @@ function importData(error, response){
   dendroData["westers"] = dendroWesters;
   dendroData["nietWesters"] = dendroNietWesters;
 
-  // console.log(dendroData)
-
-  // years.forEach(function(year){
-  //
-  //   dataParticipatie[year] = {"name": year, "children": superTempArray}
-  //
-  // })
-
-  // console.log(dendrogramData["2012"])
-
   makeLinegraph(vertrouwen.nederlands)
   updateLines(vertrouwen)
-  makeDendrogram(dataParticipatie["2012"].children[0])
-
-  // console.log('hee',d3.hierarchy(dataParticipatie["2012"]));
-
-  // het totaal van 2012
-  // console.log("dataGebruik", dataGebruik['2012'].children[0])
-
-  // console.log("dataDienstverlening", dataDienstverlening)
-  // console.log("dataParticipatie", dataParticipatie)
-  // console.log("dataInteresse", dataInteresse)
-
-  // this[0].name
-
-  // var groups = ["totaal", "nederlands", "westers", "nietWesters"];
-  //
-  // var children = ["gebruik", "dienstverlening", "participatie", "interesse"];
-
-  // years.forEach(function(year){
-  //   groups.forEach(function(group){
-  //       // console.log(child)
-  //       // console.log('sdfsdfs',dataGebruik[year]["name"])
-  //     console.log('ksdfaewk',dataGebruik[year].children)
-  //     dataGebruik[year]["children"][group].push(dataDienstverlening[year]["children"][group])
-  //   })
-  // });
-
-  //
-
-  // console.log('vertrouwen', vertrouwen)
-  // console.log('dienstverlening', dienstverlening)
-  // console.log('faciliteiten', faciliteiten)
-  // console.log('gebruik', gebruik)
-  // console.log('interesse', interesse)
-  // console.log('participatie', participatie)
-
-  // niet verwijderen, dit was mijn struct voordat tim ging helpen
-  // var dendroData = {};
-  // dendroData["internetgebruik"] = gebruik;
-  // dendroData["dienstverlening"] = dienstverlening;
-  // dendroData["participatie"] = participatie;
-  // dendroData["interesse"] = interesse;
-
-  // console.log('dendro',dendroData)
-
-
-  // dendroData.push(gebruik)
-  // dendroData.push(dienstverlening)
-  // dendroData.push(participatie)
-  // dendroData.push(interesse)
-
-  // var alles = (d,i => dendroData[i].nederlands);
-  // console.log(alles)
-
-  // for(var i = 0; i < )
-
-  // var dataTotaal = {}
-  // dataTotaal["internetgebruik"] = dendroData.internetgebruik.totaal;
-  // dataTotaal["dienstverlening"] = dendroData.dienstverlening.totaal;
-  // dataTotaal["participatie"] = dendroData.participatie.totaal;
-  // dataTotaal["interesse"] = dendroData.interesse.totaal;
-  //
-  // var totaal = [];
-  // totaal.push(dataTotaal)
-  //
-  // var nestTotaal = d3.nest()
-  //     .key(function(d){return d.dienstverlening[2012].Migratieachtergrond})
-  //     .entries(totaal);
-  // console.log(nestTotaal)
-
+  makeDendrogram(dendroData.nietWesters["2012"])
 
 };

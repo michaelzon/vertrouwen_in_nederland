@@ -285,7 +285,7 @@ function makeDendrogram(data){
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
     .append("g")
-      .attr("transform", "translate(50,0)");
+      .attr("transform", "translate(80,0)");
 
   var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
 
@@ -336,14 +336,11 @@ function makeDendrogram(data){
     var data = tree(root)
     // console.log(data)
 
-    // and the new tree layout
+    // and the new tree layout, 'nodes' is our data from now on
     var nodes = data.descendants(),
 
     // links are the same as above minus the root node (bevolkingsgroep)
     links = data.descendants().slice(1)
-    //
-    // console.log('nodes', nodes)
-    // console.log('links', links)
 
     // ensure nodes and links are spread across half of the dendrosvg
     nodes.forEach(d => d.y = d.depth * 180);
@@ -365,7 +362,7 @@ function makeDendrogram(data){
         .attr("class", "node")
         .attr('r', 10)
         .style("fill", d => {
-          // console.log(d);
+          console.log(d);
           d._children ? "#000000" : "#000000";
         })
 
@@ -380,25 +377,76 @@ function makeDendrogram(data){
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
+    // getting al the variables for the rects (get rect m8)
+    var valueArr = [];
+    nodes = nodes.slice(1)
+    nodes.forEach(function(element){
+      console.log('element', element)
+      element._children.forEach(function(child){
+        valueArr.push(child.data.value)
+        })
+      })
+
     nodeBirth.append("rect")
         .attr("class", "babyRect")
         .attr("width", 1)     // it starts at zero so the transistion is right
         .attr("height", 30)
         .attr("rx", 5)         // this makes the bars less blocky
         .attr("ry", 5)
+        .data([valueArr])
+        .enter()
         .transition()
           .duration(500)
           .attr("width", function (d,i) {
             if (i != 0){
-              // console.log('hierzo',d._children.value);
               d._children.forEach(function(child){
-                console.log('value',child.data.value);
-                // console.log('scale',xScale(child.data.value))
-                return xScale(child.data.value)
+                valueArr.push(child.data.value)
+                console.log('ar', i)
+                return xScale(valueArr[i])
               })
-            }
+            }});
 
-            ;});
+    nodeBirth.append("rect")
+        .attr("class", "babyRect")
+        .attr("width", 1)     // it starts at zero so the transistion is right
+        .attr("height", 30)
+        .attr("rx", 5)         // this makes the bars less blocky
+        .attr("ry", 5)
+        .data([valueArr])
+        .enter()
+        .transition()
+          .duration(500)
+          .attr("width", function (d,i) {
+            if (i != 0){
+              d._children.forEach(function(child){
+                valueArr.push(child.data.value)
+                console.log('ar', i)
+                return xScale(valueArr[i])
+              })
+            }});
+
+    // var valueArr = [];
+    //
+    // nodeBirth.append("rect")
+    //     .attr("class", "babyRect")
+    //     .attr("width", 1)     // it starts at zero so the transistion is right
+    //     .attr("height", 30)
+    //     .attr("rx", 5)         // this makes the bars less blocky
+    //     .attr("ry", 5)
+    //     .transition()
+    //       .duration(500)
+    //       .attr("width", function (d,i) {
+    //         if (i != 0){
+    //           console.log('hierzo',d._children.value);
+    //           d._children.forEach(function(child){
+    //             console.log('child', child)
+    //             console.log('value',child.data.value);
+    //             valueArr.push(child.data.value)
+    //             console.log('ar', valueArr)
+    //             console.log('scale',xScale(child.data.value))
+    //             return xScale(child.data.value)
+    //           })
+    //         }});
 
     // nodeBirth.append("rect")
     //     .attr("class", "babyRect")
@@ -450,8 +498,6 @@ function makeDendrogram(data){
     //       // .attr("width", d => xScale(data.data.value))
 
     var nodeUpdate = nodeBirth.merge(node);
-
-    // console.log('upd', nodeUpdate)
 
     // transition to the right position
     nodeUpdate.transition()

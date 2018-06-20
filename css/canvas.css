@@ -10,6 +10,12 @@
   border-style: dotted;
 }
 
+/* ?????? */
+#graphLegend {
+  left: 100%;
+  border-style: dotted;
+}
+
 .text2 {
   position: absolute;
   top: 50%;

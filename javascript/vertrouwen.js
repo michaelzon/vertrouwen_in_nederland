@@ -67,8 +67,8 @@ function makeLinegraph(data){
   // console.log('vertrouwen', vertrouwen)
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
-      outerWidth = 1260,
-      outerHeight = 700,
+      outerWidth = 1160,
+      outerHeight = 600,
       innerWidth = outerWidth - margin.left - margin.right,
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
@@ -248,7 +248,7 @@ function makeLinegraph(data){
       .scale(legendLines);
 
   //placing legend
-  var svgGraphDes = d3.select("#linegraphDes")
+  var svgGraphDes = d3.select("#linechart")
       .append("svg")
       .attr("width", legendWidth)
       .attr("height", legendHeight)
@@ -259,13 +259,14 @@ function makeLinegraph(data){
 
   svgGraphDes.select("#graphLegend")
       .call(graphLegend);
+
 };
 
 function makeDendrogramCanvas(data){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
-      outerWidth = 1300,
-      outerHeight = 1100,
+      outerWidth = 1180,
+      outerHeight = 980,
       innerWidth = outerWidth - margin.left - margin.right,
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
@@ -350,10 +351,8 @@ function makeDendrogramCanvas(data){
         .on("click", click); //click function need to be implemented
 
     // add circles to visualize the nodes
-    nodeBirth.append("cirle")
+    nodeBirth.append("circle")
         .attr("class", "node")
-        .attr("x", width/2)
-        .attr("y", height/2)
         .attr('r', 10)
         .style("fill", d => console.log('hier',d.children));// d._children ? "#000000" : "#000000");
 
@@ -392,7 +391,7 @@ function makeDendrogramCanvas(data){
 
     // ik snap niet waarom er geen cirkels komen maar hierboven was het ook al niet
 
-    nodeExit.select("cirkle")
+    nodeExit.select("circle")
         .attr("r", 10);
 
     nodeExit.select("text")
@@ -460,6 +459,9 @@ function makeDendrogramCanvas(data){
         }
       update(d);
     }
+
+
   }
+
 
 };

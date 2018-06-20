@@ -336,27 +336,28 @@ function makeDendrogramCanvas(data){
     console.log('links', links)
 
     // ensure nodes and links are spread across half of the dendrosvg
-    nodes.forEach(d => d.y = d.depth * 180);;
+    nodes.forEach(d => d.y = d.depth * 180);
 
-    // update nodes and recursive assigns id's
+    // update nodes and recursive assigns id's and classes,
+    // if node has a other nodes after her she is a momma, otherwise a baby
     var node = svg.selectAll("g.node")
-        .data(nodes, d => d.id || (d.id = ++i));
-
-    console.log("node", node)
+        .data(nodes, d => d.id || (d.id = ++i))
+        .attr("class", d => "node" + (d.children ? " nodeMomma" : " nodeBaby"));
 
     // a new child is born and birth takes place at position of the parent
     var nodeBirth = node.enter().append("g")
         .attr("class", "node")
         .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
-        .on("click", click); //click function need to be implemented
+        .on("click", click);
 
     // add circles to visualize the nodes
     nodeBirth.append("circle")
         .attr("class", "node")
         .attr('r', 10)
-        .style("fill", d => console.log('hier',d.children));// d._children ? "#000000" : "#000000");
+        .style("fill", d => d._children ? "#000000" : "#000000");
 
     // (conditie = true) ? (dan dit) : (anders dit)
+
     console.log(data.data.name)
 
     // adding labels
@@ -383,23 +384,37 @@ function makeDendrogramCanvas(data){
         .style("fill", d => d._children ? "#000000" : "#000000")
         .attr("cursor", "pointer");
 
-    // snap deze nog niet heeel goed
-    var nodeExit = node.exit().transition()
+    // remove nodes including text and circles when update
+    var nodeGone = node.exit().transition()
         .duration(duration)
         .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
         .remove();
 
-    // ik snap niet waarom er geen cirkels komen maar hierboven was het ook al niet
+    nodeGone.select("circle")
+        .attr("r", 0);
 
-    nodeExit.select("circle")
-        .attr("r", 10);
+    nodeGone.select("text")
+        .style("fill-opacity", 0);
 
-    nodeExit.select("text")
-        .style("fill-opacity", 2);
+    // ****************** bars section ***************************
 
-    console.log("nodeExit", nodeExit)
+    // create new variable for the horizontal bars whom appear after the baby's
+    var rectFromBaby = g.selectAll(".nodeBaby")
+        .append("g") // give the rects a grouping element
+        .attr("class", "babyRect")
+        // transform/translate something
 
-    // continue
+    rectFromBaby.append("rect")
+        // add class with attr
+        // fill em up with a color
+        .attr("width", 0) // it starts at zero so the transistion is right
+        .attr("height", 30)
+        
+
+
+
+
+    console.log("nodeGone", nodeGone)
 
     // ****************** links section ***************************
 
@@ -411,7 +426,7 @@ function makeDendrogramCanvas(data){
         .attr("class", "link")
         .attr('d', function(d){
           var position = {x: source.x0, y: source.y0}
-          console.log(diagonal(position, position))
+          // console.log(diagonal(position, position))
           return diagonal(position, position)
         });
 
@@ -431,13 +446,15 @@ function makeDendrogramCanvas(data){
         })
         .remove();
 
-    // Store the old positions for transition.
+    // remember the position of nodes so the transition runs smoothly
     nodes.forEach(function(d){
       d.x0 = d.x;
       d.y0 = d.y;
     });
 
-    // Creates a curved (diagonal) path from parent to the child nodes
+    //
+
+    // function for the path between mothers and baby's
     function diagonal(s, d) {
 
       path = `M ${s.y} ${s.x}
@@ -448,7 +465,7 @@ function makeDendrogramCanvas(data){
       return path
     }
 
-    // Toggle children on click.
+    // switch between state of nodes when clicked on.
     function click(d) {
       if (d.children) {
           d._children = d.children;

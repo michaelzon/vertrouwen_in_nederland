@@ -72,7 +72,7 @@
 
 * Ik heb de keuze gemaakt om de variabelen over faciliteiten niet meer te gebruiken omdat de gebruiker anders door de bomen het bos niet meer zien.
 
-# dag 9 (19/6)
+# dag 9 (18/6)
 
 * Ga weer verder met mijn dendrogram. Hoop dat ik er een beetje uit kom qua structuur.
 
@@ -94,7 +94,7 @@
 ![](photo/image_13.jpg)
 ![](photo/image_14.jpg)
 
-# dag 10 (20/6)
+# dag 10 (19/6)
 
 * Moeite met for loop voor data children/parents. wacht even op TA's en ondertussen doe ik wat andere dingen (legenda/crosshair etc.)
 
@@ -110,3 +110,7 @@
 * al een stuk verder, ga nu proberen rectangles met de waarde van de variabelen erachter te laten appenden.
 
 ![](photo/image_16.jpg)
+
+# dag 11 (20/6)
+
+* Ga vandaag zorgen dat er rectangles verschijnen achter de laatste nodes. Eerst gewoon rects. daarna met waardes, en daarna met kleur. Om er achter te komen hoe dit moet ga ik goed naar de code kijken van voorbeeld Dendrogram + Grouped Horizontal Bar Chart op bl.ocks.org. 

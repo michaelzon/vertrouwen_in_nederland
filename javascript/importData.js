@@ -1,4 +1,4 @@
-  var dendroData = {};
+  // var dendroData = {};
 
 function importData(error, response){
 
@@ -440,6 +440,44 @@ function importData(error, response){
     dataParticipatie[year] = {"name": year, "children": superTempArray}
   })
 
+
+  var dendrogramData = dataParticipatie;
+  var dendrotot = {};
+  years.forEach(function(year){
+    console.log(dendrogramData[year].children[0])
+    dendrotot[year] = (dendrogramData[year].children[0])
+  })
+  console.log(dendrotot);
+  var dendroTotaal = dendrogramData["2012"].children[0];
+  var dendroNederlands = dendrogramData["2012"].children[1];
+  var dendroWesters = dendrogramData["2012"].children[2];
+  var dendroNietWesters = dendrogramData["2012"].children[3];
+
+  console.log(dendroTotaal)
+  // console.log(dendroNederlands)
+  // console.log(dendroWesters)
+  // console.log(dendroNietWesters)
+
+  var dendroData = {};
+  dendroData["totaal"] = dendroTotaal;
+  dendroData["nederlands"] = dendroNederlands;
+  dendroData["westers"] = dendroWesters;
+  dendroData["nietWesters"] = dendroNietWesters;
+
+  // console.log(dendroData)
+
+  // years.forEach(function(year){
+  //
+  //   dataParticipatie[year] = {"name": year, "children": superTempArray}
+  //
+  // })
+
+  // console.log(dendrogramData["2012"])
+
+  makeLinegraph(vertrouwen.nederlands)
+  updateLines(vertrouwen)
+  makeDendrogram(dataParticipatie["2012"].children[0])
+
   // console.log('hee',d3.hierarchy(dataParticipatie["2012"]));
 
   // het totaal van 2012
@@ -451,9 +489,9 @@ function importData(error, response){
 
   // this[0].name
 
-  var groups = ["totaal", "nederlands", "westers", "nietWesters"];
-
-  var children = ["gebruik", "dienstverlening", "participatie", "interesse"];
+  // var groups = ["totaal", "nederlands", "westers", "nietWesters"];
+  //
+  // var children = ["gebruik", "dienstverlening", "participatie", "interesse"];
 
   // years.forEach(function(year){
   //   groups.forEach(function(group){
@@ -507,8 +545,5 @@ function importData(error, response){
   //     .entries(totaal);
   // console.log(nestTotaal)
 
-  makeLinegraph(vertrouwen.nederlands)
-  updateLines(vertrouwen)
-  makeDendrogramCanvas(dataParticipatie["2012"].children[0])
 
 };

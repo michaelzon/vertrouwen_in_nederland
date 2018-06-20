@@ -29,24 +29,32 @@ function updateLines(data){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
+      makeDendrogram(dataParticipatie["2012"].children[0])
+
     }
   });
 
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.nederlands)
+      makeDendrogram(data.dataParticipatie["2012"].children[1])
+
     }
   });
 
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.westers)
+      makeDendrogram(data.dataParticipatie["2012"].children[2])
+
     }
   });
 
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.nietWesters)
+      makeDendrogram(data.dataParticipatie["2012"].children[3])
+
     }
   });
 
@@ -248,7 +256,7 @@ function makeLinegraph(data){
       .scale(legendLines);
 
   //placing legend
-  var svgGraphDes = d3.select("#linechart")
+  var svgGraphDes = d3.select("#linegraphLegend")
       .append("svg")
       .attr("width", legendWidth)
       .attr("height", legendHeight)
@@ -262,7 +270,7 @@ function makeLinegraph(data){
 
 };
 
-function makeDendrogramCanvas(data){
+function makeDendrogram(data){
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1180,
@@ -278,6 +286,8 @@ function makeDendrogramCanvas(data){
       .attr("id", "dendrochart")
     .append("g")
       .attr("transform", "translate(50,0)");
+
+  var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
 
   // creating axis and scale
   var xScale = d3.scaleLinear()
@@ -304,7 +314,7 @@ function makeDendrogramCanvas(data){
   root.x0 = height / 2;
   root.y0 = 0;
 
-  console.log('root',root)
+  // console.log('root',root)
 
   // collapse
   root.children.forEach(collapse);
@@ -324,16 +334,16 @@ function makeDendrogramCanvas(data){
 
     // determine x and y position for nodes
     var data = tree(root)
-    console.log(data)
+    // console.log(data)
 
     // and the new tree layout
     var nodes = data.descendants(),
 
     // links are the same as above minus the root node (bevolkingsgroep)
     links = data.descendants().slice(1)
-
-    console.log('nodes', nodes)
-    console.log('links', links)
+    //
+    // console.log('nodes', nodes)
+    // console.log('links', links)
 
     // ensure nodes and links are spread across half of the dendrosvg
     nodes.forEach(d => d.y = d.depth * 180);
@@ -354,11 +364,14 @@ function makeDendrogramCanvas(data){
     nodeBirth.append("circle")
         .attr("class", "node")
         .attr('r', 10)
-        .style("fill", d => d._children ? "#000000" : "#000000");
+        .style("fill", d => {
+          console.log(d);
+          d._children ? "#000000" : "#000000";
+        })
 
     // (conditie = true) ? (dan dit) : (anders dit)
 
-    console.log(data.data.name)
+    // console.log(data.data)
 
     // adding labels
     nodeBirth.append("text")
@@ -366,6 +379,51 @@ function makeDendrogramCanvas(data){
         .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
+
+    nodeBirth.append("rect")
+        .attr("class", "babyRect")
+        .attr("width", 1) // it starts at zero so the transistion is right
+        .attr("height", 30)
+        .attr("rx", 5) // this makes the bars less blocky
+        .attr("ry", 5)
+        .transition()
+          .duration(500)
+          .attr("width", function (d,i) {
+            if (i != 0){
+              console.log(d._children);
+              d._children.forEach(function(child){
+                console.log(child.data.value);
+              })
+            }
+            // console.log("huisje", d)
+            // console.log("boompje", d.data)
+            // console.log("feestje", d.data.children)
+            // console.log('beestje',d.data.children[i].value)
+            // return xScale(data.data.value)
+            ;});
+          // .attr("width", d => xScale(data.data.value))
+
+
+    // ****************** bars section ***************************
+    //
+    // // create new variable for the horizontal bars whom appear after the baby's
+    // var rectFromBaby = g.selectAll(".nodeBaby")
+    //     .append("g") // give the rects a grouping element
+    //     .attr("class", "babyRect")
+    //     .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+    //
+    // rectFromBaby.append("rect")
+    //     .attr("class","youngRect")        // fill em up with a color
+    //     .attr("width", 0) // it starts at zero so the transistion is right
+    //     .attr("height", 30)
+    //     .attr("rx", 5) // this makes the bars less blocky
+    //     .attr("ry", 5)
+    //     .transition()
+    //       .duration(500)
+    //       .attr("width", function (d) {
+    //         console.log('blablabla',d)
+    //         return xScale(data.data.value);});
+    //       // .attr("width", d => xScale(data.data.value))
 
     var nodeUpdate = nodeBirth.merge(node);
 
@@ -395,24 +453,6 @@ function makeDendrogramCanvas(data){
 
     nodeGone.select("text")
         .style("fill-opacity", 0);
-
-    // ****************** bars section ***************************
-
-    // create new variable for the horizontal bars whom appear after the baby's
-    var rectFromBaby = g.selectAll(".nodeBaby")
-        .append("g") // give the rects a grouping element
-        .attr("class", "babyRect")
-        // transform/translate something
-
-    rectFromBaby.append("rect")
-        // add class with attr
-        // fill em up with a color
-        .attr("width", 0) // it starts at zero so the transistion is right
-        .attr("height", 30)
-        
-
-
-
 
     console.log("nodeGone", nodeGone)
 
@@ -451,8 +491,6 @@ function makeDendrogramCanvas(data){
       d.x0 = d.x;
       d.y0 = d.y;
     });
-
-    //
 
     // function for the path between mothers and baby's
     function diagonal(s, d) {

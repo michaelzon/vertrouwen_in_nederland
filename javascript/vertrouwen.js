@@ -13,7 +13,7 @@ window.onload = function(){
 
 };
 
-function updateLines(data){
+function updateLines(data, secondData){
 
   var butTotaal = document.getElementById("selectTotaal");
   var butNederlands = document.getElementById("selectNederlands");
@@ -22,10 +22,12 @@ function updateLines(data){
 
   // eventhandler > roept linegraph functie aan met de data die je wil hebben
 
+  console.log('seconddata',secondData.totaal["2012"])
+
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
-      makeDendrogram(dataParticipatie["2012"].children[0])
+      makeDendrogram(secondData.totaal["2012"])
 
     }
   });
@@ -33,7 +35,7 @@ function updateLines(data){
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.nederlands)
-      makeDendrogram(data.dataParticipatie["2012"].children[1])
+      makeDendrogram(secondData.nederlands["2012"])
 
     }
   });
@@ -41,7 +43,7 @@ function updateLines(data){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.westers)
-      makeDendrogram(data.dataParticipatie["2012"].children[2])
+      makeDendrogram(secondData.westers["2012"])
 
     }
   });
@@ -49,7 +51,7 @@ function updateLines(data){
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.nietWesters)
-      makeDendrogram(data.dataParticipatie["2012"].children[3])
+      makeDendrogram(secondData.nietWesters["2012"])
 
     }
   });
@@ -61,7 +63,7 @@ function makeLinegraph(data){
   // remove current lines if others are added by clicking on dropdown
   if (d3.select("#linegraph").select("svg")){
     d3.select("#linegraph").select("svg").remove();
-    d3.select("#linegraphDes").select("svg").remove();
+    d3.select("#linegraphLegend").select("svg").remove();
 
   }
 
@@ -263,6 +265,12 @@ function makeLinegraph(data){
 };
 
 function makeDendrogram(data){
+
+  // remove current lines if others are added by clicking on dropdown
+  if (d3.select("#dendrogram").select("svg")){
+    d3.select("#dendrogram").select("svg").remove();
+  }
+
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       outerWidth = 1180,
@@ -306,8 +314,6 @@ function makeDendrogram(data){
   root.x0 = height / 2;
   root.y0 = 0;
 
-  // console.log('root',root)
-
   // collapse
   root.children.forEach(collapse);
 
@@ -337,6 +343,21 @@ function makeDendrogram(data){
     // ensure nodes and links are spread across half of the dendrosvg
     nodes.forEach(d => d.y = d.depth * 180);
 
+    var getRect = nodes.slice(5, nodes.length)
+    console.log(getRect);
+
+    d3.selectAll(".reccit").remove();
+
+    getRect.forEach(function(t){
+      console.log((t));
+      svg.append("rect")
+      .attr("class", "reccit")
+      .attr("width", t.data.value)
+      .attr("height", 20)
+      .attr("x", t.y)
+      .attr("y", t.x + 70)
+    })
+
     // update nodes and recursive assigns id's and classes,
     // if node has a other nodes after her she is a momma, otherwise a baby
     var node = svg.selectAll("g.node")
@@ -360,8 +381,6 @@ function makeDendrogram(data){
 
     // (conditie = true) ? (dan dit) : (anders dit)
 
-    // console.log(data.data)
-
     // adding labels
     nodeBirth.append("text")
         .attr("dy", ".35em")
@@ -378,100 +397,28 @@ function makeDendrogram(data){
         .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
         .on("click", click);
 
-        var counter = 0;
-        console.log(nodes);
-        console.log(source.data.children.length);
+    var counter = 0;
+    console.log(nodes);
+    console.log(source.data.children.length);
 
     rectFromBaby.append("rect")
-        // .attr("width", 50) // it starts at zero so the transistion is right
         .attr("height", 30)
-        .attr("width", 20)
         .attr("width", function (d, i){
-          console.log(counter);
-          console.log(counter < source.data.children.length);
-          if(i != 0 && counter < source.data.children.length){
-            console.log('d', d.children[counter].data.value);
-            var withValue = d.children[counter].data.value;
-            counter++;
-            console.log(counter);
-            return withValue;
-            // d.children.data.forEach(function(value){
-            // console.log(value)})
-          } else {
-            return 0;
+          // console.log(d);
+          // console.log('count1',counter);
+          // console.log('ifstatement',counter < source.data.children.length);
+          if(i != 0 &&counter < source.data.children.length){
+            console.log('data', d);
+          //   var widthValue = d.children[counter].data.value;
+          //   counter++;
+          //   console.log('count2',counter);
+          //   return widthValue;
+          //   // d.children.data.forEach(function(value){
+          //   // console.log(value)})
+          // } else {
+          //   return 0;
           }
         })
-
-
-        // tim:
-        // .attr("width", function (d,i) {
-        //   if (i != 0){
-        //     console.log(d._children);
-        //     return d._children.forEach(function(child){
-        //       console.log('value',child.data.value);
-        //       return xScale(child.data.value)
-        //     })}});
-
-        // .attr("rx", 5) // this makes the bars less blocky
-        // .attr("ry", 5)
-        // .transition()
-        //   .duration(500)
-        //   .attr("width", function (d) {
-        //     console.log('blablabla',d)
-        //     return xScale(data.data.value);});
-        //   // .attr("width", d => xScale(data.data.value))
-
-    // // getting al the variables for the rects (get rect m8)
-    // var valueArr = [];
-    // nodes = nodes.slice(1)
-    // nodes.forEach(function(element){
-    //   element._children.forEach(function(child){
-    //     valueArr.push(child.data.value)
-    //     })
-    //   })
-    //
-    // console.log('values',valueArr)
-
-    // nodeBirth.append("rect")
-    //     .attr("class", "babyRect")
-    //     // .attr("width", 0)     // it starts at zero so the transistion is right
-    //     .attr("height", 30)
-    //     .style("fill", "#000000")
-    //     // .attr("rx", 5)         // this makes the bars less blocky
-    //     // .attr("ry", 5)
-    //     .data(valueArr)
-    //     .enter()
-    //     // .transition()
-    //       // .duration(500)
-    //       .attr("width", function (d){
-    //         console.log('value',d)
-    //         // console.log('scale',xScale(d))
-    //         return xScale(d)
-    //       })
-
-    // nodeBirth.append("rect")
-    //     .attr("class", "babyRect")
-    //     .attr("width", 1) // it starts at zero so the transistion is right
-    //     .attr("height", 30)
-    //     .attr("rx", 5) // this makes the bars less blocky
-    //     .attr("ry", 5)
-    //     .transition()
-    //       .duration(500)
-    //       .attr("width", function (d,i) {
-    //         if (i != 0){
-    //           console.log(d._children);
-    //           return d._children.forEach(function(child){
-    //             console.log('value',child.data.value);
-    //             return xScale(child.data.value)
-    //           })}});
-
-            // console.log("huisje", d)
-            // console.log("boompje", d.data)
-            // console.log("feestje", d.data.children)
-            // console.log('beestje',d.data.children[i].value)
-            // return xScale(data.data.value)
-            // ;});
-          // .attr("width", d => xScale(data.data.value))
 
     var nodeUpdate = nodeBirth.merge(node);
 

@@ -423,7 +423,7 @@ function importData(error, response){
   dendroData["nietWesters"] = dendroNietWesters;
 
   makeLinegraph(vertrouwen.nederlands)
-  updateLines(vertrouwen)
-  makeDendrogram(dendroData.nietWesters["2012"])
+  makeDendrogram(dendroData.westers["2017"])
+  updateLines(vertrouwen, dendroData)
 
 };

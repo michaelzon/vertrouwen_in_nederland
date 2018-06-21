@@ -354,7 +354,7 @@ function makeDendrogram(data){
         .attr("class", "node")
         .attr('r', 10)
         .style("fill", d => {
-          console.log(d);
+          // console.log(d);
           d._children ? "#000000" : "#000000";
         })
 
@@ -369,7 +369,8 @@ function makeDendrogram(data){
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
-    console.log(source.y0 + source.x0)
+    console.log('source',source.y0, source.x0)
+
     // create new variable for the horizontal bars whom appear after the baby's
     var rectFromBaby = node.enter().selectAll(".nodeMomma")
         .append("g") // give the rects a grouping element
@@ -377,11 +378,40 @@ function makeDendrogram(data){
         .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
         .on("click", click);
 
+        var counter = 0;
+        console.log(nodes);
+        console.log(source.data.children.length);
+
     rectFromBaby.append("rect")
-        .attr("width", 50) // it starts at zero so the transistion is right
+        // .attr("width", 50) // it starts at zero so the transistion is right
         .attr("height", 30)
-        .attr("dy", ".35em")
-        .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
+        .attr("width", 20)
+        .attr("width", function (d, i){
+          console.log(counter);
+          console.log(counter < source.data.children.length);
+          if(i != 0 && counter < source.data.children.length){
+            console.log('d', d.children[counter].data.value);
+            var withValue = d.children[counter].data.value;
+            counter++;
+            console.log(counter);
+            return withValue;
+            // d.children.data.forEach(function(value){
+            // console.log(value)})
+          } else {
+            return 0;
+          }
+        })
+
+
+        // tim:
+        // .attr("width", function (d,i) {
+        //   if (i != 0){
+        //     console.log(d._children);
+        //     return d._children.forEach(function(child){
+        //       console.log('value',child.data.value);
+        //       return xScale(child.data.value)
+        //     })}});
+
         // .attr("rx", 5) // this makes the bars less blocky
         // .attr("ry", 5)
         // .transition()

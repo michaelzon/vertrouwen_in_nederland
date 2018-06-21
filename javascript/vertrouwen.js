@@ -381,49 +381,56 @@ function makeDendrogram(data){
     var valueArr = [];
     nodes = nodes.slice(1)
     nodes.forEach(function(element){
-      console.log('element', element)
       element._children.forEach(function(child){
         valueArr.push(child.data.value)
         })
       })
+    console.log('values',valueArr)
 
     nodeBirth.append("rect")
         .attr("class", "babyRect")
-        .attr("width", 1)     // it starts at zero so the transistion is right
+        .attr("width", 0)     // it starts at zero so the transistion is right
         .attr("height", 30)
-        .attr("rx", 5)         // this makes the bars less blocky
-        .attr("ry", 5)
-        .data([valueArr])
+        .style("fill", "#000000")
+        // .attr("rx", 5)         // this makes the bars less blocky
+        // .attr("ry", 5)
+        .data(valueArr)
         .enter()
         .transition()
-          .duration(500)
-          .attr("width", function (d,i) {
-            if (i != 0){
-              d._children.forEach(function(child){
-                valueArr.push(child.data.value)
-                console.log('ar', i)
-                return xScale(valueArr[i])
-              })
-            }});
+          // .duration(500)
+          .attr("width", function (d){0
+            console.log('value',d)
+            // console.log('scale',xScale(d))
+            return xScale(d)
+          })
 
-    nodeBirth.append("rect")
-        .attr("class", "babyRect")
-        .attr("width", 1)     // it starts at zero so the transistion is right
-        .attr("height", 30)
-        .attr("rx", 5)         // this makes the bars less blocky
-        .attr("ry", 5)
-        .data([valueArr])
-        .enter()
-        .transition()
-          .duration(500)
-          .attr("width", function (d,i) {
-            if (i != 0){
-              d._children.forEach(function(child){
-                valueArr.push(child.data.value)
-                console.log('ar', i)
-                return xScale(valueArr[i])
-              })
-            }});
+          // .attr("width", function (d,i) {
+          //   if (i != 0){
+          //     d._children.forEach(function(child){
+          //       valueArr.push(child.data.value)
+          //       console.log('ar', i)
+          //       return xScale(valueArr[i])
+          //     })
+          //   }});
+    //
+    // nodeBirth.append("rect")
+    //     .attr("class", "babyRect")
+    //     .attr("width", 1)       // it starts at zero so the transistion is right
+    //     .attr("height", 30)
+    //     .attr("rx", 5)         // this makes the bars less blocky
+    //     .attr("ry", 5)
+    //     .data([valueArr])
+    //     .enter()
+    //     .transition()
+    //       .duration(500)
+    //       .attr("width", function (d,i) {
+    //         if (i != 0){
+    //           d._children.forEach(function(child){
+    //             valueArr.push(child.data.value)
+    //             console.log('ar', i)
+    //             return xScale(valueArr[i])
+    //           })
+    //         }});
 
     // var valueArr = [];
     //
@@ -524,8 +531,6 @@ function makeDendrogram(data){
     nodeGone.select("text")
         .style("fill-opacity", 0);
 
-    // console.log("nodeGone", nodeGone)
-
     // ****************** links section ***************************
 
     // make update function for the links, returns id's from collapsed nodes
@@ -536,7 +541,6 @@ function makeDendrogram(data){
         .attr("class", "link")
         .attr('d', function(d){
           var position = {x: source.x0, y: source.y0}
-          // console.log(diagonal(position, position))
           return diagonal(position, position)
         });
 

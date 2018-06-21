@@ -113,4 +113,10 @@
 
 # dag 11 (20/6)
 
-* Ga vandaag zorgen dat er rectangles verschijnen achter de laatste nodes. Eerst gewoon rects. daarna met waardes, en daarna met kleur. Om er achter te komen hoe dit moet ga ik goed naar de code kijken van voorbeeld Dendrogram + Grouped Horizontal Bar Chart op bl.ocks.org. 
+* Ga vandaag zorgen dat er rectangles verschijnen achter de laatste nodes. Eerst gewoon rects. daarna met waardes, en daarna met kleur. Om er achter te komen hoe dit moet ga ik goed naar de code kijken van voorbeeld Dendrogram + Grouped Horizontal Bar Chart op bl.ocks.org.
+
+# dag 12 (21/6)
+
+* i got me some rects.
+
+![](photo/image_18.jpg)

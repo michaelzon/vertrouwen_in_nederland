@@ -369,33 +369,55 @@ function makeDendrogram(data){
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
-    // getting al the variables for the rects (get rect m8)
-    var valueArr = [];
-    nodes = nodes.slice(1)
-    nodes.forEach(function(element){
-      element._children.forEach(function(child){
-        valueArr.push(child.data.value)
-        })
-      })
-
-    console.log('values',valueArr)
-
-    nodeBirth.append("rect")
+    console.log(source.y0 + source.x0)
+    // create new variable for the horizontal bars whom appear after the baby's
+    var rectFromBaby = node.enter().selectAll(".nodeMomma")
+        .append("g") // give the rects a grouping element
         .attr("class", "babyRect")
-        // .attr("width", 0)     // it starts at zero so the transistion is right
+        .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
+        .on("click", click);
+
+    rectFromBaby.append("rect")
+        .attr("width", 50) // it starts at zero so the transistion is right
         .attr("height", 30)
-        .style("fill", "#000000")
-        // .attr("rx", 5)         // this makes the bars less blocky
+        .attr("dy", ".35em")
+        .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
+        // .attr("rx", 5) // this makes the bars less blocky
         // .attr("ry", 5)
-        .data(valueArr)
-        .enter()
         // .transition()
-          // .duration(500)
-          .attr("width", function (d){
-            console.log('value',d)
-            // console.log('scale',xScale(d))
-            return xScale(d)
-          })
+        //   .duration(500)
+        //   .attr("width", function (d) {
+        //     console.log('blablabla',d)
+        //     return xScale(data.data.value);});
+        //   // .attr("width", d => xScale(data.data.value))
+
+    // // getting al the variables for the rects (get rect m8)
+    // var valueArr = [];
+    // nodes = nodes.slice(1)
+    // nodes.forEach(function(element){
+    //   element._children.forEach(function(child){
+    //     valueArr.push(child.data.value)
+    //     })
+    //   })
+    //
+    // console.log('values',valueArr)
+
+    // nodeBirth.append("rect")
+    //     .attr("class", "babyRect")
+    //     // .attr("width", 0)     // it starts at zero so the transistion is right
+    //     .attr("height", 30)
+    //     .style("fill", "#000000")
+    //     // .attr("rx", 5)         // this makes the bars less blocky
+    //     // .attr("ry", 5)
+    //     .data(valueArr)
+    //     .enter()
+    //     // .transition()
+    //       // .duration(500)
+    //       .attr("width", function (d){
+    //         console.log('value',d)
+    //         // console.log('scale',xScale(d))
+    //         return xScale(d)
+    //       })
 
     // nodeBirth.append("rect")
     //     .attr("class", "babyRect")

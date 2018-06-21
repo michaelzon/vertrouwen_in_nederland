@@ -13,7 +13,7 @@ window.onload = function(){
 
 };
 
-function updateLines(data, secondData){
+function update(data, secondData){
 
   var butTotaal = document.getElementById("selectTotaal");
   var butNederlands = document.getElementById("selectNederlands");
@@ -22,7 +22,7 @@ function updateLines(data, secondData){
 
   // eventhandler > roept linegraph functie aan met de data die je wil hebben
 
-  console.log('seconddata',secondData.totaal["2012"])
+  console.log('seconddata',secondData.totaal["2017"])
 
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
@@ -262,6 +262,25 @@ function makeLinegraph(data){
   svgGraphDes.select("#graphLegend")
       .call(graphLegend);
 
+  // making years on x-axis clickable
+  svg.selectAll(".x-axis .tick")
+      .on("click", function(d) {
+        console.log(d)
+      })
+
+  svgTick = svg.selectAll(".x-axis .tick")
+     text = svgTick.select('text'),
+     bBox = text.node().getBBox();
+
+  svgTick.insert('rect', ':first-child')
+     .attr('x', bBox.x - 3)
+     .attr('y', bBox.y - 3)
+     .attr('height', bBox.height + 6)
+     .attr('width', bBox.width + 6)
+     .style('fill', d3.schemeCategory20[i % 20]);
+
+
+
 };
 
 function makeDendrogram(data){
@@ -355,7 +374,7 @@ function makeDendrogram(data){
       .attr("width", t.data.value)
       .attr("height", 20)
       .attr("x", t.y)
-      .attr("y", t.x + 70)
+      .attr("y", t.x + 150)
     })
 
     // update nodes and recursive assigns id's and classes,

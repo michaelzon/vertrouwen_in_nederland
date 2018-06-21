@@ -117,6 +117,10 @@
 
 # dag 12 (21/6)
 
-* i got me some rects.
+* I got me some rects:
 
 ![](photo/image_18.jpg)
+
+* Rects zijn in principe gelukt, moet alleen nog op juiste positie en scaling met x as. Heb voor de aankomende week een to-do list gemaakt:
+
+![](photo/image_19.jpg)

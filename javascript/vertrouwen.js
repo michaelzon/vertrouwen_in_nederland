@@ -27,7 +27,7 @@ function updateLines(data, secondData){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
-      makeDendrogram(secondData.totaal["2012"])
+      makeDendrogram(secondData.totaal["2017"])
 
     }
   });
@@ -35,7 +35,7 @@ function updateLines(data, secondData){
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.nederlands)
-      makeDendrogram(secondData.nederlands["2012"])
+      makeDendrogram(secondData.nederlands["2017"])
 
     }
   });
@@ -43,7 +43,7 @@ function updateLines(data, secondData){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.westers)
-      makeDendrogram(secondData.westers["2012"])
+      makeDendrogram(secondData.westers["2017"])
 
     }
   });
@@ -51,7 +51,7 @@ function updateLines(data, secondData){
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.nietWesters)
-      makeDendrogram(secondData.nietWesters["2012"])
+      makeDendrogram(secondData.nietWesters["2017"])
 
     }
   });
@@ -284,7 +284,7 @@ function makeDendrogram(data){
       .attr("width", outerWidth)
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
-    .append("g")
+      .append("g")
       .attr("transform", "translate(80,0)");
 
   var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
@@ -390,35 +390,9 @@ function makeDendrogram(data){
 
     console.log('source',source.y0, source.x0)
 
-    // create new variable for the horizontal bars whom appear after the baby's
-    var rectFromBaby = node.enter().selectAll(".nodeMomma")
-        .append("g") // give the rects a grouping element
-        .attr("class", "babyRect")
-        .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
-        .on("click", click);
-
     var counter = 0;
     console.log(nodes);
     console.log(source.data.children.length);
-
-    rectFromBaby.append("rect")
-        .attr("height", 30)
-        .attr("width", function (d, i){
-          // console.log(d);
-          // console.log('count1',counter);
-          // console.log('ifstatement',counter < source.data.children.length);
-          if(i != 0 &&counter < source.data.children.length){
-            console.log('data', d);
-          //   var widthValue = d.children[counter].data.value;
-          //   counter++;
-          //   console.log('count2',counter);
-          //   return widthValue;
-          //   // d.children.data.forEach(function(value){
-          //   // console.log(value)})
-          // } else {
-          //   return 0;
-          }
-        })
 
     var nodeUpdate = nodeBirth.merge(node);
 

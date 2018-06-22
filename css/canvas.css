@@ -32,6 +32,11 @@
   stroke-width: 1.5px;
 }
 
+#checkmark {
+  opacity:0;
+  @include transition(opacity 0.25s ease-out);
+}
+
 /* for lines */
 
 #linechart {

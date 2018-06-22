@@ -1,3 +1,6 @@
+var data = {};
+var secondData = {};
+
 // the following part will be triggered when the page is loaded
 window.onload = function(){
 
@@ -13,10 +16,25 @@ window.onload = function(){
 
 };
 
+function main(vertrouwen, restOfTheData){
+
+  // store processed datasets in variables for functions
+  var lineData = vertrouwen;
+  var dendroData = restOfTheData;
+
+  // declare which year is initially showed when page is loaded.
+  var initYear = "2012";
+
+  // call al the functions
+  makeLinegraph(lineData.totaal, dendroData);
+  makeDendrogram(dendroData.totaal[initYear]);
+  update(lineData, dendroData, initYear)
+}
+
 function update(data, secondData){
 
-  makeLinegraph(data.nederlands)
-  makeDendrogram(secondData.totaal["2012"])
+  // makeLinegraph(data.totaal)
+  // makeDendrogram(secondData.totaal["2012"])
 
   var butTotaal = document.getElementById("selectTotaal");
   var butNederlands = document.getElementById("selectNederlands");
@@ -57,8 +75,9 @@ function update(data, secondData){
 
 }
 
-function makeLinegraph(data){
+function makeLinegraph(data, secondData){
 
+  console.log(data)
   // remove current lines if others are added by clicking on dropdown
   if (d3.select("#linegraph").select("svg")){
     d3.select("#linegraph").select("svg").remove();
@@ -261,24 +280,51 @@ function makeLinegraph(data){
   svgGraphDes.select("#graphLegend")
       .call(graphLegend);
 
+  // create year variable due to clickabilty of the circle under the yearlabel
+  // var showYear;
+
   // making years on x-axis clickable
   svg.selectAll(".x-axis .tick")
       .on("click", function(d) {
         var year = d;
-        var showYear = year.toString();
-        makeDendrogram(year)
+        showYear = year.toString();
+        makeLinegraph(data.totaal)
+        // makeDendrogram(secondData.totaal[showYear])
       })
 
   svgTick = svg.selectAll(".x-axis .tick")
-     text = svgTick.select('text'),
-     bBox = text.node().getBBox();
+      .append("circle")
+      .attr("id", "checkbox_1")
+      .attr("fill", "#FFFFF")
+      .attr("stroke", "#000000")
+      .attr("r", "8")
+      .attr("stroke-width", "2")
+      .attr("stroke-miterlimit", "10")
+      .attr("transform", "translate (27, 14)")
+      // .on("click", {
+      //   console.log(showYear);
+      //   handleEvent: function (event){
+      //     makeLinegraph(data.totaal)
+      //     makeDendrogram(secondData.totaal[d])
+      //     }
+      //   });
 
-  svgTick.insert('rect', ':first-child')
-     .attr('x', bBox.x - 3)
-     .attr('y', bBox.y - 3)
-     .attr('height', bBox.height + 6)
-     .attr('width', bBox.width + 6)
-     .attr("class", "yearLabel")
+      // .append("polygon")
+      // .attr("width", "20")
+      // .attr("height", "20")
+      // .attr("stroke", "#000000")
+      // .attr("stroke-miterlimit", "10")
+
+
+     // text = svgTick.select('text'),
+     // bBox = text.node().getBBox();
+
+      // svgTick.insert('rect', ':first-child')
+      //    .attr('x', bBox.x - 3)
+      //    .attr('y', bBox.y - 3)
+      //    .attr('height', bBox.height + 6)
+      //    .attr('width', bBox.width + 6)
+      //    .attr("class", "yearLabel")
 
 };
 

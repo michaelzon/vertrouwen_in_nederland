@@ -25,6 +25,13 @@
   font-weight: bold;
 }
 
+.yearLabel {
+  fill: #ccc;
+  fill-opacity: 0.3;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
 /* for lines */
 
 #linechart {

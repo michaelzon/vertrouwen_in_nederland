@@ -410,20 +410,12 @@ function importData(error, response){
     dendroNietWesters[year] = dendrogramData[year].children[3];
   })
 
-  // var dendroTotaal = dendrogramData["2012"].children[0];
-  // var dendroNederlands = dendrogramData["2012"].children[1];
-  // var dendroWesters = dendrogramData["2012"].children[2];
-  // var dendroNietWesters = dendrogramData["2012"].children[3];
-
-
   var dendroData = {};
   dendroData["totaal"] = dendroTotaal;
   dendroData["nederlands"] = dendroNederlands;
   dendroData["westers"] = dendroWesters;
   dendroData["nietWesters"] = dendroNietWesters;
 
-  makeLinegraph(vertrouwen.nederlands)
-  makeDendrogram(dendroData.westers["2017"])
   update(vertrouwen, dendroData)
 
 };

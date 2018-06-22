@@ -15,19 +15,18 @@ window.onload = function(){
 
 function update(data, secondData){
 
+  makeLinegraph(data.nederlands)
+  makeDendrogram(secondData.totaal["2012"])
+
   var butTotaal = document.getElementById("selectTotaal");
   var butNederlands = document.getElementById("selectNederlands");
   var butWesters = document.getElementById("selectWesters");
   var butNietWesters = document.getElementById("selectNietWesters");
 
-  // eventhandler > roept linegraph functie aan met de data die je wil hebben
-
-  console.log('seconddata',secondData.totaal["2017"])
-
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
-      makeDendrogram(secondData.totaal["2017"])
+      makeDendrogram(secondData.totaal["2012"])
 
     }
   });
@@ -35,7 +34,7 @@ function update(data, secondData){
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.nederlands)
-      makeDendrogram(secondData.nederlands["2017"])
+      makeDendrogram(secondData.nederlands["2012"])
 
     }
   });
@@ -43,7 +42,7 @@ function update(data, secondData){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.westers)
-      makeDendrogram(secondData.westers["2017"])
+      makeDendrogram(secondData.westers["2012"])
 
     }
   });
@@ -51,7 +50,7 @@ function update(data, secondData){
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.nietWesters)
-      makeDendrogram(secondData.nietWesters["2017"])
+      makeDendrogram(secondData.nietWesters["2012"])
 
     }
   });
@@ -265,7 +264,9 @@ function makeLinegraph(data){
   // making years on x-axis clickable
   svg.selectAll(".x-axis .tick")
       .on("click", function(d) {
-        console.log(d)
+        var year = d;
+        var showYear = year.toString();
+        makeDendrogram(year)
       })
 
   svgTick = svg.selectAll(".x-axis .tick")
@@ -277,9 +278,7 @@ function makeLinegraph(data){
      .attr('y', bBox.y - 3)
      .attr('height', bBox.height + 6)
      .attr('width', bBox.width + 6)
-     .style('fill', d3.schemeCategory20[i % 20]);
-
-
+     .attr("class", "yearLabel")
 
 };
 

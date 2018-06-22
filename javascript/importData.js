@@ -422,6 +422,9 @@ function importData(error, response){
   restOfTheData["westers"] = dendroWesters;
   restOfTheData["nietWesters"] = dendroNietWesters;
 
+  console.log('vertrouwen', vertrouwen);
+  console.log('restofthedata', restOfTheData);
+  
   main(vertrouwen, restOfTheData)
   // update(vertrouwen, restOfTheData)
 

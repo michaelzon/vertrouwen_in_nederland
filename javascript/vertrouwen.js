@@ -31,7 +31,7 @@ function main(vertrouwen, restOfTheData){
   update(lineData, dendroData, initYear)
 }
 
-function update(data, secondData){
+function update(data, secondData, initYear){
 
   // makeLinegraph(data.totaal)
   // makeDendrogram(secondData.totaal["2012"])
@@ -44,7 +44,7 @@ function update(data, secondData){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.totaal)
-      makeDendrogram(secondData.totaal["2012"])
+      makeDendrogram(secondData.totaal[initYear])
 
     }
   });
@@ -52,7 +52,7 @@ function update(data, secondData){
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       makeLinegraph(data.nederlands)
-      makeDendrogram(secondData.nederlands["2012"])
+      makeDendrogram(secondData.nederlands[initYear])
 
     }
   });
@@ -60,7 +60,7 @@ function update(data, secondData){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.westers)
-      makeDendrogram(secondData.westers["2012"])
+      makeDendrogram(secondData.westers[initYear])
 
     }
   });
@@ -68,7 +68,7 @@ function update(data, secondData){
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       makeLinegraph(data.nietWesters)
-      makeDendrogram(secondData.nietWesters["2012"])
+      makeDendrogram(secondData.nietWesters[initYear])
 
     }
   });
@@ -77,7 +77,6 @@ function update(data, secondData){
 
 function makeLinegraph(data, secondData){
 
-  console.log(data)
   // remove current lines if others are added by clicking on dropdown
   if (d3.select("#linegraph").select("svg")){
     d3.select("#linegraph").select("svg").remove();
@@ -281,16 +280,25 @@ function makeLinegraph(data, secondData){
       .call(graphLegend);
 
   // create year variable due to clickabilty of the circle under the yearlabel
-  // var showYear;
+  var showYear;
 
   // making years on x-axis clickable
   svg.selectAll(".x-axis .tick")
       .on("click", function(d) {
         var year = d;
         showYear = year.toString();
-        makeLinegraph(data.totaal)
-        // makeDendrogram(secondData.totaal[showYear])
+        // data = eval(d3.select("#dropit").property("value"))
+        // console.log('dit', data)
+        makeLinegraph(data)
+        makeDendrogram(secondData.totaal[showYear])
       })
+
+      // handle on click event
+// d3.select('#opts')
+//   .on('change', function() {
+//     var newData = eval(d3.select(this).property('value'));
+//     updateLegend(newData);
+// });
 
   svgTick = svg.selectAll(".x-axis .tick")
       .append("circle")
@@ -301,6 +309,9 @@ function makeLinegraph(data, secondData){
       .attr("stroke-width", "2")
       .attr("stroke-miterlimit", "10")
       .attr("transform", "translate (27, 14)")
+      // .attr("transform", "")
+
+
       // .on("click", {
       //   console.log(showYear);
       //   handleEvent: function (event){
@@ -349,7 +360,7 @@ function makeDendrogram(data){
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
       .append("g")
-      .attr("transform", "translate(80,0)");
+      .attr("transform", "translate(80,100)");
 
   var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
 
@@ -396,7 +407,7 @@ function makeDendrogram(data){
 
     // determine x and y position for nodes
     var data = tree(root)
-    // console.log(data)
+    console.log('opfsdop',data)
 
     // and the new tree layout, 'nodes' is our data from now on
     var nodes = data.descendants(),
@@ -408,7 +419,7 @@ function makeDendrogram(data){
     nodes.forEach(d => d.y = d.depth * 180);
 
     var getRect = nodes.slice(5, nodes.length)
-    console.log(getRect);
+    console.log('re', getRect);
 
     d3.selectAll(".reccit").remove();
 
@@ -416,10 +427,10 @@ function makeDendrogram(data){
       console.log((t));
       svg.append("rect")
       .attr("class", "reccit")
-      .attr("width", t.data.value)
+      .attr("width", t.data.value * 7.5)
       .attr("height", 20)
       .attr("x", t.y)
-      .attr("y", t.x + 150)
+      .attr("y", t.x + 40)
     })
 
     // update nodes and recursive assigns id's and classes,

@@ -421,16 +421,17 @@ function makeDendrogram(data){
     var getRect = nodes.slice(5, nodes.length)
     console.log('re', getRect);
 
-    d3.selectAll(".reccit").remove();
+    d3.selectAll("#reccit").remove();
 
     getRect.forEach(function(t){
       console.log((t));
       svg.append("rect")
-      .attr("class", "reccit")
+      .attr("id", "reccit")
       .attr("width", t.data.value * 7.5)
       .attr("height", 20)
       .attr("x", t.y)
       .attr("y", t.x + 40)
+      .attr("transform", "translate(80,100)");
     })
 
     // update nodes and recursive assigns id's and classes,
@@ -448,10 +449,10 @@ function makeDendrogram(data){
     // add circles to visualize the nodes
     nodeBirth.append("circle")
         .attr("class", "node")
-        .attr('r', 10)
+        .attr('r', 5)
         .style("fill", d => {
           // console.log(d);
-          d._children ? "#000000" : "#000000";
+          d._children ? "#00­99­00" : "#FF­66­00";
         })
 
     // (conditie = true) ? (dan dit) : (anders dit)
@@ -459,15 +460,15 @@ function makeDendrogram(data){
     // adding labels
     nodeBirth.append("text")
         .attr("dy", ".35em")
+        .attr("y", d => d.data.name === "totaal" || "participatie" ? -20 : 13) //d.children || d._children ? -13 : 13)
         .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
     console.log('source',source.y0, source.x0)
 
-    var counter = 0;
-    console.log(nodes);
-    console.log(source.data.children.length);
+    // console.log(nodes);
+    // console.log(source.data.children.length);
 
     var nodeUpdate = nodeBirth.merge(node);
 
@@ -478,10 +479,10 @@ function makeDendrogram(data){
 
     // update node attributes and style
     nodeUpdate.select("circle.node")
-        .attr("r", 10)
+        .attr("r", 5)
         .attr("x", width/2)
         .attr("y", height/2)
-        .style("fill", d => d._children ? "#000000" : "#000000")
+        .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
         .attr("cursor", "pointer");
 
     // remove nodes including text and circles when update

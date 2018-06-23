@@ -133,13 +133,13 @@
 /* dendrogram  */
 
 .node circle {
-  fill: #000000;
-  stroke: #000000;
-  stroke-width: 3px;
+  /* fill: #999; */
+  /* stroke: #000000; */
+  stroke-width: 2px;
 }
 
 .node text {
-  font: 12px sans-serif;
+  font: 15px avenir;
 }
 
 .link {

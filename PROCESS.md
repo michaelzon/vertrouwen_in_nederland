@@ -107,7 +107,7 @@
 
 ![](photo/image_15.jpg)
 
-* al een stuk verder, ga nu proberen rectangles met de waarde van de variabelen erachter te laten appenden.
+* Al een stuk verder, ga nu proberen rectangles met de waarde van de variabelen erachter te laten appenden.
 
 ![](photo/image_16.jpg)
 
@@ -127,12 +127,14 @@
 
 # dag 13 (22/6)
 
-* begin van een update-link functie gemaakt.
+* Begin van een update-link functie gemaakt.
 
 # dag 14 (23/6)
 
-* werken aan de stijling van mijn dendrogram.
+* Werken aan de stijling van mijn dendrogram.
 
-* besloten om de bars te laten verschijnen een stukje verder van de laatste nodes. Mijn plan was eerst om de tekst te laten verschijnen in de bars, en dat de bars meteen kwamen aan de laatste nodes, maar dit lijkt me toch geen goed idee omdat er heel veel lage percentages zijn, en het dan raar oogt voor de gebruiker als er tekst maar voor de helft in een bar verschijnt, of zelfs minder.
+* Besloten om de bars te laten verschijnen een stukje verder van de laatste nodes. Mijn plan was eerst om de tekst te laten verschijnen in de bars, en dat de bars meteen kwamen aan de laatste nodes, maar dit lijkt me toch geen goed idee omdat er heel veel lage percentages zijn, en het dan raar oogt voor de gebruiker als er tekst maar voor de helft in een bar verschijnt, of zelfs minder.
 
 ![](photo/image_20.jpg)
+
+* Ga nu een x-as maken.

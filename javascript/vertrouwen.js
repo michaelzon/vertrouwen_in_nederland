@@ -360,7 +360,7 @@ function makeDendrogram(data){
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
       .append("g")
-      .attr("transform", "translate(100,100)");
+      .attr("transform", "translate(55,100)");
 
   var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
 
@@ -371,8 +371,8 @@ function makeDendrogram(data){
 
   // axis for top of the page
   var xAxis = d3.axisTop(xScale)
-      .tickFormat(function(d){return d+ "%"})
-      .tickFormat(d => d+ "%")
+      // .tickFormat(function(d){return d+ "%"})
+      // .tickFormat(d => d+ "%")
       .ticks(10);
 
   // the root is the ith node, starting at zero
@@ -462,9 +462,9 @@ function makeDendrogram(data){
     // adding labels
     nodeBirth.append("text")
         .attr("dy", ".35em")
-        // .attr("y", d => d.data.name === "totaal" || "participatie" ? -20 : 13) //d.children || d._children ? -13 : 13)
+        .attr("y", d => d.children || d._children ? -15 : 0)  // position of text left or right from node
         .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
-        .attr("text-anchor", d => d.children || d._children ? "end" : "start")
+        .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
 
     console.log('source',source.y0, source.x0)
@@ -479,13 +479,13 @@ function makeDendrogram(data){
         .duration(duration)
         .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-    // update node attributes and style
+    // update nodes, make each node responsive to the mouse pointer.
     nodeUpdate.select("circle.node")
         .attr("r", 5)
         .attr("x", width/2)
         .attr("y", height/2)
         .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
-        .attr("cursor", "pointer");
+        .attr("cursor", "pointer"); //
 
     // remove nodes including text and circles when update
     var nodeGone = node.exit().transition()
@@ -544,6 +544,16 @@ function makeDendrogram(data){
 
       return path
     }
+
+    var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
+
+    svg.append("g")
+        .attr("class", "x-axis")
+        // .attr("transform", "translate (0," - height + ","  + ")")
+        // .attr("transform", "translate(" - height + "," + innerWidth + ")")
+        // .attr("transform", "translate(" + x + "," + y + ")")
+        .attr("transform", "translate(710,0)")
+        .call(xAxis);
 
     // switch between state of nodes when clicked on.
     function click(d) {

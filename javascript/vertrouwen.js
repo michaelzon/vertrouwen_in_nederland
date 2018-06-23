@@ -360,7 +360,7 @@ function makeDendrogram(data){
       .attr("height", outerHeight)
       .attr("id", "dendrochart")
       .append("g")
-      .attr("transform", "translate(80,100)");
+      .attr("transform", "translate(100,100)");
 
   var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
 
@@ -418,6 +418,8 @@ function makeDendrogram(data){
     // ensure nodes and links are spread across half of the dendrosvg
     nodes.forEach(d => d.y = d.depth * 180);
 
+    // rects...
+
     var getRect = nodes.slice(5, nodes.length)
     console.log('re', getRect);
 
@@ -427,11 +429,11 @@ function makeDendrogram(data){
       console.log((t));
       svg.append("rect")
       .attr("id", "reccit")
-      .attr("width", t.data.value * 7.5)
+      .attr("width", t.data.value * 4)
       .attr("height", 20)
       .attr("x", t.y)
       .attr("y", t.x + 40)
-      .attr("transform", "translate(80,100)");
+      .attr("transform", "translate(350,-50)");
     })
 
     // update nodes and recursive assigns id's and classes,
@@ -460,7 +462,7 @@ function makeDendrogram(data){
     // adding labels
     nodeBirth.append("text")
         .attr("dy", ".35em")
-        .attr("y", d => d.data.name === "totaal" || "participatie" ? -20 : 13) //d.children || d._children ? -13 : 13)
+        // .attr("y", d => d.data.name === "totaal" || "participatie" ? -20 : 13) //d.children || d._children ? -13 : 13)
         .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
         .attr("text-anchor", d => d.children || d._children ? "end" : "start")
         .text(d => d.data.name); // data is convert to root so it needs an extra dimension.

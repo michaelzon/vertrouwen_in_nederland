@@ -124,3 +124,15 @@
 * Rects zijn in principe gelukt, moet alleen nog op juiste positie en scaling met x as. Heb voor de aankomende week een to-do list gemaakt:
 
 ![](photo/image_19.jpg)
+
+# dag 13 (22/6)
+
+* begin van een update-link functie gemaakt.
+
+# dag 14 (23/6)
+
+* werken aan de stijling van mijn dendrogram.
+
+* besloten om de bars te laten verschijnen een stukje verder van de laatste nodes. Mijn plan was eerst om de tekst te laten verschijnen in de bars, en dat de bars meteen kwamen aan de laatste nodes, maar dit lijkt me toch geen goed idee omdat er heel veel lage percentages zijn, en het dan raar oogt voor de gebruiker als er tekst maar voor de helft in een bar verschijnt, of zelfs minder.
+
+![](photo/image_20.jpg)

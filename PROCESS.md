@@ -143,4 +143,10 @@
 
 * Ga nu ervoor zorgen dat de naam van de geselecteerde bevolkingsgroep in de linechart komt te staan.
 
-* Kwam er achter dat voordat ik die namen in visualisaties kon doen eerst de linked-update functies helemaal goed moest hebben, dus dat heb ik gedaan. Je kan nu een bevolkingsgroep kiezen in dropdown, dan op jaar klikken in linegraph en dan blijft de bevolkingsgroep die eerst gekozen was staan in de dendrogram met het juiste jaar. 
+* Kwam er achter dat voordat ik die namen in visualisaties kon doen eerst de linked-update functies helemaal goed moest hebben, dus dat heb ik gedaan. Je kan nu een bevolkingsgroep kiezen in dropdown, dan op jaar klikken in linegraph en dan blijft de bevolkingsgroep die eerst gekozen was staan in de dendrogram met het juiste jaar.
+
+* Vandaag veel vooruitgang geboekt:
+
+![](photo/image_21.jpg)
+
+![](photo/image_22.jpg)

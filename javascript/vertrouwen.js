@@ -27,7 +27,7 @@ function main(vertrouwen, restOfTheData){
   var selectedPop = popGroups[0];
 
   makeLinegraph(lineData[selectedPop], dendroData, popGroups);
-  makeDendrogram(dendroData[selectedPop][getYear], popGroups);
+  makeDendrogram(dendroData[selectedPop][getYear], popGroups, getYear);
   update(lineData, dendroData, getYear, selectedPop, popGroups);
 }
 
@@ -45,9 +45,9 @@ function update(data, secondData, getYear, selectedPop, popGroups){
     handleEvent: function (event){
       selectedPop = popGroups[0];
       // makeLinegraph(data.totaal, secondData, selectedPop)
-      makeLinegraph(data[selectedPop], secondData, selectedPop);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
       // makeDendrogram(secondData.totaal[getYear], selectedPop)
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
 
       // adding name of population in graph when clicked on in dropdown
       // svg.append("text")
@@ -62,30 +62,30 @@ function update(data, secondData, getYear, selectedPop, popGroups){
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[1];
-      makeLinegraph(data[selectedPop], secondData, selectedPop);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
     }
   });
 
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       selectedPop = popGroups[2];
-      makeLinegraph(data[selectedPop], secondData, selectedPop)
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop)
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear)
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear)
     }
   });
 
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       selectedPop = popGroups[3];
-      makeLinegraph(data[selectedPop], secondData, selectedPop);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
     }
   });
 
 };
 
-function makeLinegraph(data, secondData, selectedPop, popGroups){
+function makeLinegraph(data, secondData, selectedPop, showYear){
 
   // remove current elements when dropdown options is clicked on
   if (d3.select("#linegraph").select("svg")){
@@ -159,9 +159,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
             .ticks(7)
     }
 
-    // console.log(height)
-
-      // add the X gridlines
+    // add the X gridlines
     svg.append("g")
         .attr("class", "grid")
         .attr("transform", "translate(10," + (height + lilPad) + ")")
@@ -315,7 +313,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
   var legendLines = d3.scaleOrdinal()
       .domain(["Vertrouwen in Andere Mensen", "Ambtenaren", "Europese Unie",
                 "de Pers", "Politie", "Rechters", "de Tweede Kamer"])
-      .range(colorbrewer.Spectral[7]);
+      .range(colorbrewer.Set2[7]);
 
   // creating legend
   var graphLegend = d3.legendColor()
@@ -351,12 +349,14 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .on("click", function(d) {
         var year = d;
         showYear = year.toString();
-        // console.log('jaar',showYear)
+        console.log('jaar',showYear)
         // console.log('kendrik',secondData[selectedPop].showYear)
-        makeLinegraph(data, secondData, selectedPop);
+        makeLinegraph(data, secondData, selectedPop, showYear);
         // makeDendrogram(secondData.totaal[showYear], selectedPop)
-        makeDendrogram(secondData[selectedPop][showYear], selectedPop, popGroups, showYear);
+        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
       });
+
+  console.log('jaar',showYear)
 
       // handle on click event
       // d3.select('#opts')
@@ -403,7 +403,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
 
 };
 
-function makeDendrogram(data, selectedPop, popGroups, showYear){
+function makeDendrogram(data, selectedPop, showYear){
 
   if (d3.select("#dendrogram").select("svg")){
     d3.select("#dendrogram").select("svg").remove();
@@ -429,10 +429,18 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
       .append("g")
       .attr("transform", "translate(55,100)");
 
+  // adding title
+  svg.append("text")
+      .attr("id", "dendroTitle")
+      .attr("x", width / 2 - 600)
+      .attr("y", height / 40)
+      .attr("transform", "translate(0,-80)")
+      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites")
+
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")
       .attr("id", "yearInDendro")
-      .attr("x", width / 2 - 500)
+      .attr("x", width / 2 - 600)
       .attr("y", height / 12)
       .text(showYear)
 

@@ -138,3 +138,7 @@
 ![](photo/image_20.jpg)
 
 * Ga nu een x-as maken.
+
+# dag 15 (24/6)
+
+* Ga nu ervoor zorgen dat de naam van de geselecteerde bevolkingsgroep in de linechart komt te staan. 

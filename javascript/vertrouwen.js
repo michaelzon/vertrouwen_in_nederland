@@ -1,6 +1,4 @@
-var data = {};
-var secondData = {};
-var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
+// var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
 // var selectedBev = bevGroups[0];
 
 // the following part will be triggered when the page is loaded
@@ -21,7 +19,7 @@ window.onload = function(){
 function main(vertrouwen, restOfTheData){
 
   // showing which population is selected
-  // var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
+  var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
 
   // store processed datasets in variables for functions
   var lineData = vertrouwen;
@@ -136,7 +134,7 @@ function update(data, secondData, getYear, selectedBev, bevGroups){
 
 }
 
-function makeLinegraph(data, secondData, selectedBev){
+function makeLinegraph(data, secondData, selectedBev, bevGroups){
 
   // selectedBev = "totaal";
 
@@ -413,7 +411,7 @@ function makeLinegraph(data, secondData, selectedBev){
 
 };
 
-function makeDendrogram(data, selectedBev){
+function makeDendrogram(data, selectedBev, bevGroups){
 
   console.log('heir', bevGroups)
 

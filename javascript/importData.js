@@ -189,10 +189,10 @@ function importData(error, response){
   };
 
   var gebruik = {};
-  gebruik["totaal"] = totaal
-  gebruik["nederlands"] = nederlands
-  gebruik["westers"] = westers
-  gebruik["nietWesters"] = nietWesters
+  gebruik["totaal"] = totaal;
+  gebruik["nederlands"] = nederlands;
+  gebruik["westers"] = westers;
+  gebruik["nietWesters"] = nietWesters;
 
   var superKeys = Object.keys(gebruik);
 
@@ -205,65 +205,65 @@ function importData(error, response){
       keys = Object.keys(gebruik[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        uberArray.push({"name": key, "value": gebruik[superKey][year][key]})
-      })
+        uberArray.push({"name": key, "value": gebruik[superKey][year][key]});
+      });
       tempArray = {"name": "internetgebruik", "children": uberArray};
       superTempArray.push({"name": superKey, "children": [tempArray]});
-    })
-    dataGebruik[year] = {"name": year, "children": superTempArray}
-  })
+    });
+    dataGebruik[year] = {"name": year, "children": superTempArray};
+  });
 
   var interesse = (bigDatty[4]["interesse"]);
 
   for(var i = 0; i < interesse.length; i ++){
-    delete(interesse[i].ID)
-    delete(interesse[i].Migratieachtergrond)
-    delete(interesse[i].Periode)
+    delete(interesse[i].ID);
+    delete(interesse[i].Migratieachtergrond);
+    delete(interesse[i].Periode);
     interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
     interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
     interesse[i].WeinigGeinteresseerd = Number(interesse[i].WeinigGeinteresseerd);
     interesse[i].NietGeinteresseerd = Number(interesse[i].NietGeinteresseerd);
   };
 
-  var interesseVars = Object.keys(interesse[0])
+  var interesseVars = Object.keys(interesse[0]);
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      totaal[years[i]][Object.keys(interesse[i])[j]] = Object.values(interesse[i])[j]
-    }
-  }
+      totaal[years[i]][Object.keys(interesse[i])[j]] = Object.values(interesse[i])[j];
+    };
+  };
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      nederlands[years[i]][Object.keys(interesse[i+6])[j]] = Object.values(interesse[i+6])[j]
-    }
-  }
+      nederlands[years[i]][Object.keys(interesse[i+6])[j]] = Object.values(interesse[i+6])[j];
+    };
+  };
 
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      westers[years[i]][Object.keys(interesse[i+12])[j]] = Object.values(interesse[i+12])[j]
-    }
-  }
+      westers[years[i]][Object.keys(interesse[i+12])[j]] = Object.values(interesse[i+12])[j];
+    };
+  };
 
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      nietWesters[years[i]][Object.keys(interesse[i+18])[j]] = Object.values(interesse[i+18])[j]
-    }
-  }
+      nietWesters[years[i]][Object.keys(interesse[i+18])[j]] = Object.values(interesse[i+18])[j];
+    };
+  };
 
   var interesse = {};
-  interesse["totaal"] = totaal
-  interesse["nederlands"] = nederlands
-  interesse["westers"] = westers
-  interesse["nietWesters"] = nietWesters
+  interesse["totaal"] = totaal;
+  interesse["nederlands"] = nederlands;
+  interesse["westers"] = westers;
+  interesse["nietWesters"] = nietWesters;
 
   var superKeys = Object.keys(interesse);
 
@@ -276,20 +276,20 @@ function importData(error, response){
       keys = Object.keys(interesse[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        uberArray.push({"name": key, "value": interesse[superKey][year][key]})
-      })
+        uberArray.push({"name": key, "value": interesse[superKey][year][key]});
+      });
       tempArray = {"name": "interesse", "children": uberArray};
       superTempArray.push({"name": superKey, "children": [tempArray]});
-    })
+    });
     dataInteresse[year] = {"name": year, "children": superTempArray}
-  })
+  });
 
   var participatie = (bigDatty[5]["participatie"]);
 
   for(var i = 0; i < participatie.length; i ++){
-    delete(participatie[i].ID)
-    delete(participatie[i].Migratieachtergrond)
-    delete(participatie[i].Periode)
+    delete(participatie[i].ID);
+    delete(participatie[i].Migratieachtergrond);
+    delete(participatie[i].Periode);
     participatie[i].RadioTelevisieOfKrantIngeschakeld = Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
     participatie[i].PolitiekeOrganisatieIngeschakeld = Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
     participatie[i].MeegedaanAanBijeenkomstOverheid = Number(participatie[i].MeegedaanAanBijeenkomstOverheid);
@@ -301,39 +301,39 @@ function importData(error, response){
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
-  var participatieVars = Object.keys(participatie[0])
+  var participatieVars = Object.keys(participatie[0]);
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      totaal[years[i]][Object.keys(participatie[i])[j]] = Object.values(participatie[i])[j]
-    }
-  }
+      totaal[years[i]][Object.keys(participatie[i])[j]] = Object.values(participatie[i])[j];
+    };
+  };
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      nederlands[years[i]][Object.keys(participatie[i+6])[j]] = Object.values(participatie[i+6])[j]
-    }
-  }
+      nederlands[years[i]][Object.keys(participatie[i+6])[j]] = Object.values(participatie[i+6])[j];
+    };
+  };
 
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      westers[years[i]][Object.keys(participatie[i+12])[j]] = Object.values(participatie[i+12])[j]
-    }
-  }
+      westers[years[i]][Object.keys(participatie[i+12])[j]] = Object.values(participatie[i+12])[j];
+    };
+  };
 
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      nietWesters[years[i]][Object.keys(participatie[i+18])[j]] = Object.values(participatie[i+18])[j]
-    }
-  }
+      nietWesters[years[i]][Object.keys(participatie[i+18])[j]] = Object.values(participatie[i+18])[j];
+    };
+  };
 
   var participatie = {};
   participatie["totaal"] = totaal;
@@ -354,49 +354,42 @@ function importData(error, response){
       keys = Object.keys(participatie[superKey][year]);
       var uberArray = [];
       keys.forEach(function(key){
-        uberArray.push({"name": key, "value": participatie[superKey][year][key]})
-      })
+        uberArray.push({"name": key, "value": participatie[superKey][year][key]});
+      });
       tempArray = {"name": "participatie", "children": uberArray};
       bevolkingArray.push(tempArray);
 
-      // interesse variabelen aan bevolkingArray pushen
+      // push all the variabels to the same bevolkingArray
       var interesseKeys = Object.keys(interesse[superKey][year]);
       var interesseArray = [];
       interesseKeys.forEach(function(key){
-        // console.log(key)
-        interesseArray.push({"name": key, "value": interesse[superKey][year][key]})
-      })
+        interesseArray.push({"name": key, "value": interesse[superKey][year][key]});
+      });
       tempArray = {"name": "interesse", "children": interesseArray};
       bevolkingArray.push(tempArray);
 
-      // internetgebruik variabelen aan bevolkingArray pushen
       var gebruikKeys = Object.keys(gebruik[superKey][year]);
       var gebruikArray = [];
       gebruikKeys.forEach(function(key){
-        // console.log(key)
-        gebruikArray.push({"name": key, "value": gebruik[superKey][year][key]})
-      })
+        gebruikArray.push({"name": key, "value": gebruik[superKey][year][key]});
+      });
       tempArray = {"name": "internetgebruik", "children": gebruikArray};
       bevolkingArray.push(tempArray);
 
-      // dienstverlening variables aan bevolkingArray pushen
       var dienstKeys = Object.keys(dienstverlening[superKey][year]);
       var dienstArray = [];
       dienstKeys.forEach(function(key){
-        // console.log(key)
-        dienstArray.push({"name": key, "value": dienstverlening[superKey][year][key]})
-      })
+        dienstArray.push({"name": key, "value": dienstverlening[superKey][year][key]});
+      });
       tempArray = {"name": "dienstverlening", "children": dienstArray};
       bevolkingArray.push(tempArray);
 
       superTempArray.push({"name": superKey, "children": bevolkingArray});
     })
-    dataParticipatie[year] = {"name": year, "children": superTempArray}
+    dataParticipatie[year] = {"name": year, "children": superTempArray};
   })
 
   var dendrogramData = dataParticipatie;
-
-  console.log(dendrogramData)
 
   var dendroTotaal = {};
   var dendroNederlands = {};
@@ -404,17 +397,16 @@ function importData(error, response){
   var dendroNietWesters = {};
 
   years.forEach(function(year){
-    dendroTotaal[year] = (dendrogramData[year].children[0])
+    dendroTotaal[year] = (dendrogramData[year].children[0]);
     dendroNederlands[year] = dendrogramData[year].children[1];
     dendroWesters[year] = dendrogramData[year].children[2];
     dendroNietWesters[year] = dendrogramData[year].children[3];
-  })
+  });
 
   // var dendroTotaal = dendrogramData["2012"].children[0];
   // var dendroNederlands = dendrogramData["2012"].children[1];
   // var dendroWesters = dendrogramData["2012"].children[2];
   // var dendroNietWesters = dendrogramData["2012"].children[3];
-
 
   var restOfTheData = {};
   restOfTheData["totaal"] = dendroTotaal;
@@ -422,9 +414,7 @@ function importData(error, response){
   restOfTheData["westers"] = dendroWesters;
   restOfTheData["nietWesters"] = dendroNietWesters;
 
-  console.log('vertrouwen', vertrouwen);
-  console.log('restofthedata', restOfTheData);
-
+  // call main function and pass the parsed data 
   main(vertrouwen, restOfTheData);
 
 };

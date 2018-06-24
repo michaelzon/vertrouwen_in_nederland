@@ -6,8 +6,8 @@
 }
 
 #dendrogram {
-  left: 2%;
-  border-style: dotted;
+  left: 7.5%;
+  /* border-style: dotted; */
 }
 
 /* ?????? */
@@ -130,6 +130,24 @@
     shape-rendering: crispEdges;
 }
 
+.grid line {
+  stroke: lightgrey;
+  stroke-dasharray: 5, 5;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid2 line {
+  stroke: lightgrey;
+  stroke-dasharray: 5, 5;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
 #popInGraph {
   font-family: avenir;
   font-size: 20px;
@@ -165,7 +183,7 @@
 
 #yearInDendro {
   font-family: avenir;
-  font-size: 24px;
+  font-size: 30px;
   color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
 }

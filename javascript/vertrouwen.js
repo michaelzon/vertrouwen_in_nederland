@@ -96,6 +96,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
   // determing margins for visualisations
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
+      lilPad = 10;
       outerWidth = 1160,
       outerHeight = 600,
       innerWidth = outerWidth - margin.left - margin.right,
@@ -145,6 +146,40 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .attr("x", width / 2 - 450)
       .attr("y", height / 8)
       .text(selectedPop)
+
+      // gridlines in x axis function
+    function make_x_gridlines() {
+        return d3.axisBottom(xScale)
+            .ticks(6)
+    }
+
+    // gridlines in y axis function
+    function make_y_gridlines() {
+        return d3.axisLeft(yScale)
+            .ticks(7)
+    }
+
+    // console.log(height)
+
+      // add the X gridlines
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(10," + (height + lilPad) + ")")
+        // .attr("transform", "translate(10, 450)")
+        .call(make_x_gridlines()
+            .tickSize(-height)
+            .tickFormat("")
+        )
+
+    // add the Y gridlines
+    svg.append("g")
+        .attr("class", "grid")
+        .attr("transform", "translate(10,10)")
+        .call(make_y_gridlines()
+            .tickSize(-width)
+            .tickFormat("")
+        );
+
 
   // svg with grouping element for the lines
   var charts = svg.append("g")
@@ -378,6 +413,7 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
+      lilPad = 10,
       outerWidth = 1280,
       outerHeight = 980,
       innerWidth = outerWidth - margin.left - margin.right,
@@ -457,14 +493,15 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
     // placing bars at the right of the tree
     var getRect = nodes.slice(5, nodes.length);
 
-    // // coloring for bars
-    // var colorRect = d3.scaleQuantize()
-    //     .domain([d3.min(s80s20Colors), d3.max(s80s20Colors)])
-    //     .range(colorbrewer.Oranges[3]);
-
     // remove bars if node is clicked and other bars are appended
     d3.selectAll("#reccit").remove();
     d3.selectAll("#axisDendro").remove();
+
+      // gridlines in x axis function
+    function make_x_gridlines() {
+        return d3.axisBottom(xScale)
+            .ticks(10)
+    }
 
     var variables = [
     "RadioTelevisieOfKrantIngeschakeld",
@@ -495,7 +532,7 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
     // colorfunction with colorbrewer for those who suffer from bad eyes
     var colorBars = d3.scaleOrdinal()
         .domain(variables)
-        .range(colorbrewer.RdBu[11]);
+        .range(colorbrewer.RdBu[4]);
 
     // append bars and x axis when node is clicked on
     getRect.forEach(function(t){
@@ -522,16 +559,30 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
                   .attr("transform", "translate(710,0)")
                   .transition()
                       .duration(600)
-                  .call(xAxis);
+                  .call(xAxis)
+
+              d3.select("#dendrogram").selectAll(".grid").remove();
+              svg.append("g")
+                  .attr("class", "grid")
+                  .attr("transform", "translate(710, 820)")
+                  .call(make_x_gridlines()
+                      .tickSize(-height)
+                      .tickFormat("")
+                  );
       });
 
       svg.selectAll("rect")
-          // .data(variables)
-          // .enter()
           .attr("fill", function(d, i){
-            console.log(d)
             return colorBars(i);
           })
+
+      // probeer nog even om de kleuren van de nodes synchroon te laten lopen met de betreffende bars.
+
+      // svg.selectAll(".nodeBaby")
+      //     .attr("fill", function(d, i){
+      //       console.log(d)
+      //       return colorBars(i);
+      //     })
 
     // update nodes and recursive assigns id's and classes,
     // if node has a other nodes after her she is a momma, otherwise a baby
@@ -548,11 +599,7 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
     // add circles to visualize the nodes
     nodeBirth.append("circle")
         .attr("class", "node")
-        .attr('r', 5)
-        .style("fill", d => {
-          // console.log(d);
-          d._children ? "#00­99­00" : "#FF­66­00";
-        });
+        .attr('r', 5);
 
     // (conditie = true) ? (dan dit) : (anders dit)
 
@@ -580,7 +627,7 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
         .attr("r", 5)
         .attr("x", width/2)
         .attr("y", height/2)
-        .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
+        // .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
         .attr("cursor", "pointer");
 
     // remove nodes including text and circles when update
@@ -641,12 +688,6 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
 
       return path;
     };
-
-    // // placing x-axis, 710 is used due to trial and error
-    // svg.append("g")
-    //     .attr("class", "x-axis")
-    //     .attr("transform", "translate(710,0)")
-    //     .call(xAxis);
 
     // switch between state of nodes when clicked on
     function click(d) {

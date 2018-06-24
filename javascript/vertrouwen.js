@@ -378,7 +378,7 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
-      outerWidth = 1180,
+      outerWidth = 1280,
       outerHeight = 980,
       innerWidth = outerWidth - margin.left - margin.right,
       innerHeight = outerHeight - margin.top - margin.bottom,
@@ -409,6 +409,8 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
       .range([0, 400]);
 
   var xAxis = d3.axisTop(xScale)
+      .tickFormat(function(d){return d+ "%"})
+      .tickFormat(d => d+ "%")
       .ticks(10);
 
   // root is the ith node, starting at zero
@@ -455,15 +457,52 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
     // placing bars at the right of the tree
     var getRect = nodes.slice(5, nodes.length);
 
+    // // coloring for bars
+    // var colorRect = d3.scaleQuantize()
+    //     .domain([d3.min(s80s20Colors), d3.max(s80s20Colors)])
+    //     .range(colorbrewer.Oranges[3]);
+
     // remove bars if node is clicked and other bars are appended
     d3.selectAll("#reccit").remove();
+    d3.selectAll("#axisDendro").remove();
 
-    // make bars a bit bigger by multipling with four for user readability
+    var variables = [
+    "RadioTelevisieOfKrantIngeschakeld",
+    "PolitiekeOrganisatieIngeschakeld",
+    "MeegedaanAanBijeenkomstOverheid",
+    "ContactOpgenomenMetPoliticus",
+    "MeegedaanAanActiegroep",
+    "MeegedaanAanProtestactie",
+    "MeegedaanAanHandtekeningenactie",
+    "MeegedaanPolitiekeActieViaInternet",
+    "Anders",
+    "ZeerGeinteresseerd",
+    "TamelijkGeinteresseerd",
+    "WeinigGeinteresseerd",
+    "NietGeinteresseerd",
+    "MinderDan3MaandenGeleden",
+    "drieTotTwaalfMaandenGeleden",
+    "MeerDan12MaandenGeleden",
+    "NooitInternetGebruikt",
+    "BijnaElkeDag",
+    "MinstensEenKeerPerWeek",
+    "MinderDanEenKeerPerWeek",
+    "ZoekenOpWebsitesOverheid",
+    "OfficieleDocumentenDownloadenOverheid",
+    "ZoekenOpWebsitesPubliekeSector",
+    "OfficieleDocumentenDownloadenPubliekeSector"];
+
+    // colorfunction with colorbrewer for those who suffer from bad eyes
+    var colorBars = d3.scaleOrdinal()
+        .domain(variables)
+        .range(colorbrewer.RdBu[11]);
+
+    // append bars and x axis when node is clicked on
     getRect.forEach(function(t){
-      console.log((t));
+      // console.log((t));
       svg.append("rect")
           .attr("id", "reccit")
-          .attr("width", 0.01)
+          .attr("width", 0)
           .attr("height", 20)
           .attr("rx", 3)
           .attr("ry", 3)
@@ -474,7 +513,25 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
               .attr("y", t.x + 40)
               .attr("width", function (d) {
                 return xScale(t.data.value);})
+              d3.selectAll("#axisDendro").remove();
+
+              // placing x-axis, placing at 710 is used due to trial and error
+              svg.append("g")
+                  .attr("class", "x-axis")
+                  .attr("id", "axisDendro")
+                  .attr("transform", "translate(710,0)")
+                  .transition()
+                      .duration(600)
+                  .call(xAxis);
       });
+
+      svg.selectAll("rect")
+          // .data(variables)
+          // .enter()
+          .attr("fill", function(d, i){
+            console.log(d)
+            return colorBars(i);
+          })
 
     // update nodes and recursive assigns id's and classes,
     // if node has a other nodes after her she is a momma, otherwise a baby
@@ -585,14 +642,11 @@ function makeDendrogram(data, selectedPop, popGroups, showYear){
       return path;
     };
 
-    // placing x-axis, 710 is used due to trial and error
-    svg.append("g")
-        .attr("class", "x-axis")
-        // .attr("transform", "translate (0," - height + ","  + ")")
-        // .attr("transform", "translate(" - height + "," + innerWidth + ")")
-        // .attr("transform", "translate(" + x + "," + y + ")")
-        .attr("transform", "translate(710,0)")
-        .call(xAxis);
+    // // placing x-axis, 710 is used due to trial and error
+    // svg.append("g")
+    //     .attr("class", "x-axis")
+    //     .attr("transform", "translate(710,0)")
+    //     .call(xAxis);
 
     // switch between state of nodes when clicked on
     function click(d) {

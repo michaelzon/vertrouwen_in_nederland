@@ -140,9 +140,10 @@
 /* dendrogram  */
 
 .node circle {
-  /* fill: #999; */
-  /* stroke: #000000; */
-  stroke-width: 2px;
+  fill: #d6604d;
+  stroke: #d6604d;
+  stroke-width: 3px;
+  opacity: 0.7;
 }
 
 .node text {
@@ -151,8 +152,15 @@
 
 .link {
   fill: none;
-  stroke: #000000;
+  stroke: grey;
   stroke-width: 2px;
+  opacity: 0.7;
+
+}
+
+#reccit {
+  opacity: 0.9;
+
 }
 
 #yearInDendro {

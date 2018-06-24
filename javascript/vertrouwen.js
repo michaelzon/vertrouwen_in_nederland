@@ -147,6 +147,15 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("y", height / 8)
       .text(selectedPop)
 
+  // adding title
+  svg.append("text")
+      .attr("id", "linegraphTitle")
+      .attr("x", width / 2 - 490)
+      .attr("y", height / 5)
+      .attr("transform", "translate(0,-120)")
+      .text("Vertrouwen in de overheid, publieke instanties, de pers en elkaar weergeven in percentages over de jaren heen:")
+
+
       // gridlines in x axis function
     function make_x_gridlines() {
         return d3.axisBottom(xScale)
@@ -177,7 +186,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
             .tickSize(-width)
             .tickFormat("")
         );
-
 
   // svg with grouping element for the lines
   var charts = svg.append("g")
@@ -326,6 +334,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   // placing legend
   var svgGraphDes = d3.select("#linegraphLegend")
       .append("svg")
+      .attr("id", "legendbox")
       .attr("width", legendWidth)
       .attr("height", legendHeight);
 
@@ -429,13 +438,14 @@ function makeDendrogram(data, selectedPop, showYear){
       .append("g")
       .attr("transform", "translate(55,100)");
 
+
   // adding title
   svg.append("text")
       .attr("id", "dendroTitle")
       .attr("x", width / 2 - 600)
       .attr("y", height / 40)
-      .attr("transform", "translate(0,-80)")
-      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites")
+      .attr("transform", "translate(40,-80)")
+      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites:")
 
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")

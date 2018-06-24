@@ -1,5 +1,6 @@
 var data = {};
 var secondData = {};
+var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
 
 // the following part will be triggered when the page is loaded
 window.onload = function(){
@@ -19,7 +20,7 @@ window.onload = function(){
 function main(vertrouwen, restOfTheData){
 
   // showing which population is selected
-  var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
+  // var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
 
   // store processed datasets in variables for functions
   var lineData = vertrouwen;
@@ -27,10 +28,10 @@ function main(vertrouwen, restOfTheData){
 
   // declare which year is initially showed when page is loaded.
   var getYear = "2012";
-  var getBev = bevGroups[0];
+  // var getBev = bevGroups[0];
 
   // call al the functions
-  makeLinegraph(lineData.totaal, dendroData, bevGroups);
+  makeLinegraph(lineData[bevGroups[2]], dendroData, bevGroups);
   makeDendrogram(dendroData[bevGroups[2]][getYear], bevGroups);
   update(lineData, dendroData, getYear, bevGroups)
 }
@@ -62,8 +63,11 @@ function update(data, secondData, getYear, bevGroups){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       selectedBev = bevGroups[0]
-      makeLinegraph(data.totaal, secondData, selectedBev)
-      makeDendrogram(secondData.totaal[getYear], selectedBev)
+      // makeLinegraph(data.totaal, secondData, selectedBev)
+      makeLinegraph(data[selectedBev], secondData, selectedBev)
+      // makeDendrogram(secondData.totaal[getYear], selectedBev)
+      makeDendrogram(secondData[selectedBev][getYear], selectedBev)
+
       // adding name of population in graph when clicked on in dropdown
       // svg.append("text")
       //     .attr("id", "bevInGraph")
@@ -74,13 +78,16 @@ function update(data, secondData, getYear, bevGroups){
     }
   });
 
-
+  // makeDendrogram(secondData[bevGroups[1]][showYear], selectedBev)
 
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       selectedBev = bevGroups[1]
-      makeLinegraph(data.nederlands, secondData, selectedBev)
-      makeDendrogram(secondData.nederlands[getYear], selectedBev)
+      // makeLinegraph(data[bevGroups[1]], secondData, selectedBev)
+      makeLinegraph(data[selectedBev], secondData, selectedBev)
+      // makeDendrogram(secondData.nederlands[getYear], selectedBev)
+      makeDendrogram(secondData[selectedBev][getYear], selectedBev)
+
       // svg.append("text")
       //     .attr("id", "bevInGraph")
       //     .attr("x", width / 2 - 300)
@@ -93,8 +100,11 @@ function update(data, secondData, getYear, bevGroups){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       selectedBev = bevGroups[2]
-      makeLinegraph(data.westers, secondData, selectedBev)
-      makeDendrogram(secondData.westers[getYear], selectedBev)
+      // makeLinegraph(data.westers, secondData, selectedBev)
+      makeLinegraph(data[selectedBev], secondData, selectedBev)
+      // makeDendrogram(secondData.westers[getYear], selectedBev)
+      makeDendrogram(secondData[selectedBev][getYear], selectedBev)
+
       // svg.append("text")
       //     .attr("id", "bevInGraph")
       //     .attr("x", width / 2 - 300)
@@ -107,8 +117,11 @@ function update(data, secondData, getYear, bevGroups){
   butNietWesters.addEventListener("click", {
     handleEvent: function (event) {
       selectedBev = bevGroups[3]
-      makeLinegraph(data.nietWesters, secondData, selectedBev)
-      makeDendrogram(secondData.nietWesters[getYear], selectedBev)
+      // makeLinegraph(data.nietWesters, secondData, selectedBev)
+      makeLinegraph(data[selectedBev], secondData, selectedBev)
+      // makeDendrogram(secondData.nietWesters[getYear], selectedBev)
+      makeDendrogram(secondData[selectedBev][getYear], selectedBev)
+
       // svg.append("text")
       //     .attr("id", "bevInGraph")
       //     .attr("x", width / 2 - 300)
@@ -329,6 +342,12 @@ function makeLinegraph(data, secondData, selectedBev){
 
   console.log('selectbevline',selectedBev)
 
+  // makeDendrogram(dendroData[bevGroups[2]][getYear], bevGroups);
+  // makeDendrogram(secondData[bevGroups[2]][showYear], selectedBev)
+
+  // makeDendrogram(secondData[selectedBev][getYear], selectedBev)
+
+
   // making years on x-axis clickable
   svg.selectAll(".x-axis .tick")
       .on("click", function(d) {
@@ -337,7 +356,9 @@ function makeLinegraph(data, secondData, selectedBev){
         // data = eval(d3.select("#dropit").property("value"))
         // console.log('dit', data)
         makeLinegraph(data, secondData, selectedBev)
-        makeDendrogram(secondData.totaal[showYear], selectedBev)
+        // makeDendrogram(secondData.totaal[showYear], selectedBev)
+        makeDendrogram(secondData[selectedBev][showYear], selectedBev)
+
       })
 
       // handle on click event
@@ -387,6 +408,8 @@ function makeLinegraph(data, secondData, selectedBev){
 };
 
 function makeDendrogram(data, selectedBev){
+
+  console.log('heir', bevGroups)
 
   // console.log('datadendro', data)
 

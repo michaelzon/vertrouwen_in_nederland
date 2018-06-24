@@ -146,84 +146,86 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
   // pushing values to arrays for visualization of graph
   var mensenTot = [];
   for(var i = 0; i < years.length; i ++){
-    mensenTot.push(data[years[i]]["VertrouwenInAndereMensen"])
+    mensenTot.push(data[years[i]]["VertrouwenInAndereMensen"]);
   };
 
   var ambtTot = [];
   for(var i = 0; i < years.length; i ++){
-    ambtTot.push(data[years[i]]["Ambtenaren"])
+    ambtTot.push(data[years[i]]["Ambtenaren"]);
   };
 
   var euTot = [];
   for(var i = 0; i < years.length; i ++){
-    euTot.push(data[years[i]]["EuropeseUnie"])
+    euTot.push(data[years[i]]["EuropeseUnie"]);
   };
 
   var persTot = [];
   for(var i = 0; i < years.length; i ++){
-    persTot.push(data[years[i]]["Pers"])
+    persTot.push(data[years[i]]["Pers"]);
   };
 
   var politieTot = [];
   for(var i = 0; i < years.length; i ++){
-    politieTot.push(data[years[i]]["Politie"])
+    politieTot.push(data[years[i]]["Politie"]);
   };
 
   var rechtersTot = [];
   for(var i = 0; i < years.length; i ++){
-    rechtersTot.push(data[years[i]]["Rechters"])
+    rechtersTot.push(data[years[i]]["Rechters"]);
   };
 
   var tweedeKamerTot = [];
   for(var i = 0; i < years.length; i ++){
-    tweedeKamerTot.push(data[years[i]]["TweedeKamer"])
+    tweedeKamerTot.push(data[years[i]]["TweedeKamer"]);
   };
 
   // inserting lines for every variable so multiple classes can be created
   var lineMen = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(mensenTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(mensenTot[i]))
       .curve(d3.curveLinear);
 
+  // the data is the list with years
   charts.append("path")
-    .data([years])         //array with years
+    .data([years])
     .attr("class", "lineMen")
     .attr("id", "lines")
     .attr("d", lineMen);
 
+  // pass the list with years to x-scaling function
   var lineAmbt = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(ambtTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(ambtTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
+    .data([years])
     .attr("class", "lineAmbt")
     .attr("id", "lines")
     .attr("d", lineAmbt);
 
+  // and pass the list with percentages to y-scaling function
   var lineEu = d3.line()
       .x(d => xScale(d))
-      .x(function(d) {return xScale(d)})
-      .y((d,i) => yScale(euTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(euTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
-    .attr("class", "lineEu")
-    .attr("id", "lines")
-    .attr("d", lineEu);
+      .data([years])
+      .attr("class", "lineEu")
+      .attr("id", "lines")
+      .attr("d", lineEu);
 
   var linePers = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(persTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(persTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
-    .attr("class", "linePers")
-    .attr("id", "lines")
-    .attr("d", linePers);
+      .data([years])
+      .attr("class", "linePers")
+      .attr("id", "lines")
+      .attr("d", linePers);
 
   var linePolitie = d3.line()
       .x(d => xScale(d))
@@ -231,7 +233,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
+    .data([years])
     .attr("class", "linePolitie")
     .attr("id", "lines")
     .attr("d", linePolitie);
@@ -242,10 +244,10 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])         //array with years
-    .attr("class", "lineRechters")
-    .attr("id", "lines")
-    .attr("d", lineRechters);
+      .data([years])         //array with years
+      .attr("class", "lineRechters")
+      .attr("id", "lines")
+      .attr("d", lineRechters);
 
   var lineTweedeKamer = d3.line()
       .x(d => xScale(d))
@@ -285,7 +287,7 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
   var svgGraphDes = d3.select("#linegraphLegend")
       .append("svg")
       .attr("width", legendWidth)
-      .attr("height", legendHeight)
+      .attr("height", legendHeight);
 
   svgGraphDes.append("g")
       .attr("id", "graphLegend")
@@ -312,7 +314,6 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
         makeLinegraph(data, secondData, selectedPop);
         // makeDendrogram(secondData.totaal[showYear], selectedPop)
         makeDendrogram(secondData[selectedPop][showYear], selectedPop);
-
       });
 
       // handle on click event
@@ -401,10 +402,10 @@ function makeDendrogram(data, selectedPop, popGroups){
 
   // declare tree layout
   var tree = d3.tree()
-      .size([height, width])
+      .size([height, width]);
 
   // assign variable to the root node
-  var root = d3.hierarchy(data, d => d.children)
+  var root = d3.hierarchy(data, d => d.children);
   root.x0 = height / 2;
   root.y0 = 0;
 
@@ -413,7 +414,7 @@ function makeDendrogram(data, selectedPop, popGroups){
   update(root);
 
   // collapse function nodes and all their children
-  function collapse(d) {
+  function collapse(d){
     if(d.children) {
       d._children = d.children
       d._children.forEach(collapse)
@@ -424,19 +425,19 @@ function makeDendrogram(data, selectedPop, popGroups){
   function update(source){
 
     // determine x and y position for nodes
-    var data = tree(root)
+    var data = tree(root);
 
     // and the new tree layout, 'nodes' is our data from now on
-    var nodes = data.descendants(),
+    var nodes = data.descendants();
 
     // links contains same structure as above minus the root node
-    links = data.descendants().slice(1)
+    var links = data.descendants().slice(1);
 
     // ensure nodes and links are spread across half of the canvas
     nodes.forEach(d => d.y = d.depth * 180);
 
     // placing bars at the right of the tree
-    var getRect = nodes.slice(5, nodes.length)
+    var getRect = nodes.slice(5, nodes.length);
 
     // remove bars if node is clicked and other bars are appended
     d3.selectAll("#reccit").remove();
@@ -445,12 +446,12 @@ function makeDendrogram(data, selectedPop, popGroups){
     getRect.forEach(function(t){
       console.log((t));
       svg.append("rect")
-      .attr("id", "reccit")
-      .attr("width", t.data.value * 4)
-      .attr("height", 20)
-      .attr("x", t.y)
-      .attr("y", t.x + 40)
-      .attr("transform", "translate(350,-50)");
+          .attr("id", "reccit")
+          .attr("width", t.data.value * 4)
+          .attr("height", 20)
+          .attr("x", t.y)
+          .attr("y", t.x + 40)
+          .attr("transform", "translate(350,-50)");
     });
 
     // update nodes and recursive assigns id's and classes,
@@ -459,7 +460,7 @@ function makeDendrogram(data, selectedPop, popGroups){
         .data(nodes, d => d.id || (d.id = ++i))
         .attr("class", d => "node" + (d.children ? " nodeMomma" : " nodeBaby"));
 
-    // a new child is born and birth takes place at position of the parent
+    // a new child is born and birth takes place at position of the momma
     var nodeBirth = node.enter().append("g")
         .attr("class", "node")
         .attr("transform", d => "translate(" + source.y0 + "," + source.x0 + ")")
@@ -472,23 +473,22 @@ function makeDendrogram(data, selectedPop, popGroups){
         .style("fill", d => {
           // console.log(d);
           d._children ? "#00­99­00" : "#FF­66­00";
-        })
+        });
 
     // (conditie = true) ? (dan dit) : (anders dit)
 
-    // adding labels
+    // adding text label with variablenames of the nodes
     nodeBirth.append("text")
         .attr("dy", ".35em")
-        .attr("y", d => d.children || d._children ? -15 : 0)  // position of text left or right from node
-        .attr("x", d => d.children || d._children ? -13 : 13) // position of text left or right from node
+        .attr("y", d => d.children || d._children ? -15 : 0)
+        .attr("x", d => d.children || d._children ? -13 : 13)          // position of text left or right from node
         .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
-        .text(d => d.data.name); // data is convert to root so it needs an extra dimension.
-
-    console.log('source',source.y0, source.x0)
+        .text(d => d.data.name);                                       // data is convert to root so it needs an extra dimension.
 
     // console.log(nodes);
     // console.log(source.data.children.length);
 
+    // when node is clicked she gives birth to a bunch of other nodes
     var nodeUpdate = nodeBirth.merge(node);
 
     // transition to the right position
@@ -502,7 +502,7 @@ function makeDendrogram(data, selectedPop, popGroups){
         .attr("x", width/2)
         .attr("y", height/2)
         .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
-        .attr("cursor", "pointer"); //
+        .attr("cursor", "pointer");
 
     // remove nodes including text and circles when update
     var nodeGone = node.exit().transition()
@@ -510,6 +510,7 @@ function makeDendrogram(data, selectedPop, popGroups){
         .attr("transform", d => "translate(" + source.y + "," + source.x + ")")
         .remove();
 
+    // let node shrink to zero radius when they are gone
     nodeGone.select("circle")
         .attr("r", 0);
 
@@ -539,7 +540,7 @@ function makeDendrogram(data, selectedPop, popGroups){
     // delete current links
     var linkDelete = link.exit().transition()
         .duration(duration)
-        .attr('d', function(d) {
+        .attr('d', function(d){
           var position = {x: source.x, y: source.y}
           return diagonal(position, position)
         })
@@ -552,18 +553,17 @@ function makeDendrogram(data, selectedPop, popGroups){
     });
 
     // function for the path between mothers and baby's
-    function diagonal(s, d) {
+    function diagonal(s, d){
 
       path = `M ${s.y} ${s.x}
               C ${(s.y + d.y) / 2} ${s.x},
                 ${(s.y + d.y) / 2} ${d.x},
-                ${d.y} ${d.x}`
+                ${d.y} ${d.x}`;
 
-      return path
-    }
+      return path;
+    };
 
-    var g = svg.append("g").attr("transform", "translate(20,0)");       // move right 20px.
-
+    // placing x-axis, 710 is used due to trial and error
     svg.append("g")
         .attr("class", "x-axis")
         // .attr("transform", "translate (0," - height + ","  + ")")
@@ -572,7 +572,7 @@ function makeDendrogram(data, selectedPop, popGroups){
         .attr("transform", "translate(710,0)")
         .call(xAxis);
 
-    // switch between state of nodes when clicked on.
+    // switch between state of nodes when clicked on
     function click(d) {
       if (d.children) {
           d._children = d.children;
@@ -582,10 +582,6 @@ function makeDendrogram(data, selectedPop, popGroups){
           d._children = null;
         }
       update(d);
-    }
-
-
-  }
-
-
+    };
+  };
 };

@@ -15,8 +15,8 @@ function importData(error, response){
   var vertrouwen = (bigDatty[0]["vertrouwen"]);
 
   for(var i = 0; i < vertrouwen.length; i ++){
-    delete(vertrouwen[i].ID)
-    delete(vertrouwen[i].Migratieachtergrond)
+    delete(vertrouwen[i].ID);
+    delete(vertrouwen[i].Migratieachtergrond);
     vertrouwen[i].Periode = Number(vertrouwen[i].Periode);
     vertrouwen[i].Ambtenaren = Number(vertrouwen[i].Ambtenaren);
     vertrouwen[i].EuropeseUnie = Number(vertrouwen[i].EuropeseUnie);
@@ -28,97 +28,97 @@ function importData(error, response){
   };
 
   // create an array with all variables from vertrouwen dataset
-  var vertrouwenVars = Object.keys(vertrouwen[0])
+  var vertrouwenVars = Object.keys(vertrouwen[0]);
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      totaal[years[i]][Object.keys(vertrouwen[i])[j]] = Object.values(vertrouwen[i])[j]
-    }
-  }
+      totaal[years[i]][Object.keys(vertrouwen[i])[j]] = Object.values(vertrouwen[i])[j];
+    };
+  };
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] = Object.values(vertrouwen[i+6])[j]
-    }
-  }
+      nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] = Object.values(vertrouwen[i+6])[j];
+    };
+  };
 
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      westers[years[i]][Object.keys(vertrouwen[i+12])[j]] = Object.values(vertrouwen[i+12])[j]
-    }
-  }
+      westers[years[i]][Object.keys(vertrouwen[i+12])[j]] = Object.values(vertrouwen[i+12])[j];
+    };
+  };
 
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j]
-    }
-  }
+      nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j];
+    };
+  };
 
-  vertrouwen = {};
-  vertrouwen["totaal"] = totaal
-  vertrouwen["nederlands"] = nederlands
-  vertrouwen["westers"] = westers
-  vertrouwen["nietWesters"] = nietWesters
+  var vertrouwen = {};
+  vertrouwen["totaal"] = totaal;
+  vertrouwen["nederlands"] = nederlands;
+  vertrouwen["westers"] = westers;
+  vertrouwen["nietWesters"] = nietWesters;
 
-  var dienstverlening = (bigDatty[1]["dienstverlening"])
+  var dienstverlening = (bigDatty[1]["dienstverlening"]);
 
   for(var i = 0; i < dienstverlening.length; i ++){
-    delete(dienstverlening[i].ID)
-    delete(dienstverlening[i].Migratieachtergrond)
-    delete(dienstverlening[i].Periode)
+    delete(dienstverlening[i].ID);
+    delete(dienstverlening[i].Migratieachtergrond);
+    delete(dienstverlening[i].Periode);
     dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
     dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
     dienstverlening[i].ZoekenOpWebsitesPubliekeSector = Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
     dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
-  }
+  };
 
-  var dienstverleningVars = Object.keys(dienstverlening[0])
+  var dienstverleningVars = Object.keys(dienstverlening[0]);
 
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      totaal[years[i]][Object.keys(dienstverlening[i])[j]] = Object.values(dienstverlening[i])[j]
-    }
-  }
+      totaal[years[i]][Object.keys(dienstverlening[i])[j]] = Object.values(dienstverlening[i])[j];
+    };
+  };
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      nederlands[years[i]][Object.keys(dienstverlening[i+6])[j]] = Object.values(dienstverlening[i+6])[j]
-    }
-  }
+      nederlands[years[i]][Object.keys(dienstverlening[i+6])[j]] = Object.values(dienstverlening[i+6])[j];
+    };
+  };
 
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      westers[years[i]][Object.keys(dienstverlening[i+12])[j]] = Object.values(dienstverlening[i+12])[j]
-    }
-  }
+      westers[years[i]][Object.keys(dienstverlening[i+12])[j]] = Object.values(dienstverlening[i+12])[j];
+    };
+  };
 
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      nietWesters[years[i]][Object.keys(dienstverlening[i+18])[j]] = Object.values(dienstverlening[i+18])[j]
-    }
-  }
+      nietWesters[years[i]][Object.keys(dienstverlening[i+18])[j]] = Object.values(dienstverlening[i+18])[j];
+    };
+  };
 
   var dienstverlening = {};
-  dienstverlening["totaal"] = totaal
-  dienstverlening["nederlands"] = nederlands
-  dienstverlening["westers"] = westers
-  dienstverlening["nietWesters"] = nietWesters
+  dienstverlening["totaal"] = totaal;
+  dienstverlening["nederlands"] = nederlands;
+  dienstverlening["westers"] = westers;
+  dienstverlening["nietWesters"] = nietWesters;
 
   var superKeys = Object.keys(dienstverlening);
 
@@ -137,14 +137,14 @@ function importData(error, response){
       superTempArray.push({"name": superKey, "children": [tempArray]});
     })
     dataDienstverlening[year] = {"name": year, "children": superTempArray}
-  })
+  });
 
   var gebruik = (bigDatty[3]["gebruik"]);
 
   for(var i = 0; i < gebruik.length; i ++){
-    delete(gebruik[i].ID)
-    delete(gebruik[i].Migratieachtergrond)
-    delete(gebruik[i].Periode)
+    delete(gebruik[i].ID);
+    delete(gebruik[i].Migratieachtergrond);
+    delete(gebruik[i].Periode);
     gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
     gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
     gebruik[i].MeerDan12MaandenGeleden = Number(gebruik[i].MeerDan12MaandenGeleden);
@@ -160,33 +160,33 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      totaal[years[i]][Object.keys(gebruik[i])[j]] = Object.values(gebruik[i])[j]
-    }
-  }
+      totaal[years[i]][Object.keys(gebruik[i])[j]] = Object.values(gebruik[i])[j];
+    };
+  };
 
   var nederlands = {};
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      nederlands[years[i]][Object.keys(gebruik[i+6])[j]] = Object.values(gebruik[i+6])[j]
-    }
-  }
+      nederlands[years[i]][Object.keys(gebruik[i+6])[j]] = Object.values(gebruik[i+6])[j];
+    };
+  };
 
   var westers = {};
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      westers[years[i]][Object.keys(gebruik[i+12])[j]] = Object.values(gebruik[i+12])[j]
-    }
-  }
+      westers[years[i]][Object.keys(gebruik[i+12])[j]] = Object.values(gebruik[i+12])[j];
+    };
+  };
 
   var nietWesters = {};
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      nietWesters[years[i]][Object.keys(gebruik[i+18])[j]] = Object.values(gebruik[i+18])[j]
-    }
-  }
+      nietWesters[years[i]][Object.keys(gebruik[i+18])[j]] = Object.values(gebruik[i+18])[j];
+    };
+  };
 
   var gebruik = {};
   gebruik["totaal"] = totaal
@@ -424,8 +424,7 @@ function importData(error, response){
 
   console.log('vertrouwen', vertrouwen);
   console.log('restofthedata', restOfTheData);
-  
-  main(vertrouwen, restOfTheData)
-  // update(vertrouwen, restOfTheData)
+
+  main(vertrouwen, restOfTheData);
 
 };

@@ -22,7 +22,7 @@ function main(vertrouwen, restOfTheData){
   var lineData = vertrouwen;
   var dendroData = restOfTheData;
 
-  // declare initial year and population (bev)
+  // declare initial year and population
   var getYear = "2012";
   var selectedPop = popGroups[0];
 
@@ -138,6 +138,13 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .attr("width", outerWidth)
       .attr("height", outerHeight)
       .attr("id", "linechart");
+
+  // adding name of population in graph when clicked on in dropdown
+  svg.append("text")
+      .attr("id", "popInGraph")
+      .attr("x", width / 2 - 450)
+      .attr("y", height / 8)
+      .text(selectedPop)
 
   // svg with grouping element for the lines
   var charts = svg.append("g")
@@ -309,11 +316,11 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
       .on("click", function(d) {
         var year = d;
         showYear = year.toString();
-        console.log('jaar',showYear)
+        // console.log('jaar',showYear)
         // console.log('kendrik',secondData[selectedPop].showYear)
         makeLinegraph(data, secondData, selectedPop);
         // makeDendrogram(secondData.totaal[showYear], selectedPop)
-        makeDendrogram(secondData[selectedPop][showYear], selectedPop);
+        makeDendrogram(secondData[selectedPop][showYear], selectedPop, popGroups, showYear);
       });
 
       // handle on click event
@@ -361,11 +368,13 @@ function makeLinegraph(data, secondData, selectedPop, popGroups){
 
 };
 
-function makeDendrogram(data, selectedPop, popGroups){
+function makeDendrogram(data, selectedPop, popGroups, showYear){
 
   if (d3.select("#dendrogram").select("svg")){
     d3.select("#dendrogram").select("svg").remove();
   };
+
+  console.log('year',showYear)
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
@@ -383,6 +392,13 @@ function makeDendrogram(data, selectedPop, popGroups){
       .attr("id", "dendrochart")
       .append("g")
       .attr("transform", "translate(55,100)");
+
+  // adding name of population in graph when clicked on in dropdown
+  svg.append("text")
+      .attr("id", "yearInDendro")
+      .attr("x", width / 2 - 500)
+      .attr("y", height / 12)
+      .text(showYear)
 
   // move grouping elements 20 pixels to the right
   var g = svg.append("g").attr("transform", "translate(20,0)");
@@ -447,12 +463,18 @@ function makeDendrogram(data, selectedPop, popGroups){
       console.log((t));
       svg.append("rect")
           .attr("id", "reccit")
-          .attr("width", t.data.value * 4)
+          .attr("width", 0.01)
           .attr("height", 20)
-          .attr("x", t.y)
-          .attr("y", t.x + 40)
-          .attr("transform", "translate(350,-50)");
-    });
+          .attr("rx", 3)
+          .attr("ry", 3)
+          .attr("transform", "translate(350,-50)")
+          .transition()
+              .duration(600)
+              .attr("x", t.y)
+              .attr("y", t.x + 40)
+              .attr("width", function (d) {
+                return xScale(t.data.value);})
+      });
 
     // update nodes and recursive assigns id's and classes,
     // if node has a other nodes after her she is a momma, otherwise a baby

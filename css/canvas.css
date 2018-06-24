@@ -130,10 +130,10 @@
     shape-rendering: crispEdges;
 }
 
-#provBars {
+#popInGraph {
   font-family: avenir;
   font-size: 20px;
-  /* color: rgba(252, 243, 0, 0.4); */
+  color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
 }
 
@@ -153,4 +153,11 @@
   fill: none;
   stroke: #000000;
   stroke-width: 2px;
+}
+
+#yearInDendro {
+  font-family: avenir;
+  font-size: 24px;
+  color: rgba(252, 243, 0, 0.4);
+  opacity: 0.7;
 }

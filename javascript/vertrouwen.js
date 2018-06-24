@@ -1,6 +1,7 @@
 var data = {};
 var secondData = {};
 var bevGroups = ["totaal", "nederlands", "westers", "nietWesters"];
+// var selectedBev = bevGroups[0];
 
 // the following part will be triggered when the page is loaded
 window.onload = function(){
@@ -28,15 +29,17 @@ function main(vertrouwen, restOfTheData){
 
   // declare which year is initially showed when page is loaded.
   var getYear = "2012";
-  // var getBev = bevGroups[0];
+  var selectedBev = bevGroups[0];
+
+  // makeDendrogram(secondData[selectedBev][showYear], selectedBev)
 
   // call al the functions
-  makeLinegraph(lineData[bevGroups[2]], dendroData, bevGroups);
-  makeDendrogram(dendroData[bevGroups[2]][getYear], bevGroups);
-  update(lineData, dendroData, getYear, bevGroups)
+  makeLinegraph(lineData[selectedBev], dendroData, bevGroups);
+  makeDendrogram(dendroData[selectedBev][getYear], bevGroups);
+  update(lineData, dendroData, getYear, selectedBev, bevGroups)
 }
 
-function update(data, secondData, getYear, bevGroups){
+function update(data, secondData, getYear, selectedBev, bevGroups){
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
@@ -56,7 +59,7 @@ function update(data, secondData, getYear, bevGroups){
   var butNietWesters = document.getElementById("selectNietWesters");
 
   // variable for the population that is selected by user
-  var selectedBev;
+  // var selectedBev;
 
   // var svg = d3.select("#linegraph");
 
@@ -134,6 +137,8 @@ function update(data, secondData, getYear, bevGroups){
 }
 
 function makeLinegraph(data, secondData, selectedBev){
+
+  // selectedBev = "totaal";
 
   // remove current lines if others are added by clicking on dropdown
   if (d3.select("#linegraph").select("svg")){
@@ -347,14 +352,15 @@ function makeLinegraph(data, secondData, selectedBev){
 
   // makeDendrogram(secondData[selectedBev][getYear], selectedBev)
 
+  // console.log('kendrik',secondData[selectedBev])
 
   // making years on x-axis clickable
   svg.selectAll(".x-axis .tick")
       .on("click", function(d) {
         var year = d;
         showYear = year.toString();
-        // data = eval(d3.select("#dropit").property("value"))
-        // console.log('dit', data)
+        console.log('jaar',showYear)
+        // console.log('kendrik',secondData[selectedBev].showYear)
         makeLinegraph(data, secondData, selectedBev)
         // makeDendrogram(secondData.totaal[showYear], selectedBev)
         makeDendrogram(secondData[selectedBev][showYear], selectedBev)

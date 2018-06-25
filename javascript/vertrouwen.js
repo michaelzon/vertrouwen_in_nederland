@@ -26,8 +26,8 @@ function main(vertrouwen, restOfTheData){
   var getYear = "2012";
   var selectedPop = popGroups[0];
 
-  makeLinegraph(lineData[selectedPop], dendroData, popGroups);
-  makeDendrogram(dendroData[selectedPop][getYear], popGroups, getYear);
+  makeLinegraph(lineData[selectedPop], dendroData, selectedPop);
+  makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear);
   update(lineData, dendroData, getYear, selectedPop, popGroups);
 }
 
@@ -44,18 +44,8 @@ function update(data, secondData, getYear, selectedPop, popGroups){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[0];
-      // makeLinegraph(data.totaal, secondData, selectedPop)
       makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
-      // makeDendrogram(secondData.totaal[getYear], selectedPop)
       makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
-
-      // adding name of population in graph when clicked on in dropdown
-      // svg.append("text")
-      //     .attr("id", "bevInGraph")
-      //     .attr("x", width / 2 - 300)
-      //     .attr("y", height / 8)
-      //     .text(popGroups[0])
-
     }
   });
 
@@ -358,21 +348,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .on("click", function(d) {
         var year = d;
         showYear = year.toString();
-        console.log('jaar',showYear)
-        // console.log('kendrik',secondData[selectedPop].showYear)
         makeLinegraph(data, secondData, selectedPop, showYear);
-        // makeDendrogram(secondData.totaal[showYear], selectedPop)
         makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
       });
-
-  console.log('jaar',showYear)
-
-      // handle on click event
-      // d3.select('#opts')
-      //   .on('change', function() {
-      //     var newData = eval(d3.select(this).property('value'));
-      //     updateLegend(newData);
-      // });
 
   // append small buttons next to labels
   svgTick = svg.selectAll(".x-axis .tick")
@@ -417,8 +395,6 @@ function makeDendrogram(data, selectedPop, showYear){
   if (d3.select("#dendrogram").select("svg")){
     d3.select("#dendrogram").select("svg").remove();
   };
-
-  console.log('year',showYear)
 
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},

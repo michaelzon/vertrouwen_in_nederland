@@ -8,7 +8,7 @@ function importData(error, response){
 
   for(i = 0; i < 6; i ++){
     bigDatty.push(response[i])
-  }
+  };
 
   var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
@@ -414,7 +414,7 @@ function importData(error, response){
   restOfTheData["westers"] = dendroWesters;
   restOfTheData["nietWesters"] = dendroNietWesters;
 
-  // call main function and pass the parsed data 
+  // call main function and pass the parsed data
   main(vertrouwen, restOfTheData);
 
 };

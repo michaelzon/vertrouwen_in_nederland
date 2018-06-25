@@ -150,3 +150,9 @@
 ![](photo/image_21.jpg)
 
 ![](photo/image_22.jpg)
+
+# dag 16
+
+* Op basis van mijn feedback van groepje besloten dat ik de x-assen laat staan voor de bars en niet g proberen om ze erachter te krijgen. Mijn groepsgenoten vonden juist namelijk juist duidelijker:
+
+![](photo/image_23.jpg)

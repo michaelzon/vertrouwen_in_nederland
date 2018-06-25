@@ -1,7 +1,7 @@
 # Project
 [My site!](https://michaelzon.github.io/vertrouwen_in_nederland/)
 
-## Probleemstelling
+<!-- ## Probleemstelling
 
 Sinds het touwtje uit de brievenbus van Jan Terlouw die een emotionele toespraak hield over het verloren vertrouwen onder de mens, bekommert men zich of het vertrouwen in elkaar inderdaad verloren is gegaan. Brexit, het afschaffen van de dividendbelasting, de overwinning van Trump, zijn mogelijke oorzaken op de verloren vertrouwen kwestie. Men verzameld over dit soort zaken informatie via mediakanalen op het internet. Het doel is ook om te ontdekken of er een correlatie is tussen vertrouwen en media/internet consumptie, en of dit verschilt tussen Nederlandse bevolkingsgroepen.
 
@@ -47,7 +47,7 @@ Hier is het iets duidelijker wat ik precies ga doen: ik koppel de grouped horizo
 
 **Het Lastigste Deel:**
 
-Ik hoop dat ik niet in de knoop kom met de update functies omdat ik dat nog wel het lastigste vind van data visualiseren. Daarnaast hoop ik dat mijn variabelen tenzamen wel betekenis geven aan het storytelling gedeelte van mijn website, en dat dit ook voor de gebruiker duidelijk is.
+Ik hoop dat ik niet in de knoop kom met de update functies omdat ik dat nog wel het lastigste vind van data visualiseren. Daarnaast hoop ik dat mijn variabelen tenzamen wel betekenis geven aan het storytelling gedeelte van mijn website, en dat dit ook voor de gebruiker duidelijk is. -->
 
 
 ![](photo/image.jpg)

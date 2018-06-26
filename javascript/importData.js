@@ -417,4 +417,30 @@ function importData(error, response){
   // call main function and pass the parsed data
   main(vertrouwen, restOfTheData);
 
+  // var variables = [
+  // "Radio, televisie of krant ingeschakeld"
+  // "Politieke organisatie ingeschakeld"
+  // "Meegedaan aan bijeenkomst van de overheid"
+  // "Contact opgenomen met politicus"
+  // "Meegedaan aan actiegroep"
+  // "Meegedaan aan protestactie"
+  // "Meegedaan aan handtekeningenactie"
+  // "Meegedaan met politieke actie via internet"
+  // "Anders"
+  // "Zeer geïnteresseerd"
+  // "Tamelijk geïnteresseerd"
+  // "Weinig geïnteresseerd"
+  // "Niet geïnteresseerd"
+  // "Minder dan drie maanden geleden"
+  // "Drie tot twaalf maanden geleden"
+  // "Meer dan twaalf maanden geleden"
+  // "Nooit internet gebruikt"
+  // "Bijna elke dag"
+  // "Minstens een keer per week"
+  // "Minder dan een keer per week"
+  // "Zoeken op websites overheid"
+  // "Officiële documenten downloaden overheid"
+  // "Zoeken op websites publieke sector"
+  // "Officiële documenten downloaden publieke sector"]
+
 };

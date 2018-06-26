@@ -9,14 +9,12 @@
 
 #linegraph {
   left: 4.5%;
-  zoom: 90%
-  /* border-style: dotted; */
-
+  zoom: 90%;
 }
 
 #dendrogram {
   left: 5.5%;
-  zoom: 90%
+  zoom: 90%;
   /* border-style: dotted; */
 }
 
@@ -92,7 +90,7 @@
 }
 
 #linegraphTitle {
-  font-family: avenir;
+  font-family: sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: rgba(252, 243, 0, 0.4);
@@ -105,13 +103,13 @@
 
 .x-axis {
   font-size: 15px;
-  font-family: avenir;
+  font-family: sans-serif;
 
 }
 
 .y-axis {
   font-size: 13px;
-  font-family: avenir;
+  font-family: sans-serif;
 
 }
 
@@ -163,7 +161,7 @@
 }
 
 #popInGraph {
-  font-family: avenir;
+  font-family: sans-serif;
   font-size: 20px;
   color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
@@ -188,7 +186,7 @@
 }
 
 .node text {
-  font: 15px avenir;
+  font: 15px sans-serif;
 }
 
 .link {
@@ -205,9 +203,9 @@
 }
 
 #yearInDendro {
-  font-family: avenir;
+  font-family: sans-serif;
   font-size: 30px;
-  font-style: italic;
+  /* font-style: italic; */
   text-decoration: underline;
   color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
@@ -215,7 +213,7 @@
 
 
 #dendroTitle {
-  font-family: avenir;
+  font-family: sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: rgba(252, 243, 0, 0.4);

@@ -222,16 +222,13 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
     tweedeKamerTot.push(data[years[i]]["TweedeKamer"]);
   };
 
-  // function transition(path){
-  //   path.transition()
-  //       .duration(1800);
-  // }
-
   // dummyTot = [80, 80, 80, 80, 80, 80];
   // dummyTot = [(width,height), (width,height),(width,height),(width,height),(width,height), (width,height)]
-  dummyTot = [(width,20), (width,20),(width,20),(width,20),(width,20), (width,20)]
-  // dummyTot = [80, 80, 80, 80, 80, 80];
+  // dummyTot = [(width,20), (width,20),(width,20),(width,20),(width,20), (width,20)]
+  // dummyTot = [(20,20), (20,20),(20,20),(20,20),(20,20), (20,20)]
 
+  // starting positions for the lines with transition
+  var dummyTot = [20, 20, 20, 20, 20, 20];
 
   // inserting lines for every variable so multiple classes can be created
   var lineMen = d3.line()
@@ -328,6 +325,8 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("class", "y-axis")
       .call(yAxis);
 
+
+  // ensure lines are appear smoothly when page is loaded or update is called
   var trans = charts.transition();
 
   trans.select("#lineMen").duration(1000)
@@ -394,11 +393,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("r", "8")
       .attr("stroke-width", "2")
       .attr("stroke-miterlimit", "10")
-      .attr("transform", "translate (27, 14)")
-      .on("click", function(d){
-        console.log(d);
-        console.log(this);
-      });
+      .attr("transform", "translate (27, 14)");
 
   // ensure years on x-axis are clickable and initialize visualization functions
   svg.selectAll(".x-axis .tick")

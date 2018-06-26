@@ -26,9 +26,6 @@ function main(vertrouwen, restOfTheData){
   var getYear = "2012";
   var selectedPop = popGroups[0];
 
-  // variable for coloring checks
-  // var called = "no";
-
   makeLinegraph(lineData[selectedPop], dendroData, selectedPop, getYear);
   makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear);
   update(lineData, dendroData, getYear, selectedPop, popGroups);
@@ -91,7 +88,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   // determing margins for visualisations
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
-      lilPad = 10;
+      lilPad = 10,
       outerWidth = 1160,
       outerHeight = 600,
       innerWidth = outerWidth - margin.left - margin.right,
@@ -124,7 +121,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   // ensure labels are shown in percentages
   var yAxis = d3.axisLeft(yScale)
-      .tickFormat(function(d){return d+ "%"})
       .tickFormat(d => d+ "%")
       .ticks(7);
 
@@ -151,36 +147,35 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .text("Vertrouwen in de overheid, publieke instanties, de pers en elkaar weergeven in percentages over de jaren heen:")
 
 
-      // gridlines in x axis function
-    function make_x_gridlines() {
-        return d3.axisBottom(xScale)
-            .ticks(6)
-    }
+  // gridlines in x axis function
+  function make_x_gridlines() {
+      return d3.axisBottom(xScale)
+          .ticks(6);
+  };
 
-    // gridlines in y axis function
-    function make_y_gridlines() {
-        return d3.axisLeft(yScale)
-            .ticks(7)
-    }
+  // gridlines in y axis function
+  function make_y_gridlines() {
+      return d3.axisLeft(yScale)
+          .ticks(7);
+  };
 
-    // add the X gridlines
-    svg.append("g")
-        .attr("class", "grid")
-        .attr("transform", "translate(10," + (height + lilPad) + ")")
-        // .attr("transform", "translate(10, 450)")
-        .call(make_x_gridlines()
-            .tickSize(-height)
-            .tickFormat("")
-        )
+  // add the X gridlines
+  svg.append("g")
+      .attr("class", "grid")
+      .attr("transform", "translate(10," + (height + lilPad) + ")")
+      .call(make_x_gridlines()
+          .tickSize(-height)
+          .tickFormat("")
+      );
 
-    // add the Y gridlines
-    svg.append("g")
-        .attr("class", "grid")
-        .attr("transform", "translate(10,10)")
-        .call(make_y_gridlines()
-            .tickSize(-width)
-            .tickFormat("")
-        );
+  // add the Y gridlines
+  svg.append("g")
+      .attr("class", "grid")
+      .attr("transform", "translate(10,10)")
+      .call(make_y_gridlines()
+          .tickSize(-width)
+          .tickFormat("")
+      );
 
   // svg with grouping element for the lines
   var charts = svg.append("g")
@@ -325,30 +320,29 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("class", "y-axis")
       .call(yAxis);
 
-
   // ensure lines are appear smoothly when page is loaded or update is called
   var trans = charts.transition();
 
   trans.select("#lineMen").duration(1000)
-      .attr("d", lineMen(years))
+      .attr("d", lineMen(years));
 
   trans.select("#lineAmbt").duration(1000)
-      .attr("d", lineAmbt(years))
+      .attr("d", lineAmbt(years));
 
   trans.select("#lineEu").duration(1000)
-      .attr("d", lineEu(years))
+      .attr("d", lineEu(years));
 
   trans.select("#linePers").duration(1000)
-      .attr("d", linePers(years))
+      .attr("d", linePers(years));
 
   trans.select("#linePolitie").duration(1000)
-      .attr("d", linePolitie(years))
+      .attr("d", linePolitie(years));
 
   trans.select("#lineRechters").duration(1000)
-      .attr("d", lineRechters(years))
+      .attr("d", lineRechters(years));
 
   trans.select("#lineTweedeKamer").duration(1000)
-      .attr("d", lineTweedeKamer(years))
+      .attr("d", lineTweedeKamer(years));
 
   // create extra function to show full variablenames in legend
   var legendLines = d3.scaleOrdinal()
@@ -386,9 +380,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   svgTick = svg.selectAll(".x-axis .tick")
       .append("circle")
       .attr("class", "checkboxes")
-      .attr("id", function(d) {
-        return "checkbox" + d
-      })
+      .attr("id", d => "checkbox" + d)
       .attr("stroke", "#000000")
       .attr("r", "8")
       .attr("stroke-width", "2")
@@ -397,13 +389,19 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   // ensure years on x-axis are clickable and initialize visualization functions
   svg.selectAll(".x-axis .tick")
-      .on("click", function(d){
+      // .on("click", function(d){
+      //   var year = d;
+      //   showYear = year.toString();
+      //   makeLinegraph(data, secondData, selectedPop, showYear);
+      //   makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
+      // })
+      .on("click", d => {
         var year = d;
         showYear = year.toString();
         makeLinegraph(data, secondData, selectedPop, showYear);
-        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
-      })
+        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);})
 
+  // color the checkbox of the selected year and
   function colorChecks(){
       svg.selectAll(".checkboxes")
           .style("fill", "FFFFF");
@@ -439,21 +437,20 @@ function makeDendrogram(data, selectedPop, showYear){
       .append("g")
       .attr("transform", "translate(55,100)");
 
-
   // adding title
   svg.append("text")
       .attr("id", "dendroTitle")
       .attr("x", width / 2 - 600)
       .attr("y", height / 40)
       .attr("transform", "translate(40,-80)")
-      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites:")
+      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites:");
 
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")
       .attr("id", "yearInDendro")
       .attr("x", width / 2 - 600)
       .attr("y", height / 12)
-      .text(showYear)
+      .text(showYear);
 
   // move grouping elements 20 pixels to the right
   var g = svg.append("g").attr("transform", "translate(20,0)");
@@ -498,13 +495,13 @@ function makeDendrogram(data, selectedPop, showYear){
   function update(source){
 
     // determine x and y position for nodes
-    var data = tree(root);
+    var data = tree(root),
 
     // and the new tree layout, 'nodes' is our data from now on
-    var nodes = data.descendants();
+        nodes = data.descendants(),
 
     // links contains same structure as above minus the root node
-    var links = data.descendants().slice(1);
+        links = data.descendants().slice(1);
 
     // ensure nodes and links are spread across half of the canvas
     nodes.forEach(d => d.y = d.depth * 180);
@@ -516,37 +513,37 @@ function makeDendrogram(data, selectedPop, showYear){
     d3.selectAll("#reccit").remove();
     d3.selectAll("#axisDendro").remove();
 
-      // gridlines in x axis function
+    // gridlines in x axis function
     function make_x_gridlines() {
         return d3.axisBottom(xScale)
-            .ticks(10)
+            .ticks(10);
     }
 
     var variables = [
-    "Radio Televisie Of Krant Ingeschakeld",
-    "Politieke Organisatie Ingeschakeld",
-    "Meegedaan Aan Bijeenkomst Overheid",
-    "Contact Opgenomen Met Politicus",
-    "Meegedaan Aan Actiegroep",
-    "Meegedaan Aan Protestactie",
-    "Meegedaan Aan Handtekeningenactie",
-    "MeegedaanPolitiekeActieViaInternet",
+    "Radio, televisie of krant ingeschakeld",
+    "Politieke organisatie ingeschakeld",
+    "Meegedaan aan bijeenkomst van de overheid",
+    "Contact opgenomen met politicus",
+    "Meegedaan aan actiegroep",
+    "Meegedaan aan protestactie",
+    "Meegedaan aan handtekeningenactie",
+    "Meegedaan met politieke actie via internet",
     "Anders",
-    "ZeerGeinteresseerd",
-    "TamelijkGeinteresseerd",
-    "WeinigGeinteresseerd",
-    "NietGeinteresseerd",
-    "MinderDan3MaandenGeleden",
-    "drieTotTwaalfMaandenGeleden",
-    "MeerDan12MaandenGeleden",
-    "NooitInternetGebruikt",
-    "BijnaElkeDag",
-    "MinstensEenKeerPerWeek",
-    "MinderDanEenKeerPerWeek",
-    "ZoekenOpWebsitesOverheid",
-    "OfficieleDocumentenDownloadenOverheid",
-    "ZoekenOpWebsitesPubliekeSector",
-    "OfficieleDocumentenDownloadenPubliekeSector"];
+    "Zeer geïnteresseerd",
+    "Tamelijk geïnteresseerd",
+    "Weinig geïnteresseerd",
+    "Niet geïnteresseerd",
+    "Minder dan drie maanden geleden",
+    "Drie tot twaalf maanden geleden",
+    "Meer dan twaalf maanden geleden",
+    "Nooit internet gebruikt",
+    "Bijna elke dag",
+    "Minstens een keer per week",
+    "Minder dan een keer per week",
+    "Zoeken op websites overheid",
+    "Officiële documenten downloaden overheid",
+    "Zoeken op websites publieke sector",
+    "Officiële documenten downloaden publieke sector"];
 
     // colorfunction with colorbrewer for those who suffer from bad eyes
     var colorBars = d3.scaleOrdinal()
@@ -567,41 +564,31 @@ function makeDendrogram(data, selectedPop, showYear){
               .duration(600)
               .attr("x", t.y)
               .attr("y", t.x + 40)
-              .attr("width", function (d) {
-                return xScale(t.data.value);})
-              d3.selectAll("#axisDendro").remove();
+              .attr("width", d => xScale(t.data.value));
 
-              // placing x-axis, placing at 710 is used due to trial and error
-              svg.append("g")
-                  .attr("class", "x-axis")
-                  .attr("id", "axisDendro")
-                  .attr("transform", "translate(710,0)")
-                  .transition()
-                      .duration(600)
-                  .call(xAxis)
+      d3.selectAll("#axisDendro").remove();
 
-              d3.select("#dendrogram").selectAll(".grid").remove();
-              svg.append("g")
-                  .attr("class", "grid")
-                  .attr("transform", "translate(710, 820)")
-                  .call(make_x_gridlines()
-                      .tickSize(-height)
-                      .tickFormat("")
-                  );
+      // placing x-axis, placing at 710 is used due to trial and error
+      svg.append("g")
+          .attr("class", "x-axis")
+          .attr("id", "axisDendro")
+          .attr("transform", "translate(710,0)")
+          .transition()
+              .duration(600)
+          .call(xAxis);
+
+      d3.select("#dendrogram").selectAll(".grid").remove();
+      svg.append("g")
+          .attr("class", "grid")
+          .attr("transform", "translate(710, 820)")
+          .call(make_x_gridlines()
+              .tickSize(-height)
+              .tickFormat("")
+          );
       });
 
-      svg.selectAll("rect")
-          .attr("fill", function(d, i){
-            return colorBars(i);
-          })
-
-      // probeer nog even om de kleuren van de nodes synchroon te laten lopen met de betreffende bars.
-
-      // svg.selectAll(".nodeBaby")
-      //     .attr("fill", function(d, i){
-      //       console.log(d)
-      //       return colorBars(i);
-      //     })
+    svg.selectAll("rect")
+        .attr("fill", (d,i) => colorBars(i));
 
     // update nodes and recursive assigns id's and classes,
     // if node has a other nodes after her she is a momma, otherwise a baby
@@ -630,9 +617,6 @@ function makeDendrogram(data, selectedPop, showYear){
         .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
         .text(d => d.data.name);                                       // data is convert to root so it needs an extra dimension.
 
-    console.log(nodes);
-    // console.log(source.data.children.length);
-
     // when node is clicked she gives birth to a bunch of other nodes
     var nodeUpdate = nodeBirth.merge(node);
 
@@ -646,7 +630,6 @@ function makeDendrogram(data, selectedPop, showYear){
         .attr("r", 5)
         .attr("x", width/2)
         .attr("y", height/2)
-        // .style("fill", d => d._children ? "#00­99­00" : "#FF­66­00")
         .attr("cursor", "pointer");
 
     // remove nodes including text and circles when update
@@ -666,7 +649,7 @@ function makeDendrogram(data, selectedPop, showYear){
 
     // make update function for the links, returns id's from collapsed nodes
     var link = svg.selectAll("path.link")
-        .data(links, function(d) { return d.id; });
+        .data(links, d => d.id);
 
     var linkIt = link.enter().insert("path", "g")
         .attr("class", "link")

@@ -51,42 +51,42 @@
   padding: 60px;
 }
 
-#lines {
+.lines {
  stroke-width: 3px;
  fill: none;
 }
 
-.lineMen {
+#lineMen {
   fill: none;
   stroke: #66c2a5;
 }
 
-.lineAmbt {
+#lineAmbt {
   fill: none;
   stroke: #fc8d62;
 }
 
-.lineEu {
+#lineEu {
   fill: none;
   stroke: #8da0cb;
 }
 
-.linePers {
+#linePers {
   fill: none;
   stroke: #e78ac3;
 }
 
-.linePolitie {
+#linePolitie {
   fill: none;
   stroke: #a6d854;
 }
 
-.lineRechters {
+#lineRechters {
   fill: none;
   stroke: #ffd92f;
 }
 
-.lineTweedeKamer {
+#lineTweedeKamer {
   fill: none;
   stroke: #e5c494;
 }

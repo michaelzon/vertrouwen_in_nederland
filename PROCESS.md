@@ -162,3 +162,5 @@
 * Zorgen dat checkboxes correct rood gekleurd worden bij het selecteren van een jaar.
 
 * Jaar selectie kleur is rood want dat doet het meest denken aan een markering of het invullen van een rondje.
+
+* Klaar met bovenstaande nu zorgen dat er transitie is in de lijnen. 

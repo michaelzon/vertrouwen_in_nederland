@@ -80,6 +80,8 @@ function update(data, secondData, getYear, selectedPop, popGroups){
 
 function makeLinegraph(data, secondData, selectedPop, showYear){
 
+  var duration = 1000;
+
   // remove current elements when dropdown options is clicked on
   if (d3.select("#linegraph").select("svg")){
     d3.select("#linegraph").select("svg").remove();
@@ -220,18 +222,34 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
     tweedeKamerTot.push(data[years[i]]["TweedeKamer"]);
   };
 
+  // function transition(path){
+  //   path.transition()
+  //       .duration(1800);
+  // }
+
+  // dummyTot = [80, 80, 80, 80, 80, 80];
+  // dummyTot = [(width,height), (width,height),(width,height),(width,height),(width,height), (width,height)]
+  dummyTot = [(width,20), (width,20),(width,20),(width,20),(width,20), (width,20)]
+  // dummyTot = [80, 80, 80, 80, 80, 80];
+
+
   // inserting lines for every variable so multiple classes can be created
   var lineMen = d3.line()
       .x(d => xScale(d))
       .y((d,i) => yScale(mensenTot[i]))
       .curve(d3.curveLinear);
 
+  var dummyMen = d3.line()
+      .x(d => xScale(d))
+      .y((d,i) => yScale(dummyTot[i]))
+      .curve(d3.curveLinear);
+
   // the data is the list with years
   charts.append("path")
     .data([years])
-    .attr("class", "lineMen")
-    .attr("id", "lines")
-    .attr("d", lineMen);
+    .attr("id", "lineMen")
+    .attr("class", "lines")
+    .attr("d", dummyMen);
 
   // pass the list with years to x-scaling function
   var lineAmbt = d3.line()
@@ -241,9 +259,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   charts.append("path")
     .data([years])
-    .attr("class", "lineAmbt")
-    .attr("id", "lines")
-    .attr("d", lineAmbt);
+    .attr("id", "lineAmbt")
+    .attr("class", "lines")
+    .attr("d", dummyMen);
 
   // and pass the list with percentages to y-scaling function
   var lineEu = d3.line()
@@ -253,9 +271,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   charts.append("path")
       .data([years])
-      .attr("class", "lineEu")
-      .attr("id", "lines")
-      .attr("d", lineEu);
+      .attr("id", "lineEu")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   var linePers = d3.line()
       .x(d => xScale(d))
@@ -264,9 +282,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   charts.append("path")
       .data([years])
-      .attr("class", "linePers")
-      .attr("id", "lines")
-      .attr("d", linePers);
+      .attr("id", "linePers")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   var linePolitie = d3.line()
       .x(d => xScale(d))
@@ -274,10 +292,10 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])
-    .attr("class", "linePolitie")
-    .attr("id", "lines")
-    .attr("d", linePolitie);
+      .data([years])
+      .attr("id", "linePolitie")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   var lineRechters = d3.line()
       .x(d => xScale(d))
@@ -286,9 +304,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   charts.append("path")
       .data([years])         //array with years
-      .attr("class", "lineRechters")
-      .attr("id", "lines")
-      .attr("d", lineRechters);
+      .attr("id", "lineRechters")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   var lineTweedeKamer = d3.line()
       .x(d => xScale(d))
@@ -297,9 +315,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   charts.append("path")
     .data([years])
-    .attr("class", "lineTweedeKamer")
-    .attr("id", "lines")
-    .attr("d", lineTweedeKamer);
+    .attr("id", "lineTweedeKamer")
+    .attr("class", "lines")
+    .attr("d", dummyMen);
 
   charts.append("g")
       .attr("class", "x-axis")
@@ -309,6 +327,29 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   charts.append("g")
       .attr("class", "y-axis")
       .call(yAxis);
+
+  var trans = charts.transition();
+
+  trans.select("#lineMen").duration(1000)
+      .attr("d", lineMen(years))
+
+  trans.select("#lineAmbt").duration(1000)
+      .attr("d", lineAmbt(years))
+
+  trans.select("#lineEu").duration(1000)
+      .attr("d", lineEu(years))
+
+  trans.select("#linePers").duration(1000)
+      .attr("d", linePers(years))
+
+  trans.select("#linePolitie").duration(1000)
+      .attr("d", linePolitie(years))
+
+  trans.select("#lineRechters").duration(1000)
+      .attr("d", lineRechters(years))
+
+  trans.select("#lineTweedeKamer").duration(1000)
+      .attr("d", lineTweedeKamer(years))
 
   // create extra function to show full variablenames in legend
   var legendLines = d3.scaleOrdinal()
@@ -376,72 +417,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
     };
 
   colorChecks()
-
-
-
-
-  // var removeRed = document.getElementById("#checkbox2012");
-  //
-  // $(removeRed).ready(function(){
-  //   $(".checkboxes").click(function(){
-  //       $("g").removeAttr("style");
-  //   });
-  // });
-
-
-  // svg.select("#checkbox2012")
-  //     .style("fill", function(){
-  //       if (colorChecks()){
-  //         return "FFFFF";
-  //       }
-  //       // else{
-  //       //   return "#FF0000";
-  //       // };
-  //     });
-
-
-  // svg.select("#checkbox2012")
-  //     .style("fill", "FFFFF");
-
-  //
-  // if (d3.select(".checkboxes").select("svg")){
-  //   d3.select("#checkbox2012").select("fill").remove();
-  // };
-
-  // function colorChecks(){
-  //   if (showYear === "2013"){
-  //     svg.selectAll(".checkboxes")
-  //         .style("fill", "FFFFF");
-  //     svg.select("#checkbox2013")
-  //         .style("fill", "FF0000");
-  //         }
-  //   if (showYear === "2014"){
-  //     svg.selectAll(".checkboxes")
-  //         .style("fill", "FFFFF");
-  //     svg.select("#checkbox2014")
-  //         .style("fill", "FF0000");
-  //         }
-  //   if (showYear === "2015"){
-  //     svg.selectAll(".checkboxes")
-  //         .style("fill", "FFFFF");
-  //     svg.select("#checkbox2015")
-  //         .style("fill", "FF0000");
-  //         }
-  //   if (showYear === "2016"){
-  //     svg.selectAll(".checkboxes")
-  //         .style("fill", "FFFFF");
-  //     svg.select("#checkbox2016")
-  //         .style("fill", "FF0000");
-  //         }
-  //   if (showYear === "2017"){
-  //     svg.selectAll(".checkboxes")
-  //         .style("fill", "FFFFF");
-  //     svg.select("#checkbox2017")
-  //         .style("fill", "FF0000");
-  //         }
-  //   called = true;
-  //   };
-
 
 };
 

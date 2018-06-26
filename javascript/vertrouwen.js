@@ -26,7 +26,10 @@ function main(vertrouwen, restOfTheData){
   var getYear = "2012";
   var selectedPop = popGroups[0];
 
-  makeLinegraph(lineData[selectedPop], dendroData, selectedPop);
+  // variable for coloring checks
+  // var called = "no";
+
+  makeLinegraph(lineData[selectedPop], dendroData, selectedPop, getYear);
   makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear);
   update(lineData, dendroData, getYear, selectedPop, popGroups);
 }
@@ -60,8 +63,8 @@ function update(data, secondData, getYear, selectedPop, popGroups){
   butWesters.addEventListener("click", {
     handleEvent: function (event) {
       selectedPop = popGroups[2];
-      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear)
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear)
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
     }
   });
 
@@ -342,31 +345,102 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   // for coloring
   svgTick = svg.selectAll(".x-axis .tick")
       .append("circle")
+      .attr("class", "checkboxes")
       .attr("id", function(d) {
-        console.log(d)
         return "checkbox" + d
       })
-      .attr("fill", "#FFFFF")
       .attr("stroke", "#000000")
       .attr("r", "8")
       .attr("stroke-width", "2")
       .attr("stroke-miterlimit", "10")
-      .attr("transform", "translate (27, 14)");
+      .attr("transform", "translate (27, 14)")
+      .on("click", function(d){
+        console.log(d);
+        console.log(this);
+      });
 
   // ensure years on x-axis are clickable and initialize visualization functions
   svg.selectAll(".x-axis .tick")
-      .on("click", function(d) {
+      .on("click", function(d){
         var year = d;
         showYear = year.toString();
-        // console.log(showYear)
-        // svg.selectAll("#checkbox").attr("fill", "#FF0000")
-        // console.log(d3.select("#checkbox"))//.attr("fill", "#FF0000"));
         makeLinegraph(data, secondData, selectedPop, showYear);
         makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
       })
 
-  svg.select("#checkbox2012")
+  function colorChecks(){
+      svg.selectAll(".checkboxes")
+          .style("fill", "FFFFF");
+      svg.select("#checkbox" + showYear)
+          .style("fill", "FF0000");
+    };
 
+  colorChecks()
+
+
+
+
+  // var removeRed = document.getElementById("#checkbox2012");
+  //
+  // $(removeRed).ready(function(){
+  //   $(".checkboxes").click(function(){
+  //       $("g").removeAttr("style");
+  //   });
+  // });
+
+
+  // svg.select("#checkbox2012")
+  //     .style("fill", function(){
+  //       if (colorChecks()){
+  //         return "FFFFF";
+  //       }
+  //       // else{
+  //       //   return "#FF0000";
+  //       // };
+  //     });
+
+
+  // svg.select("#checkbox2012")
+  //     .style("fill", "FFFFF");
+
+  //
+  // if (d3.select(".checkboxes").select("svg")){
+  //   d3.select("#checkbox2012").select("fill").remove();
+  // };
+
+  // function colorChecks(){
+  //   if (showYear === "2013"){
+  //     svg.selectAll(".checkboxes")
+  //         .style("fill", "FFFFF");
+  //     svg.select("#checkbox2013")
+  //         .style("fill", "FF0000");
+  //         }
+  //   if (showYear === "2014"){
+  //     svg.selectAll(".checkboxes")
+  //         .style("fill", "FFFFF");
+  //     svg.select("#checkbox2014")
+  //         .style("fill", "FF0000");
+  //         }
+  //   if (showYear === "2015"){
+  //     svg.selectAll(".checkboxes")
+  //         .style("fill", "FFFFF");
+  //     svg.select("#checkbox2015")
+  //         .style("fill", "FF0000");
+  //         }
+  //   if (showYear === "2016"){
+  //     svg.selectAll(".checkboxes")
+  //         .style("fill", "FFFFF");
+  //     svg.select("#checkbox2016")
+  //         .style("fill", "FF0000");
+  //         }
+  //   if (showYear === "2017"){
+  //     svg.selectAll(".checkboxes")
+  //         .style("fill", "FFFFF");
+  //     svg.select("#checkbox2017")
+  //         .style("fill", "FF0000");
+  //         }
+  //   called = true;
+  //   };
 
 
 };

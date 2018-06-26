@@ -338,24 +338,14 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   // create variable due to clickabilty of the buttons next to the yearlabels
   var showYear;
 
-  // makeDendrogram(dendroData[popGroups[2]][getYear], popGroups);
-  // makeDendrogram(secondData[popGroups[2]][showYear], selectedPop)
-  // makeDendrogram(secondData[selectedPop][getYear], selectedPop)
-  // console.log('kendrik',secondData[selectedPop])
-
-  // ensure years on x-axis are clickable and initialize visualization functions
-  svg.selectAll(".x-axis .tick")
-      .on("click", function(d) {
-        var year = d;
-        showYear = year.toString();
-        makeLinegraph(data, secondData, selectedPop, showYear);
-        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
-      });
-
-  // append small buttons next to labels
+  // append small buttons next to labels, each circle gets different id
+  // for coloring
   svgTick = svg.selectAll(".x-axis .tick")
       .append("circle")
-      .attr("id", "checkbox_1")
+      .attr("id", function(d) {
+        console.log(d)
+        return "checkbox" + d
+      })
       .attr("fill", "#FFFFF")
       .attr("stroke", "#000000")
       .attr("r", "8")
@@ -363,30 +353,21 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("stroke-miterlimit", "10")
       .attr("transform", "translate (27, 14)");
 
-      // .on("click", {
-      //   console.log(showYear);
-      //   handleEvent: function (event){
-      //     makeLinegraph(data.totaal)
-      //     makeDendrogram(secondData.totaal[d])
-      //     }
-      //   });
+  // ensure years on x-axis are clickable and initialize visualization functions
+  svg.selectAll(".x-axis .tick")
+      .on("click", function(d) {
+        var year = d;
+        showYear = year.toString();
+        // console.log(showYear)
+        // svg.selectAll("#checkbox").attr("fill", "#FF0000")
+        // console.log(d3.select("#checkbox"))//.attr("fill", "#FF0000"));
+        makeLinegraph(data, secondData, selectedPop, showYear);
+        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
+      })
 
-      // .append("polygon")
-      // .attr("width", "20")
-      // .attr("height", "20")
-      // .attr("stroke", "#000000")
-      // .attr("stroke-miterlimit", "10")
+  svg.select("#checkbox2012")
 
 
-     // text = svgTick.select('text'),
-     // bBox = text.node().getBBox();
-
-      // svgTick.insert('rect', ':first-child')
-      //    .attr('x', bBox.x - 3)
-      //    .attr('y', bBox.y - 3)
-      //    .attr('height', bBox.height + 6)
-      //    .attr('width', bBox.width + 6)
-      //    .attr("class", "yearLabel")
 
 };
 
@@ -498,13 +479,13 @@ function makeDendrogram(data, selectedPop, showYear){
     }
 
     var variables = [
-    "RadioTelevisieOfKrantIngeschakeld",
-    "PolitiekeOrganisatieIngeschakeld",
-    "MeegedaanAanBijeenkomstOverheid",
-    "ContactOpgenomenMetPoliticus",
-    "MeegedaanAanActiegroep",
-    "MeegedaanAanProtestactie",
-    "MeegedaanAanHandtekeningenactie",
+    "Radio Televisie Of Krant Ingeschakeld",
+    "Politieke Organisatie Ingeschakeld",
+    "Meegedaan Aan Bijeenkomst Overheid",
+    "Contact Opgenomen Met Politicus",
+    "Meegedaan Aan Actiegroep",
+    "Meegedaan Aan Protestactie",
+    "Meegedaan Aan Handtekeningenactie",
     "MeegedaanPolitiekeActieViaInternet",
     "Anders",
     "ZeerGeinteresseerd",
@@ -530,7 +511,7 @@ function makeDendrogram(data, selectedPop, showYear){
 
     // append bars and x axis when node is clicked on
     getRect.forEach(function(t){
-      // console.log((t));
+      console.log(('t',t));
       svg.append("rect")
           .attr("id", "reccit")
           .attr("width", 0)
@@ -605,7 +586,7 @@ function makeDendrogram(data, selectedPop, showYear){
         .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
         .text(d => d.data.name);                                       // data is convert to root so it needs an extra dimension.
 
-    // console.log(nodes);
+    console.log(nodes);
     // console.log(source.data.children.length);
 
     // when node is clicked she gives birth to a bunch of other nodes

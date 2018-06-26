@@ -156,3 +156,7 @@
 * Op basis van mijn feedback van groepje besloten dat ik de x-assen laat staan voor de bars en niet g proberen om ze erachter te krijgen. Mijn groepsgenoten vonden juist namelijk juist duidelijker:
 
 ![](photo/image_23.jpg)
+
+# dag 17
+
+* Zorgen dat checkboxes correct rood gekleurd worden bij het selecteren van een jaar. 

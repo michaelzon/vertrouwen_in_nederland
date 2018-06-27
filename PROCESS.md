@@ -10,9 +10,9 @@
 
 * Ik heb twee canvassen aangemaakt voor de drie visualisaties. Ik heb het skelet van de margin convention erbij geimporteert voor de duidelijkheid qua padding.
 
-![](photo/image_3.jpg)
+![](docs/image_3.jpg)
 
-![](photo/image_4.jpg)
+![](docs/image_4.jpg)
 
 * Ik ga nu beginnen aan mijn json data inladen. Om weer even te weten hoe dit ook alweer moest ben ik een tutorial op youtube gaan kijken: https://www.youtube.com/watch?v=duGyc25m9YI&t=415s
 
@@ -30,7 +30,7 @@
 
 * Ga mijn linegraph verbeteren, hij is nu nog heel ruw:
 
-![](photo/image_5.jpg)
+![](docs/image_5.jpg)
 
 * Zoals je ziet zijn de lijnen allemaal met elkaar verbonden. Dit zijn nu alle values van vertrouwen in alle mensen van alle bevolkingsgroepen. Ik ga nu proberen 1 lijn te trekken voor migratieachtergrond: totaal. Dan verder met de andere variabelen die in deze linegraph moeten.
 
@@ -38,7 +38,7 @@
 
 * Ben vandaag tot zover gekomen:
 
-![](photo/image_6.jpg)
+![](docs/image_6.jpg)
 
 * Morgen ga ik hier een forloop voor maken en dan kan ik het toepassen op mijn andere jsons, en dan kan ik hopelijk door met mijn visualisaties.
 
@@ -55,7 +55,7 @@
 
 * Line graph al een stuk verder:
 
-![](photo/image_7.jpg)
+![](docs/image_7.jpg)
 
 * Ga nu basis maken van update functie met dropdown.
 
@@ -80,19 +80,19 @@
 
 * Verschil in datastructuur van root.descendants ten opzichte van mijn voorbeeld:
 
-![](photo/image_8.jpg)
+![](docs/image_8.jpg)
 
-![](photo/image_9.jpg)
+![](docs/image_9.jpg)
 
-![](photo/image_10.jpg)
+![](docs/image_10.jpg)
 
-![](photo/image_11.jpg)
+![](docs/image_11.jpg)
 
 * Hierarchische data structuur bereikt voor 2012 alle nederlanders (zie onderstaande afbeeldingen). moet dit later in een for loop verwerken zodat ik het cross-sectioneel heb voor alle datapunten en bevolkingsgroepen. Nu heb ik een opzet qua data om daadwerkelijk een dendrogram te maken (hopelijk). Dit was eerst niet mogelijk omdat mijn data te "plat" was.
 
-![](photo/image_12.jpg)
-![](photo/image_13.jpg)
-![](photo/image_14.jpg)
+![](docs/image_12.jpg)
+![](docs/image_13.jpg)
+![](docs/image_14.jpg)
 
 # dag 10 (19/6)
 
@@ -100,16 +100,16 @@
 
 * Samen met tim deze for loop geschreven waardoor ik nu echt kan beginnen aan mijn dendro.
 
-![](photo/image_17.jpg)
+![](docs/image_17.jpg)
 
 
 * Ben al een stuk verder met dendrogram alleen staat er nog weining op blad. Wel veel code op basis van voorbeeld maar er is een bug waar ik niet uit kom en dat is dat er geen cirkles worden geplaatst bij de nodes.
 
-![](photo/image_15.jpg)
+![](docs/image_15.jpg)
 
 * Al een stuk verder, ga nu proberen rectangles met de waarde van de variabelen erachter te laten appenden.
 
-![](photo/image_16.jpg)
+![](docs/image_16.jpg)
 
 # dag 11 (20/6)
 
@@ -119,11 +119,11 @@
 
 * I got me some rects:
 
-![](photo/image_18.jpg)
+![](docs/image_18.jpg)
 
 * Rects zijn in principe gelukt, moet alleen nog op juiste positie en scaling met x as. Heb voor de aankomende week een to-do list gemaakt:
 
-![](photo/image_19.jpg)
+![](docs/image_19.jpg)
 
 # dag 13 (22/6)
 
@@ -135,7 +135,7 @@
 
 * Besloten om de bars te laten verschijnen een stukje verder van de laatste nodes. Mijn plan was eerst om de tekst te laten verschijnen in de bars, en dat de bars meteen kwamen aan de laatste nodes, maar dit lijkt me toch geen goed idee omdat er heel veel lage percentages zijn, en het dan raar oogt voor de gebruiker als er tekst maar voor de helft in een bar verschijnt, of zelfs minder.
 
-![](photo/image_20.jpg)
+![](docs/image_20.jpg)
 
 * Ga nu een x-as maken.
 
@@ -147,15 +147,15 @@
 
 * Vandaag veel vooruitgang geboekt:
 
-![](photo/image_21.jpg)
+![](docs/image_21.jpg)
 
-![](photo/image_22.jpg)
+![](docs/image_22.jpg)
 
 # dag 16
 
 * Op basis van mijn feedback van groepje besloten dat ik de x-assen laat staan voor de bars en niet g proberen om ze erachter te krijgen. Mijn groepsgenoten vonden juist namelijk juist duidelijker:
 
-![](photo/image_23.jpg)
+![](docs/image_23.jpg)
 
 # dag 17
 

@@ -176,6 +176,11 @@
 
 }
 
+.tick:hover {
+  font-weight: bolder;
+  opacity: 0.7;
+}
+
 /* dendrogram  */
 
 .node circle {

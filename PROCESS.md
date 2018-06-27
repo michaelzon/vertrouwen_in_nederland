@@ -166,3 +166,7 @@
 * Klaar met bovenstaande nu zorgen dat er transitie is in de lijnen.
 
 * Variabelnamen beter leesbaar gemaakt, zijn nu niet geëmigreerde camelcase variabelen uit json.
+
+# dag 18
+
+* Vandaag report en story telling schrijven.

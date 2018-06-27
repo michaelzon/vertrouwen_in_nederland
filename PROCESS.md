@@ -163,4 +163,6 @@
 
 * Jaar selectie kleur is rood want dat doet het meest denken aan een markering of het invullen van een rondje.
 
-* Klaar met bovenstaande nu zorgen dat er transitie is in de lijnen. 
+* Klaar met bovenstaande nu zorgen dat er transitie is in de lijnen.
+
+* Variabelnamen beter leesbaar gemaakt, zijn nu niet geëmigreerde camelcase variabelen uit json.

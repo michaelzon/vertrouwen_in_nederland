@@ -7,6 +7,20 @@
   color: black;
 } */
 
+.parallax {
+    /* The image used */
+    background-image: ![](photo/image_24.jpg)
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #linegraph {
   left: 4.5%;
   zoom: 90%;
@@ -15,7 +29,7 @@
 #dendrogram {
   left: 5.5%;
   zoom: 90%;
-  /* border-style: dotted; */
+  border-style: dotted;
 }
 
 .dropdown {

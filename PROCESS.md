@@ -102,7 +102,6 @@
 
 ![](docs/image_17.jpg)
 
-
 * Ben al een stuk verder met dendrogram alleen staat er nog weining op blad. Wel veel code op basis van voorbeeld maar er is een bug waar ik niet uit kom en dat is dat er geen cirkles worden geplaatst bij de nodes.
 
 ![](docs/image_15.jpg)
@@ -153,7 +152,7 @@
 
 # dag 16
 
-* Op basis van mijn feedback van groepje besloten dat ik de x-assen laat staan voor de bars en niet g proberen om ze erachter te krijgen. Mijn groepsgenoten vonden juist namelijk juist duidelijker:
+* Op basis van mijn feedback van groepje besloten dat ik de x-assen laat staan voor de bars en niet ga proberen om ze erachter te krijgen. Mijn groepsgenoten vonden juist namelijk juist duidelijker:
 
 ![](docs/image_23.jpg)
 

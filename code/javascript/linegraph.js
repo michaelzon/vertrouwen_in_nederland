@@ -1,4 +1,4 @@
-function makeLinegraph(data, secondData, selectedPop, showYear){
+function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
 
   // remove current elements when dropdown options is clicked on
   if (d3.select("#linegraph").select("svg")){
@@ -6,7 +6,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
     d3.select("#linegraphLegend").select("svg").remove();
   };
 
-  // determing margins for visualisations
+  // margins for visualisations
   var margin = {top: 20, right: 20, bottom: 20, left: 20},
       padding = {top: 60, right: 60, bottom: 60, left: 60},
       lilPad = 10,
@@ -52,11 +52,11 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("height", outerHeight)
       .attr("id", "linechart");
 
-  var graphTitles = {};
-  graphTitles["totaal"] = "Totale gemiddelde";
-  graphTitles["nederlands"] = "Geen migratieachtergrond";
-  graphTitles["westers"] = "Westerse migratieachtergrond";
-  graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
+  // var graphTitles = {};
+  // graphTitles["totaal"] = "Totale gemiddelde";
+  // graphTitles["nederlands"] = "Geen migratieachtergrond";
+  // graphTitles["westers"] = "Westerse migratieachtergrond";
+  // graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
 
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")
@@ -134,11 +134,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
   for(var i = 0; i < years.length; i ++){
     tweedeKamerTot.push(data[years[i]]["TweedeKamer"]);
   };
-
-  // dummyTot = [80, 80, 80, 80, 80, 80];
-  // dummyTot = [(width,height), (width,height),(width,height),(width,height),(width,height), (width,height)]
-  // dummyTot = [(width,20), (width,20),(width,20),(width,20),(width,20), (width,20)]
-  // dummyTot = [(20,20), (20,20),(20,20),(20,20),(20,20), (20,20)]
 
   // starting positions for the lines with transition
   var dummyTot = [20, 20, 20, 20, 20, 20];
@@ -305,17 +300,12 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
 
   // ensure years on x-axis are clickable and initialize visualization functions
   svg.selectAll(".x-axis .tick")
-      // .on("click", function(d){
-      //   var year = d;
-      //   showYear = year.toString();
-      //   makeLinegraph(data, secondData, selectedPop, showYear);
-      //   makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);
-      // })
       .on("click", d => {
         var year = d;
         showYear = year.toString();
-        makeLinegraph(data, secondData, selectedPop, showYear);
-        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear);})
+        makeLinegraph(data, secondData, selectedPop, showYear, graphTitles);
+        makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear,
+                      graphTitles);})
 
   // color the checkbox of the selected year and
   function colorChecks(){

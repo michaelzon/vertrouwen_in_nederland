@@ -1,4 +1,4 @@
-function makeDendrogram(data, selectedPop, showYear){
+function makeDendrogram(data, selectedPop, showYear, graphTitles){
 
   if (d3.select("#dendrogram").select("svg")){
     d3.select("#dendrogram").select("svg").remove();
@@ -97,52 +97,52 @@ function makeDendrogram(data, selectedPop, showYear){
             .ticks(10);
     }
 
-    var graphTitles = {};
-    graphTitles["totaal"] = "Totale gemiddelde";
-    graphTitles["nederlands"] = "Geen migratieachtergrond";
-    graphTitles["westers"] = "Westerse migratieachtergrond";
-    graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
-    graphTitles["participatie"] = "Politieke participatie";
-    graphTitles["interesse"] = "Politieke interesse";
-    graphTitles["internetgebruik"] = "Frequentie internetgebruik";
-    graphTitles["dienstverlening"] =
-    "Gedrag dienstverleningswebsites";
-    graphTitles["RadioTelevisieOfKrantIngeschakeld"] =
-    "Radio, televisie of krant ingeschakeld";
-    graphTitles["PolitiekeOrganisatieIngeschakeld"] =
-    "Politieke organisatie ingeschakeld";
-    graphTitles["MeegedaanAanBijeenkomstOverheid"] =
-      "Meegedaan aan bijeenkomst van de overheid";
-    graphTitles["ContactOpgenomenMetPoliticus"] =
-      "Contact opgenomen met politicus";
-    graphTitles["MeegedaanAanActiegroep"] =
-      "Meegedaan aan actiegroep";
-    graphTitles["MeegedaanAanProtestactie"] =
-      "Meegedaan aan protestactie";
-    graphTitles["MeegedaanAanHandtekeningenactie"] =
-      "Meegedaan aan handtekeningenactie";
-    graphTitles["MeegedaanPolitiekeActieViaInternet"] =
-      "Meegedaan met politieke actie via internet";
-    graphTitles["Anders"] = "Anders";
-    graphTitles["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
-    graphTitles["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
-    graphTitles["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
-    graphTitles["NietGeinteresseerd"] = "Niet geïnteresseerd";
-    graphTitles["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
-    graphTitles["drieTotTwaalfMaandenGeleden"] =
-      "Drie tot twaalf maanden geleden";
-    graphTitles["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
-    graphTitles["NooitInternetGebruikt"] = "Nooit internet gebruikt";
-    graphTitles["BijnaElkeDag"] = "Bijna elke dag";
-    graphTitles["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
-    graphTitles["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
-    graphTitles["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
-    graphTitles["OfficieleDocumentenDownloadenOverheid"] =
-      "Officiële documenten downloaden overheid";
-    graphTitles["ZoekenOpWebsitesPubliekeSector"] =
-      "Zoeken op websites publieke sector";
-    graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] =
-      "Officiële documenten downloaden publieke sector";
+    // var graphTitles = {};
+    // graphTitles["totaal"] = "Totale gemiddelde";
+    // graphTitles["nederlands"] = "Geen migratieachtergrond";
+    // graphTitles["westers"] = "Westerse migratieachtergrond";
+    // graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
+    // graphTitles["participatie"] = "Politieke participatie";
+    // graphTitles["interesse"] = "Politieke interesse";
+    // graphTitles["internetgebruik"] = "Frequentie internetgebruik";
+    // graphTitles["dienstverlening"] =
+    // "Gedrag dienstverleningswebsites";
+    // graphTitles["RadioTelevisieOfKrantIngeschakeld"] =
+    // "Radio, televisie of krant ingeschakeld";
+    // graphTitles["PolitiekeOrganisatieIngeschakeld"] =
+    // "Politieke organisatie ingeschakeld";
+    // graphTitles["MeegedaanAanBijeenkomstOverheid"] =
+    //   "Meegedaan aan bijeenkomst van de overheid";
+    // graphTitles["ContactOpgenomenMetPoliticus"] =
+    //   "Contact opgenomen met politicus";
+    // graphTitles["MeegedaanAanActiegroep"] =
+    //   "Meegedaan aan actiegroep";
+    // graphTitles["MeegedaanAanProtestactie"] =
+    //   "Meegedaan aan protestactie";
+    // graphTitles["MeegedaanAanHandtekeningenactie"] =
+    //   "Meegedaan aan handtekeningenactie";
+    // graphTitles["MeegedaanPolitiekeActieViaInternet"] =
+    //   "Meegedaan met politieke actie via internet";
+    // graphTitles["Anders"] = "Anders";
+    // graphTitles["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
+    // graphTitles["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
+    // graphTitles["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
+    // graphTitles["NietGeinteresseerd"] = "Niet geïnteresseerd";
+    // graphTitles["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
+    // graphTitles["drieTotTwaalfMaandenGeleden"] =
+    //   "Drie tot twaalf maanden geleden";
+    // graphTitles["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
+    // graphTitles["NooitInternetGebruikt"] = "Nooit internet gebruikt";
+    // graphTitles["BijnaElkeDag"] = "Bijna elke dag";
+    // graphTitles["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
+    // graphTitles["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
+    // graphTitles["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
+    // graphTitles["OfficieleDocumentenDownloadenOverheid"] =
+    //   "Officiële documenten downloaden overheid";
+    // graphTitles["ZoekenOpWebsitesPubliekeSector"] =
+    //   "Zoeken op websites publieke sector";
+    // graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] =
+    //   "Officiële documenten downloaden publieke sector";
 
     // colorfunction with colorbrewer for those who suffer from bad eyes
     var colorBars = d3.scaleOrdinal()

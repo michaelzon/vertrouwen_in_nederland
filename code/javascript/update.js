@@ -1,4 +1,5 @@
-function updateGraphs(data, secondData, getYear, selectedPop, popGroups){
+function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
+                      graphTitles){
 
   // store clickable options from drop down for code readability
   var butTotaal = document.getElementById("selectTotaal");
@@ -10,32 +11,40 @@ function updateGraphs(data, secondData, getYear, selectedPop, popGroups){
   butTotaal.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[0];
-      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
+                    graphTitles);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
+                    graphTitles);
     }
   });
 
   butNederlands.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[1];
-      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
+                    graphTitles);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
+                    graphTitles);
     }
   });
 
   butWesters.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[2];
-      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
+                    graphTitles);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
+                    graphTitles);
     }
   });
 
   butNietWesters.addEventListener("click", {
     handleEvent: function (event){
       selectedPop = popGroups[3];
-      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear);
-      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear);
+      makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
+                    graphTitles);
+      makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
+                    graphTitles);
     }
   });
 

@@ -1,4 +1,4 @@
-function main(vertrouwen, restOfTheData){
+function main(vertrouwen, restOfTheData, graphTitles){
 
   // showing which population is selected, same syntax as in json due to update
   var popGroups = ["totaal", "nederlands", "westers", "nietWesters"];
@@ -11,7 +11,7 @@ function main(vertrouwen, restOfTheData){
   var getYear = "2012";
   var selectedPop = popGroups[0];
 
-  makeLinegraph(lineData[selectedPop], dendroData, selectedPop, getYear);
-  makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear);
-  updateGraphs(lineData, dendroData, getYear, selectedPop, popGroups);
+  makeLinegraph(lineData[selectedPop], dendroData, selectedPop, getYear, graphTitles);
+  makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear, graphTitles);
+  updateGraphs(lineData, dendroData, getYear, selectedPop, popGroups, graphTitles);
 }

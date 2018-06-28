@@ -32,3 +32,6 @@ https://bl.ocks.org/basilesimon/29efb0e0a43dde81985c20d9a862e34e
 http://www.d3noob.org/2014/01/tree-diagrams-in-d3js_11.html
 
 https://bl.ocks.org/mbostock/3884955
+
+# Product demo
+https://youtu.be/UyK6Dchaz5g

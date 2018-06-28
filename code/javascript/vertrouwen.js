@@ -430,14 +430,6 @@ function makeDendrogram(data, selectedPop, showYear){
       .append("g")
       .attr("transform", "translate(135,100)");
 
-  // adding title
-  svg.append("text")
-      .attr("id", "dendroTitle")
-      .attr("x", width / 2 - 600)
-      .attr("y", height / 40)
-      .attr("transform", "translate(-90,-80)")
-      .text("Percentages politieke participatie, politieke interesse, mate van internetgebruik en uitgevoerde acties op dienstverleningswebsites:");
-
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")
       .attr("id", "yearInDendro")

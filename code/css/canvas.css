@@ -23,11 +23,6 @@
   zoom: 90%;
 }
 
-#dendrogram {
-  left: 5.5%;
-  zoom: 90%;
-}
-
 .dropdown {
   left: 75%;
 }
@@ -192,6 +187,17 @@
 }
 
 /* dendrogram  */
+
+#denTitle, #denLead {
+  zoom: 120%;
+}
+
+
+
+#dendrogram {
+  left: 5.5%;
+  zoom: 80%;
+}
 
 .node circle {
   fill: #d6604d;

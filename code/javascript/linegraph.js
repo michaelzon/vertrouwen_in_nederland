@@ -315,4 +315,11 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 
   colorChecks()
 
+  // scroll to dendrogram when year is selected
+  $(".tick").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#secondVis").offset().top
+    }, 1000);
+  });
+
 };

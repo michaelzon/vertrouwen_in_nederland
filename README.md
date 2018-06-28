@@ -17,7 +17,7 @@ Het doel is om de gebruiker te laten ontdekken waar de verschillen liggen tussen
 
 # Naam en auteursrechten:
 
-Auteur: Michael Zonneveld.
+Copyright (c) 2018 Michael Franklin Zonneveld
 
 # Bronnen:
 

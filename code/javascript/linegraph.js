@@ -195,7 +195,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 
   var linePolitie = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(politieTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(politieTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")
@@ -206,18 +206,18 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 
   var lineRechters = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(rechtersTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(rechtersTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")
-      .data([years])         //array with years
+      .data([years])
       .attr("id", "lineRechters")
       .attr("class", "lines")
       .attr("d", dummyMen);
 
   var lineTweedeKamer = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(tweedeKamerTot[i])) // pass a list of all percentages from mensenvertrouwen of totaalbev
+      .y((d,i) => yScale(tweedeKamerTot[i])) 
       .curve(d3.curveLinear);
 
   charts.append("path")

@@ -456,55 +456,56 @@ function importData(error, response){
   restOfTheData["westers"] = dendroWesters;
   restOfTheData["nietWesters"] = dendroNietWesters;
 
-  var graphTitles = {};
-  graphTitles["totaal"] = "Totale gemiddelde";
-  graphTitles["nederlands"] = "Geen migratieachtergrond";
-  graphTitles["westers"] = "Westerse migratieachtergrond";
-  graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
-  graphTitles["participatie"] = "Politieke participatie";
-  graphTitles["interesse"] = "Politieke interesse";
-  graphTitles["internetgebruik"] = "Frequentie internetgebruik";
-  graphTitles["dienstverlening"] =
+  // linking variables with strings for better readability for the user
+  var graphNames = {};
+  graphNames["totaal"] = "Totale gemiddelde";
+  graphNames["nederlands"] = "Geen migratieachtergrond";
+  graphNames["westers"] = "Westerse migratieachtergrond";
+  graphNames["nietWesters"] = "Niet-westerse migratieachtergrond";
+  graphNames["participatie"] = "Politieke participatie";
+  graphNames["interesse"] = "Politieke interesse";
+  graphNames["internetgebruik"] = "Frequentie internetgebruik";
+  graphNames["dienstverlening"] =
   "Gedrag dienstverleningswebsites";
-  graphTitles["RadioTelevisieOfKrantIngeschakeld"] =
+  graphNames["RadioTelevisieOfKrantIngeschakeld"] =
   "Radio, televisie of krant ingeschakeld";
-  graphTitles["PolitiekeOrganisatieIngeschakeld"] =
+  graphNames["PolitiekeOrganisatieIngeschakeld"] =
   "Politieke organisatie ingeschakeld";
-  graphTitles["MeegedaanAanBijeenkomstOverheid"] =
+  graphNames["MeegedaanAanBijeenkomstOverheid"] =
     "Meegedaan aan bijeenkomst van de overheid";
-  graphTitles["ContactOpgenomenMetPoliticus"] =
+  graphNames["ContactOpgenomenMetPoliticus"] =
     "Contact opgenomen met politicus";
-  graphTitles["MeegedaanAanActiegroep"] =
+  graphNames["MeegedaanAanActiegroep"] =
     "Meegedaan aan actiegroep";
-  graphTitles["MeegedaanAanProtestactie"] =
+  graphNames["MeegedaanAanProtestactie"] =
     "Meegedaan aan protestactie";
-  graphTitles["MeegedaanAanHandtekeningenactie"] =
+  graphNames["MeegedaanAanHandtekeningenactie"] =
     "Meegedaan aan handtekeningenactie";
-  graphTitles["MeegedaanPolitiekeActieViaInternet"] =
+  graphNames["MeegedaanPolitiekeActieViaInternet"] =
     "Meegedaan met politieke actie via internet";
-  graphTitles["Anders"] = "Anders";
-  graphTitles["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
-  graphTitles["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
-  graphTitles["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
-  graphTitles["NietGeinteresseerd"] = "Niet geïnteresseerd";
-  graphTitles["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
-  graphTitles["drieTotTwaalfMaandenGeleden"] =
+  graphNames["Anders"] = "Anders";
+  graphNames["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
+  graphNames["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
+  graphNames["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
+  graphNames["NietGeinteresseerd"] = "Niet geïnteresseerd";
+  graphNames["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
+  graphNames["drieTotTwaalfMaandenGeleden"] =
     "Drie tot twaalf maanden geleden";
-  graphTitles["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
-  graphTitles["NooitInternetGebruikt"] = "Nooit internet gebruikt";
-  graphTitles["BijnaElkeDag"] = "Bijna elke dag";
-  graphTitles["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
-  graphTitles["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
-  graphTitles["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
-  graphTitles["OfficieleDocumentenDownloadenOverheid"] =
+  graphNames["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
+  graphNames["NooitInternetGebruikt"] = "Nooit internet gebruikt";
+  graphNames["BijnaElkeDag"] = "Bijna elke dag";
+  graphNames["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
+  graphNames["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
+  graphNames["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
+  graphNames["OfficieleDocumentenDownloadenOverheid"] =
     "Officiële documenten downloaden overheid";
-  graphTitles["ZoekenOpWebsitesPubliekeSector"] =
+  graphNames["ZoekenOpWebsitesPubliekeSector"] =
     "Zoeken op websites publieke sector";
-  graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] =
+  graphNames["OfficieleDocumentenDownloadenPubliekeSector"] =
     "Officiële documenten downloaden publieke sector";
 
-  // pass the parsed data, restOfTheData is in tree-hierarchy
-  main(vertrouwen, restOfTheData, graphTitles);
+  // pass the parsed data, restOfTheData is in tree-hierarchy and the titles
+  main(vertrouwen, restOfTheData, graphNames);
 
 
 };

@@ -1,4 +1,4 @@
-function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
+function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 /* this function creates the multiple linegraph visualisation
 ** paths are drawn one for one depending on which array is selected
 ** the ticks beneath the x-axis represent buttons to select a year for the
@@ -61,7 +61,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
       .attr("id", "popInGraph")
       .attr("x", width / 2 - 450)
       .attr("y", height / 8)
-      .text(graphTitles[selectedPop]);
+      .text(graphNames[selectedPop]);
 
   // gridlines in x axis function
   function make_x_gridlines() {
@@ -149,10 +149,10 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
 
   // the data is the list with years
   charts.append("path")
-    .data([years])
-    .attr("id", "lineMen")
-    .attr("class", "lines")
-    .attr("d", dummyMen);
+      .data([years])
+      .attr("id", "lineMen")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   // pass the list with years to x-scaling function
   var lineAmbt = d3.line()
@@ -217,10 +217,10 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
       .curve(d3.curveLinear);
 
   charts.append("path")
-    .data([years])
-    .attr("id", "lineTweedeKamer")
-    .attr("class", "lines")
-    .attr("d", dummyMen);
+      .data([years])
+      .attr("id", "lineTweedeKamer")
+      .attr("class", "lines")
+      .attr("d", dummyMen);
 
   charts.append("g")
       .attr("class", "x-axis")
@@ -235,6 +235,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
   var trans = charts.transition();
   var duration = 1000;
 
+  // transition didn't worked when selected on all lines via classes
   trans.select("#lineMen").duration(duration)
       .attr("d", lineMen(years));
 
@@ -284,8 +285,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
   svgGraphDes.select("#graphLegend")
       .call(graphLegend);
 
-  // append small buttons next to labels, each circle gets different id
-  // for coloring
+  // create buttons next to labels, each circle gets different id for coloring
   svgTick = svg.selectAll(".x-axis .tick")
       .append("circle")
       .attr("class", "checkboxes")
@@ -301,9 +301,9 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
       .on("click", d => {
         var year = d;
         showYear = year.toString();
-        makeLinegraph(data, secondData, selectedPop, showYear, graphTitles);
+        makeLinegraph(data, secondData, selectedPop, showYear, graphNames);
         makeDendrogram(secondData[selectedPop][showYear], selectedPop, showYear,
-                      graphTitles);})
+                      graphNames);})
 
   // color the checkbox of the selected year and
   function colorChecks(){

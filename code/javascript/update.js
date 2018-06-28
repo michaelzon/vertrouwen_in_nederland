@@ -1,5 +1,5 @@
 function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
-                      graphTitles){
+                      graphNames){
 /* this update functions manipulates the visualizations on the page when a
 ** option is selected in the dropdown menu */
 
@@ -14,9 +14,9 @@ function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
     handleEvent: function (event){
       selectedPop = popGroups[0];
       makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
       makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
     }
   });
 
@@ -24,9 +24,9 @@ function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
     handleEvent: function (event){
       selectedPop = popGroups[1];
       makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
       makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
     }
   });
 
@@ -34,9 +34,9 @@ function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
     handleEvent: function (event){
       selectedPop = popGroups[2];
       makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
       makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
     }
   });
 
@@ -44,9 +44,9 @@ function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
     handleEvent: function (event){
       selectedPop = popGroups[3];
       makeLinegraph(data[selectedPop], secondData, selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
       makeDendrogram(secondData[selectedPop][getYear], selectedPop, getYear,
-                    graphTitles);
+                    graphNames);
     }
   });
 

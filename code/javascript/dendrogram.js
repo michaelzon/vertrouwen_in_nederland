@@ -1,4 +1,4 @@
-function makeDendrogram(data, selectedPop, showYear, graphTitles){
+function makeDendrogram(data, selectedPop, showYear, graphNames){
 /* this function creates the dendrogram visualisation
 ** nodes within the tree structure are updated when clicked upon
 ** the barchart is created by appending rects at children if they were nodes */
@@ -179,7 +179,7 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
         .attr("y", d => d.children || d._children ? -15 : 0)
         .attr("x", d => d.children || d._children ? -13 : 13)
         .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
-        .text(d => graphTitles[d.data.name]);
+        .text(d => graphNames[d.data.name]);
 
     // when node is clicked she gives birth to a bunch of other nodes
     var nodeUpdate = nodeBirth.merge(node);

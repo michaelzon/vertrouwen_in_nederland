@@ -1,4 +1,4 @@
-function main(vertrouwen, restOfTheData, graphTitles){
+function main(vertrouwen, restOfTheData, graphNames){
 /* this main function calls all the visualisation functions and the update
 ** function after is recieves it data from the importData script */
 
@@ -14,11 +14,11 @@ function main(vertrouwen, restOfTheData, graphTitles){
   var selectedPop = popGroups[0];
 
   makeLinegraph(lineData[selectedPop], dendroData, selectedPop, getYear,
-                graphTitles);
+                graphNames);
 
   makeDendrogram(dendroData[selectedPop][getYear], selectedPop, getYear,
-                graphTitles);
+                graphNames);
 
   updateGraphs(lineData, dendroData, getYear, selectedPop, popGroups,
-                graphTitles);
+                graphNames);
 }

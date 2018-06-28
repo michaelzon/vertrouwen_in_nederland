@@ -6,7 +6,7 @@ function importData(error, response){
   // creating one big array of all my objects
   var bigDatty = [];
 
-  for(i = 0; i < 6; i ++){
+  for(i = 0; i < 5; i ++){
     bigDatty.push(response[i])
   };
 
@@ -155,7 +155,7 @@ function importData(error, response){
     dataDienstverlening[year] = {"name": year, "children": superTempArray}
   });
 
-  var gebruik = (bigDatty[3]["gebruik"]);
+  var gebruik = (bigDatty[2]["gebruik"]);
 
   for(var i = 0; i < gebruik.length; i ++){
     delete(gebruik[i].ID);
@@ -238,7 +238,7 @@ function importData(error, response){
     dataGebruik[year] = {"name": year, "children": superTempArray};
   });
 
-  var interesse = (bigDatty[4]["interesse"]);
+  var interesse = (bigDatty[3]["interesse"]);
 
   for(var i = 0; i < interesse.length; i ++){
     delete(interesse[i].ID);
@@ -315,7 +315,7 @@ function importData(error, response){
     dataInteresse[year] = {"name": year, "children": superTempArray}
   });
 
-  var participatie = (bigDatty[5]["participatie"]);
+  var participatie = (bigDatty[4]["participatie"]);
 
   for(var i = 0; i < participatie.length; i ++){
     delete(participatie[i].ID);

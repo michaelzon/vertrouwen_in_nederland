@@ -111,28 +111,38 @@ function makeDendrogram(data, selectedPop, showYear){
     "Radio, televisie of krant ingeschakeld";
     graphTitles["PolitiekeOrganisatieIngeschakeld"] =
     "Politieke organisatie ingeschakeld";
-    graphTitles["MeegedaanAanBijeenkomstOverheid"] = "Meegedaan aan bijeenkomst van de overheid";
-    graphTitles["ContactOpgenomenMetPoliticus"] = "Contact opgenomen met politicus";
-    graphTitles["MeegedaanAanActiegroep"] = "Meegedaan aan actiegroep";
-    graphTitles["MeegedaanAanProtestactie"] = "Meegedaan aan protestactie";
-    graphTitles["MeegedaanAanHandtekeningenactie"] = "Meegedaan aan handtekeningenactie";
-    graphTitles["MeegedaanPolitiekeActieViaInternet"] = "Meegedaan met politieke actie via internet";
+    graphTitles["MeegedaanAanBijeenkomstOverheid"] =
+      "Meegedaan aan bijeenkomst van de overheid";
+    graphTitles["ContactOpgenomenMetPoliticus"] =
+      "Contact opgenomen met politicus";
+    graphTitles["MeegedaanAanActiegroep"] =
+      "Meegedaan aan actiegroep";
+    graphTitles["MeegedaanAanProtestactie"] =
+      "Meegedaan aan protestactie";
+    graphTitles["MeegedaanAanHandtekeningenactie"] =
+      "Meegedaan aan handtekeningenactie";
+    graphTitles["MeegedaanPolitiekeActieViaInternet"] =
+      "Meegedaan met politieke actie via internet";
     graphTitles["Anders"] = "Anders";
     graphTitles["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
     graphTitles["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
     graphTitles["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
     graphTitles["NietGeinteresseerd"] = "Niet geïnteresseerd";
     graphTitles["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
-    graphTitles["drieTotTwaalfMaandenGeleden"] = "Drie tot twaalf maanden geleden";
+    graphTitles["drieTotTwaalfMaandenGeleden"] =
+      "Drie tot twaalf maanden geleden";
     graphTitles["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
     graphTitles["NooitInternetGebruikt"] = "Nooit internet gebruikt";
     graphTitles["BijnaElkeDag"] = "Bijna elke dag";
     graphTitles["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
     graphTitles["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
     graphTitles["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
-    graphTitles["OfficieleDocumentenDownloadenOverheid"] = "Officiële documenten downloaden overheid";
-    graphTitles["ZoekenOpWebsitesPubliekeSector"] = "Zoeken op websites publieke sector";
-    graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] = "Officiële documenten downloaden publieke sector";
+    graphTitles["OfficieleDocumentenDownloadenOverheid"] =
+      "Officiële documenten downloaden overheid";
+    graphTitles["ZoekenOpWebsitesPubliekeSector"] =
+      "Zoeken op websites publieke sector";
+    graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] =
+      "Officiële documenten downloaden publieke sector";
 
     // colorfunction with colorbrewer for those who suffer from bad eyes
     var colorBars = d3.scaleOrdinal()
@@ -166,7 +176,7 @@ function makeDendrogram(data, selectedPop, showYear){
               .duration(600)
           .call(xAxis);
 
-// "translate(" + padding + "," + padding + ")")
+          // "translate(" + padding + "," + padding + ")")
 
       d3.select("#dendrogram").selectAll(".grid").remove();
       svg.append("g")
@@ -181,8 +191,8 @@ function makeDendrogram(data, selectedPop, showYear){
     svg.selectAll("rect")
         .attr("fill", (d,i) => colorBars(i));
 
-    // update nodes and recursive assigns id's and classes,
-    // if node has another nodes after her she is a momma, otherwise a baby
+    /* update nodes and recursive assigns id's and classes
+    ** if a node has children she is a momma, otherwise a baby */
     var node = svg.selectAll("g.node")
         .data(nodes, d => d.id || (d.id = ++i))
         .attr("class", d => "node" + (d.children ? " nodeMomma" : " nodeBaby"));
@@ -198,26 +208,25 @@ function makeDendrogram(data, selectedPop, showYear){
         .attr("class", "node")
         .attr('r', 5);
 
-    // (conditie = true) ? (dan dit) : (anders dit)
-
-    // adding text label with variablenames of the nodes
+    /* place name of nodes in appropiate format
+    ** if a node has no child text is placed directly at the right side
+    ** else name is placed above a node */
     nodeBirth.append("text")
         .attr("dy", ".35em")
         .attr("y", d => d.children || d._children ? -15 : 0)
-        .attr("x", d => d.children || d._children ? -13 : 13)          // position of text left or right from node
+        .attr("x", d => d.children || d._children ? -13 : 13)
         .attr("text-anchor", d => d.children || d._children ? "middle" : "start")
-        // .text(d => d.data.name);                                       // data is convert to root so it needs an extra dimension.
-        .text(d => graphTitles[d.data.name]);                                       // data is convert to root so it needs an extra dimension.
+        .text(d => graphTitles[d.data.name]);
 
     // when node is clicked she gives birth to a bunch of other nodes
     var nodeUpdate = nodeBirth.merge(node);
 
-    // transition to the right position
+    // they appear at the the right position, at their momma
     nodeUpdate.transition()
         .duration(duration)
         .attr("transform", d => "translate(" + d.y + "," + d.x + ")");
 
-    // update nodes, make each node responsive to the mouse pointer.
+    // update nodes, make each node responsive to the mouse pointer
     nodeUpdate.select("circle.node")
         .attr("r", 5)
         .attr("x", width/2)
@@ -241,6 +250,7 @@ function makeDendrogram(data, selectedPop, showYear){
     var link = svg.selectAll("path.link")
         .data(links, d => d.id);
 
+    // diagonal function ensure links are created appropiate between nodes
     var linkIt = link.enter().insert("path", "g")
         .attr("class", "link")
         .attr('d', function(d){

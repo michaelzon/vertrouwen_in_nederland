@@ -12,6 +12,7 @@ function importData(error, response){
 
   var years = [2012, 2013, 2014, 2015, 2016, 2017];
 
+  // fetching data and parse it to numbers or delete inrelevant data
   var vertrouwen = (bigDatty[0]["vertrouwen"]);
 
   for(var i = 0; i < vertrouwen.length; i ++){
@@ -24,17 +25,20 @@ function importData(error, response){
     vertrouwen[i].Politie = Number(vertrouwen[i].Politie);
     vertrouwen[i].Rechters = Number(vertrouwen[i].Rechters);
     vertrouwen[i].TweedeKamer = Number(vertrouwen[i].TweedeKamer);
-    vertrouwen[i].VertrouwenInAndereMensen = Number(vertrouwen[i].VertrouwenInAndereMensen);
+    vertrouwen[i].VertrouwenInAndereMensen =
+      Number(vertrouwen[i].VertrouwenInAndereMensen);
   };
 
   // create an array with all variables from vertrouwen dataset
   var vertrouwenVars = Object.keys(vertrouwen[0]);
 
+  // push to dicts with populationgroups as key
   var totaal = {};
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      totaal[years[i]][Object.keys(vertrouwen[i])[j]] = Object.values(vertrouwen[i])[j];
+      totaal[years[i]][Object.keys(vertrouwen[i])[j]] =
+      Object.values(vertrouwen[i])[j];
     };
   };
 
@@ -42,7 +46,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] = Object.values(vertrouwen[i+6])[j];
+      nederlands[years[i]][Object.keys(vertrouwen[i+6])[j]] =
+      Object.values(vertrouwen[i+6])[j];
     };
   };
 
@@ -50,7 +55,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      westers[years[i]][Object.keys(vertrouwen[i+12])[j]] = Object.values(vertrouwen[i+12])[j];
+      westers[years[i]][Object.keys(vertrouwen[i+12])[j]] =
+      Object.values(vertrouwen[i+12])[j];
     };
   };
 
@@ -58,7 +64,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < vertrouwenVars.length; j ++){
-      nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] = Object.values(vertrouwen[i+18])[j];
+      nietWesters[years[i]][Object.keys(vertrouwen[i+18])[j]] =
+      Object.values(vertrouwen[i+18])[j];
     };
   };
 
@@ -74,10 +81,14 @@ function importData(error, response){
     delete(dienstverlening[i].ID);
     delete(dienstverlening[i].Migratieachtergrond);
     delete(dienstverlening[i].Periode);
-    dienstverlening[i].ZoekenOpWebsitesOverheid = Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
-    dienstverlening[i].OfficieleDocumentenDownloadenOverheid = Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
-    dienstverlening[i].ZoekenOpWebsitesPubliekeSector = Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
-    dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector = Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
+    dienstverlening[i].ZoekenOpWebsitesOverheid =
+      Number(dienstverlening[i].ZoekenOpWebsitesOverheid);
+    dienstverlening[i].OfficieleDocumentenDownloadenOverheid =
+      Number(dienstverlening[i].OfficieleDocumentenDownloadenOverheid);
+    dienstverlening[i].ZoekenOpWebsitesPubliekeSector =
+      Number(dienstverlening[i].ZoekenOpWebsitesPubliekeSector);
+    dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector =
+      Number(dienstverlening[i].OfficieleDocumentenDownloadenPubliekeSector);
   };
 
   var dienstverleningVars = Object.keys(dienstverlening[0]);
@@ -86,7 +97,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      totaal[years[i]][Object.keys(dienstverlening[i])[j]] = Object.values(dienstverlening[i])[j];
+      totaal[years[i]][Object.keys(dienstverlening[i])[j]] =
+      Object.values(dienstverlening[i])[j];
     };
   };
 
@@ -94,7 +106,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      nederlands[years[i]][Object.keys(dienstverlening[i+6])[j]] = Object.values(dienstverlening[i+6])[j];
+      nederlands[years[i]][Object.keys(dienstverlening[i+6])[j]] =
+      Object.values(dienstverlening[i+6])[j];
     };
   };
 
@@ -102,7 +115,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      westers[years[i]][Object.keys(dienstverlening[i+12])[j]] = Object.values(dienstverlening[i+12])[j];
+      westers[years[i]][Object.keys(dienstverlening[i+12])[j]] =
+      Object.values(dienstverlening[i+12])[j];
     };
   };
 
@@ -110,7 +124,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < dienstverleningVars.length; j ++){
-      nietWesters[years[i]][Object.keys(dienstverlening[i+18])[j]] = Object.values(dienstverlening[i+18])[j];
+      nietWesters[years[i]][Object.keys(dienstverlening[i+18])[j]] =
+      Object.values(dienstverlening[i+18])[j];
     };
   };
 
@@ -124,6 +139,7 @@ function importData(error, response){
 
   var dataDienstverlening = {};
 
+  // ensure data is in tree hierarchy
   years.forEach(function(year){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
@@ -145,13 +161,18 @@ function importData(error, response){
     delete(gebruik[i].ID);
     delete(gebruik[i].Migratieachtergrond);
     delete(gebruik[i].Periode);
-    gebruik[i].MinderDan3MaandenGeleden = Number(gebruik[i].MinderDan3MaandenGeleden);
-    gebruik[i].drieTotTwaalfMaandenGeleden = Number(gebruik[i].drieTotTwaalfMaandenGeleden);
-    gebruik[i].MeerDan12MaandenGeleden = Number(gebruik[i].MeerDan12MaandenGeleden);
+    gebruik[i].MinderDan3MaandenGeleden =
+      Number(gebruik[i].MinderDan3MaandenGeleden);
+    gebruik[i].drieTotTwaalfMaandenGeleden =
+      Number(gebruik[i].drieTotTwaalfMaandenGeleden);
+    gebruik[i].MeerDan12MaandenGeleden =
+      Number(gebruik[i].MeerDan12MaandenGeleden);
     gebruik[i].NooitInternetGebruikt = Number(gebruik[i].NooitInternetGebruikt);
     gebruik[i].BijnaElkeDag = Number(gebruik[i].BijnaElkeDag);
-    gebruik[i].MinstensEenKeerPerWeek = Number(gebruik[i].MinstensEenKeerPerWeek);
-    gebruik[i].MinderDanEenKeerPerWeek = Number(gebruik[i].MinderDanEenKeerPerWeek);
+    gebruik[i].MinstensEenKeerPerWeek =
+      Number(gebruik[i].MinstensEenKeerPerWeek);
+    gebruik[i].MinderDanEenKeerPerWeek =
+      Number(gebruik[i].MinderDanEenKeerPerWeek);
   };
 
   var gebruikVars = Object.keys(gebruik[0]);
@@ -160,7 +181,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      totaal[years[i]][Object.keys(gebruik[i])[j]] = Object.values(gebruik[i])[j];
+      totaal[years[i]][Object.keys(gebruik[i])[j]] =
+        Object.values(gebruik[i])[j];
     };
   };
 
@@ -168,7 +190,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      nederlands[years[i]][Object.keys(gebruik[i+6])[j]] = Object.values(gebruik[i+6])[j];
+      nederlands[years[i]][Object.keys(gebruik[i+6])[j]] =
+        Object.values(gebruik[i+6])[j];
     };
   };
 
@@ -176,7 +199,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      westers[years[i]][Object.keys(gebruik[i+12])[j]] = Object.values(gebruik[i+12])[j];
+      westers[years[i]][Object.keys(gebruik[i+12])[j]] =
+        Object.values(gebruik[i+12])[j];
     };
   };
 
@@ -184,7 +208,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < gebruikVars.length; j ++){
-      nietWesters[years[i]][Object.keys(gebruik[i+18])[j]] = Object.values(gebruik[i+18])[j];
+      nietWesters[years[i]][Object.keys(gebruik[i+18])[j]] =
+        Object.values(gebruik[i+18])[j];
     };
   };
 
@@ -220,8 +245,10 @@ function importData(error, response){
     delete(interesse[i].Migratieachtergrond);
     delete(interesse[i].Periode);
     interesse[i].ZeerGeinteresseerd = Number(interesse[i].ZeerGeinteresseerd);
-    interesse[i].TamelijkGeinteresseerd = Number(interesse[i].TamelijkGeinteresseerd);
-    interesse[i].WeinigGeinteresseerd = Number(interesse[i].WeinigGeinteresseerd);
+    interesse[i].TamelijkGeinteresseerd =
+      Number(interesse[i].TamelijkGeinteresseerd);
+    interesse[i].WeinigGeinteresseerd =
+      Number(interesse[i].WeinigGeinteresseerd);
     interesse[i].NietGeinteresseerd = Number(interesse[i].NietGeinteresseerd);
   };
 
@@ -231,7 +258,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      totaal[years[i]][Object.keys(interesse[i])[j]] = Object.values(interesse[i])[j];
+      totaal[years[i]][Object.keys(interesse[i])[j]] =
+        Object.values(interesse[i])[j];
     };
   };
 
@@ -239,7 +267,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      nederlands[years[i]][Object.keys(interesse[i+6])[j]] = Object.values(interesse[i+6])[j];
+      nederlands[years[i]][Object.keys(interesse[i+6])[j]] =
+        Object.values(interesse[i+6])[j];
     };
   };
 
@@ -247,7 +276,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      westers[years[i]][Object.keys(interesse[i+12])[j]] = Object.values(interesse[i+12])[j];
+      westers[years[i]][Object.keys(interesse[i+12])[j]] =
+        Object.values(interesse[i+12])[j];
     };
   };
 
@@ -255,7 +285,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < interesseVars.length; j ++){
-      nietWesters[years[i]][Object.keys(interesse[i+18])[j]] = Object.values(interesse[i+18])[j];
+      nietWesters[years[i]][Object.keys(interesse[i+18])[j]] =
+        Object.values(interesse[i+18])[j];
     };
   };
 
@@ -290,14 +321,22 @@ function importData(error, response){
     delete(participatie[i].ID);
     delete(participatie[i].Migratieachtergrond);
     delete(participatie[i].Periode);
-    participatie[i].RadioTelevisieOfKrantIngeschakeld = Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
-    participatie[i].PolitiekeOrganisatieIngeschakeld = Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
-    participatie[i].MeegedaanAanBijeenkomstOverheid = Number(participatie[i].MeegedaanAanBijeenkomstOverheid);
-    participatie[i].ContactOpgenomenMetPoliticus = Number(participatie[i].ContactOpgenomenMetPoliticus);
-    participatie[i].MeegedaanAanActiegroep = Number(participatie[i].MeegedaanAanActiegroep);
-    participatie[i].MeegedaanAanProtestactie = Number(participatie[i].MeegedaanAanProtestactie);
-    participatie[i].MeegedaanAanHandtekeningenactie = Number(participatie[i].MeegedaanAanHandtekeningenactie);
-    participatie[i].MeegedaanPolitiekeActieViaInternet = Number(participatie[i].MeegedaanPolitiekeActieViaInternet);
+    participatie[i].RadioTelevisieOfKrantIngeschakeld =
+      Number(participatie[i].RadioTelevisieOfKrantIngeschakeld);
+    participatie[i].PolitiekeOrganisatieIngeschakeld =
+      Number(participatie[i].PolitiekeOrganisatieIngeschakeld);
+    participatie[i].MeegedaanAanBijeenkomstOverheid =
+      Number(participatie[i].MeegedaanAanBijeenkomstOverheid);
+    participatie[i].ContactOpgenomenMetPoliticus =
+      Number(participatie[i].ContactOpgenomenMetPoliticus);
+    participatie[i].MeegedaanAanActiegroep =
+      Number(participatie[i].MeegedaanAanActiegroep);
+    participatie[i].MeegedaanAanProtestactie =
+      Number(participatie[i].MeegedaanAanProtestactie);
+    participatie[i].MeegedaanAanHandtekeningenactie =
+      Number(participatie[i].MeegedaanAanHandtekeningenactie);
+    participatie[i].MeegedaanPolitiekeActieViaInternet =
+      Number(participatie[i].MeegedaanPolitiekeActieViaInternet);
     participatie[i].Anders = Number(participatie[i].Anders);
   };
 
@@ -307,7 +346,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     totaal[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      totaal[years[i]][Object.keys(participatie[i])[j]] = Object.values(participatie[i])[j];
+      totaal[years[i]][Object.keys(participatie[i])[j]] =
+        Object.values(participatie[i])[j];
     };
   };
 
@@ -315,7 +355,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nederlands[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      nederlands[years[i]][Object.keys(participatie[i+6])[j]] = Object.values(participatie[i+6])[j];
+      nederlands[years[i]][Object.keys(participatie[i+6])[j]] =
+        Object.values(participatie[i+6])[j];
     };
   };
 
@@ -323,7 +364,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     westers[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      westers[years[i]][Object.keys(participatie[i+12])[j]] = Object.values(participatie[i+12])[j];
+      westers[years[i]][Object.keys(participatie[i+12])[j]] =
+        Object.values(participatie[i+12])[j];
     };
   };
 
@@ -331,7 +373,8 @@ function importData(error, response){
   for(var i = 0; i < years.length; i ++){
     nietWesters[years[i]] = {};
     for(var j = 0; j < participatieVars.length; j ++){
-      nietWesters[years[i]][Object.keys(participatie[i+18])[j]] = Object.values(participatie[i+18])[j];
+      nietWesters[years[i]][Object.keys(participatie[i+18])[j]] =
+        Object.values(participatie[i+18])[j];
     };
   };
 
@@ -345,7 +388,7 @@ function importData(error, response){
 
   var dataParticipatie = {};
 
-  // thanks Tim
+  // pass all data from above to a new dictionary so we get it all in one place
   years.forEach(function(year){
     var superTempArray = [];
     superKeys.forEach(function(superKey){
@@ -359,7 +402,7 @@ function importData(error, response){
       tempArray = {"name": "participatie", "children": uberArray};
       bevolkingArray.push(tempArray);
 
-      // push all the variabels to the same bevolkingArray
+      // push all the variabels to the same array: bevolkingArray
       var interesseKeys = Object.keys(interesse[superKey][year]);
       var interesseArray = [];
       interesseKeys.forEach(function(key){
@@ -386,11 +429,15 @@ function importData(error, response){
 
       superTempArray.push({"name": superKey, "children": bevolkingArray});
     })
+
+    // push all to the data to the "participatie" data
     dataParticipatie[year] = {"name": year, "children": superTempArray};
   })
 
+  // and change its name so it makes more sense
   var dendrogramData = dataParticipatie;
 
+  // and divide by population group for searching within dictionary
   var dendroTotaal = {};
   var dendroNederlands = {};
   var dendroWesters = {};
@@ -403,18 +450,13 @@ function importData(error, response){
     dendroNietWesters[year] = dendrogramData[year].children[3];
   });
 
-  // var dendroTotaal = dendrogramData["2012"].children[0];
-  // var dendroNederlands = dendrogramData["2012"].children[1];
-  // var dendroWesters = dendrogramData["2012"].children[2];
-  // var dendroNietWesters = dendrogramData["2012"].children[3];
-
   var restOfTheData = {};
   restOfTheData["totaal"] = dendroTotaal;
   restOfTheData["nederlands"] = dendroNederlands;
   restOfTheData["westers"] = dendroWesters;
   restOfTheData["nietWesters"] = dendroNietWesters;
 
-  // call main function and pass the parsed data
+  // pass the parsed data, restOfTheData is in tree-hierarchy
   main(vertrouwen, restOfTheData);
 
 

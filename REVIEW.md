@@ -1,10 +1,10 @@
 ## Code review
 Review code van Michael door Marc:
-Comments: Prima, paar toevoegen, af en toe onduidelijk dat er een functie wordt aangeroepen(ligt ook aan naam van functie) en paar duidelijker maken. Bijvoorbeeld bij dendogram meer beschrijven. Dat is een wat lastigere functie; 3
+Comments: Prima, paar toevoegen, af en toe onduidelijk dat er een functie wordt aangeroepen (ligt ook aan naam van functie) en paar duidelijker maken. Bijvoorbeeld bij dendogram meer beschrijven. Dat is een wat lastigere functie; 3
 
 Names: duidelijke namen. vanzelfsprekend; 4
 
-Formatting: consistent indenetation. code is ingedeeld in blokken die bij elkaar horen. niet te lange regels; 4
+Formatting: consistent indentation. code is ingedeeld in blokken die bij elkaar horen. niet te lange regels; 4
 
 Organization; zit normale orde in functies die opgeroepen worden komen na elkaar, zoas diagonals(). Verder hebben alle functies een logische volgorde. Nog paar uitgecommende code regels weghalen; 3
 

@@ -217,7 +217,7 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 
   var lineTweedeKamer = d3.line()
       .x(d => xScale(d))
-      .y((d,i) => yScale(tweedeKamerTot[i])) 
+      .y((d,i) => yScale(tweedeKamerTot[i]))
       .curve(d3.curveLinear);
 
   charts.append("path")

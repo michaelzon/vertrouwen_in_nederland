@@ -1,6 +1,7 @@
 /* Name: Michael Zonneveld
 ** Studentnumber: 11302984
-** Date: 28/06/18 */
+** Date: 28/06/18
+** Source: https://bl.ocks.org/mbostock/3884955 */
 
 function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 /* this function creates the multiple linegraph visualisation

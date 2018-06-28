@@ -1,6 +1,7 @@
 /* Name: Michael Zonneveld
 ** Studentnumber: 11302984
-** Date: 28/06/18 */
+** Date: 28/06/18
+** Source: https://bl.ocks.org/dahis39/f28369f0b17b456ac2f1fa9b937c5002 */
 
 function makeDendrogram(data, selectedPop, showYear, graphNames){
 /* this function creates the dendrogram visualisation

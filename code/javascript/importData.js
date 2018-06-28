@@ -3,7 +3,7 @@ function importData(error, response){
   // check if data gets loaded
   if (error) throw error;
 
-  // creating one big array of all my objects
+  // creating one big array of all the objects
   var bigDatty = [];
 
   for(i = 0; i < 5; i ++){

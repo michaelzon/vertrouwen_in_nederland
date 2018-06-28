@@ -142,18 +142,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear){
       .attr("y", height / 8)
       .text(graphTitles[selectedPop]);
 
-  var graphtitle = "Vertrouwen in de overheid, publieke instanties," +
-                  "de pers en elkaar weergeven in percentages over de" +
-                  "jaren heen:";
-
-  // adding title
-  svg.append("text")
-      .attr("id", "linegraphTitle")
-      .attr("x", width / 2 - 490)
-      .attr("y", height / 5)
-      .attr("transform", "translate(0,-120)")
-      .text(graphtitle)
-
   // gridlines in x axis function
   function make_x_gridlines() {
       return d3.axisBottom(xScale)

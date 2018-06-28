@@ -1,3 +1,7 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 function main(vertrouwen, restOfTheData, graphNames){
 /* this main function calls all the visualisation functions and the update
 ** function after is recieves it data from the importData script */

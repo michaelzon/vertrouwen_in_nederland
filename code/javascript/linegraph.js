@@ -1,3 +1,7 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 function makeLinegraph(data, secondData, selectedPop, showYear, graphNames){
 /* this function creates the multiple linegraph visualisation
 ** paths are drawn one for one depending on which array is selected

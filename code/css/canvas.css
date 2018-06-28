@@ -1,3 +1,7 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 .seperator {
   position: fixed;
   top: 56px;
@@ -39,7 +43,7 @@
   @include transition(opacity 0.25s ease-out);
 }
 
-/* for lines */
+/* for the lines */
 
 #linechart {
   padding: 60px;
@@ -177,8 +181,6 @@
 #denTitle, #denLead {
   zoom: 120%;
 }
-
-
 
 #dendrogram {
   left: 5.5%;

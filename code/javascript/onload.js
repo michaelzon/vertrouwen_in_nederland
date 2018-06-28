@@ -1,6 +1,10 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 window.onload = function(){
 /* this function will be triggered when the page is loaded
-** it sends al the jsons to the importData function where it gets parsed */  
+** it sends al the jsons to the importData function where it gets parsed */
 
   // request for the queries
   d3.queue()

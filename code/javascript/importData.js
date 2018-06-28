@@ -1,4 +1,10 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 function importData(error, response){
+/* Checks if data is loaded, parses the data into correct format and sends it to
+** the main function */
 
   // check if data gets loaded
   if (error) throw error;

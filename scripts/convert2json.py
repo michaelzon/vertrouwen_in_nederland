@@ -1,5 +1,6 @@
 # Name: Michael Zonneveld
 # Studentnumber: 11302984
+# Date: 28/06/18
 
 import csv
 import json
@@ -27,7 +28,6 @@ with open('data_structure/json/politieke_participatie.json', 'w') as json_f:
     json_f.write('{"participatie":')
     json.dump(rows, json_f)
     json_f.write('}')
-
 
 # read the csv file
 with open('data_structure/csv/politieke_interesse.csv') as csv_f:

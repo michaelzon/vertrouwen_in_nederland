@@ -1,3 +1,7 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
                       graphNames){
 /* this update functions manipulates the visualizations on the page when a

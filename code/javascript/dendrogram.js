@@ -1,3 +1,7 @@
+/* Name: Michael Zonneveld
+** Studentnumber: 11302984
+** Date: 28/06/18 */
+
 function makeDendrogram(data, selectedPop, showYear, graphNames){
 /* this function creates the dendrogram visualisation
 ** nodes within the tree structure are updated when clicked upon

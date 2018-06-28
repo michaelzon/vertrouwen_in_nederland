@@ -169,3 +169,7 @@
 # dag 18
 
 * Vandaag report en story telling schrijven.
+
+# dag 19
+
+* Puntjes op de i gezet. 

@@ -1,5 +1,7 @@
 function updateGraphs(data, secondData, getYear, selectedPop, popGroups,
                       graphTitles){
+/* this update functions manipulates the visualizations on the page when a
+** option is selected in the dropdown menu */
 
   // store clickable options from drop down for code readability
   var butTotaal = document.getElementById("selectTotaal");

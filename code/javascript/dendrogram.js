@@ -1,4 +1,7 @@
 function makeDendrogram(data, selectedPop, showYear, graphTitles){
+/* this function creates the dendrogram visualisation
+** nodes within the tree structure are updated when clicked upon
+** the barchart is created by appending rects at children if they were nodes */
 
   if (d3.select("#dendrogram").select("svg")){
     d3.select("#dendrogram").select("svg").remove();
@@ -12,7 +15,9 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
       innerWidth = outerWidth - margin.left - margin.right,
       innerHeight = outerHeight - margin.top - margin.bottom,
       width = innerWidth - padding.left - padding.right,
-      height = innerHeight - padding.top - padding.bottom;
+      height = innerHeight - padding.top - padding.bottom
+      lessWidth = 600,
+      lessHeight = 12;
 
   // create svg for the dendrogram visualization
   var svg = d3.select("#dendrogram").append("svg")
@@ -25,8 +30,8 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")
       .attr("id", "yearInDendro")
-      .attr("x", width / 2 - 600)
-      .attr("y", height / 12)
+      .attr("x", width / 2 - lessWidth)
+      .attr("y", height / lessHeight)
       .attr("transform", "translate(20,-80)")
       .text(showYear);
 
@@ -87,6 +92,8 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
     // placing bars at the right of the tree
     var getRect = nodes.slice(5, nodes.length);
 
+    console.log(nodes.length)
+
     // remove bars if node is clicked and other bars are appended
     d3.selectAll("#reccit").remove();
     d3.selectAll("#axisDendro").remove();
@@ -97,57 +104,13 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
             .ticks(10);
     }
 
-    // var graphTitles = {};
-    // graphTitles["totaal"] = "Totale gemiddelde";
-    // graphTitles["nederlands"] = "Geen migratieachtergrond";
-    // graphTitles["westers"] = "Westerse migratieachtergrond";
-    // graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
-    // graphTitles["participatie"] = "Politieke participatie";
-    // graphTitles["interesse"] = "Politieke interesse";
-    // graphTitles["internetgebruik"] = "Frequentie internetgebruik";
-    // graphTitles["dienstverlening"] =
-    // "Gedrag dienstverleningswebsites";
-    // graphTitles["RadioTelevisieOfKrantIngeschakeld"] =
-    // "Radio, televisie of krant ingeschakeld";
-    // graphTitles["PolitiekeOrganisatieIngeschakeld"] =
-    // "Politieke organisatie ingeschakeld";
-    // graphTitles["MeegedaanAanBijeenkomstOverheid"] =
-    //   "Meegedaan aan bijeenkomst van de overheid";
-    // graphTitles["ContactOpgenomenMetPoliticus"] =
-    //   "Contact opgenomen met politicus";
-    // graphTitles["MeegedaanAanActiegroep"] =
-    //   "Meegedaan aan actiegroep";
-    // graphTitles["MeegedaanAanProtestactie"] =
-    //   "Meegedaan aan protestactie";
-    // graphTitles["MeegedaanAanHandtekeningenactie"] =
-    //   "Meegedaan aan handtekeningenactie";
-    // graphTitles["MeegedaanPolitiekeActieViaInternet"] =
-    //   "Meegedaan met politieke actie via internet";
-    // graphTitles["Anders"] = "Anders";
-    // graphTitles["ZeerGeinteresseerd"] = "Zeer geïnteresseerd";
-    // graphTitles["TamelijkGeinteresseerd"] = "Tamelijk geïnteresseerd";
-    // graphTitles["WeinigGeinteresseerd"] = "Weinig geïnteresseerd";
-    // graphTitles["NietGeinteresseerd"] = "Niet geïnteresseerd";
-    // graphTitles["MinderDan3MaandenGeleden"] = "Minder dan drie maanden geleden";
-    // graphTitles["drieTotTwaalfMaandenGeleden"] =
-    //   "Drie tot twaalf maanden geleden";
-    // graphTitles["MeerDan12MaandenGeleden"] = "Meer dan twaalf maanden geleden";
-    // graphTitles["NooitInternetGebruikt"] = "Nooit internet gebruikt";
-    // graphTitles["BijnaElkeDag"] = "Bijna elke dag";
-    // graphTitles["MinstensEenKeerPerWeek"] = "Minstens een keer per week";
-    // graphTitles["MinderDanEenKeerPerWeek"] = "Minder dan een keer per week";
-    // graphTitles["ZoekenOpWebsitesOverheid"] = "Zoeken op websites overheid";
-    // graphTitles["OfficieleDocumentenDownloadenOverheid"] =
-    //   "Officiële documenten downloaden overheid";
-    // graphTitles["ZoekenOpWebsitesPubliekeSector"] =
-    //   "Zoeken op websites publieke sector";
-    // graphTitles["OfficieleDocumentenDownloadenPubliekeSector"] =
-    //   "Officiële documenten downloaden publieke sector";
+    // only use 4 colors from the brewer because of styling purposes
+    var colorAmount = 4;
 
     // colorfunction with colorbrewer for those who suffer from bad eyes
     var colorBars = d3.scaleOrdinal()
-        .domain(24)
-        .range(colorbrewer.RdBu[4]);
+        .domain(getRect.length)
+        .range(colorbrewer.RdBu[colorAmount]);
 
     // append bars and x axis when node is clicked on
     getRect.forEach(function(t){
@@ -176,8 +139,7 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
               .duration(600)
           .call(xAxis);
 
-          // "translate(" + padding + "," + padding + ")")
-
+      // create a grid in dendrogram for readability and remove when updated
       d3.select("#dendrogram").selectAll(".grid").remove();
       svg.append("g")
           .attr("class", "grid")
@@ -188,6 +150,7 @@ function makeDendrogram(data, selectedPop, showYear, graphTitles){
           );
       });
 
+    // color the rects according to the colorfunction from above
     svg.selectAll("rect")
         .attr("fill", (d,i) => colorBars(i));
 

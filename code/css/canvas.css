@@ -7,15 +7,15 @@
 }
 
 .parallax {
-    /* The image used */
-    background-image: url(https://images.unsplash.com/photo-1522241974502-60adebad071f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=119076a0d9f8839e4130ab236f540ade&auto=format&fit=crop&w=1634&q=80);
-    min-height: 400px;
+  /* image */
+  background-image: url(https://images.unsplash.com/photo-1522241974502-60adebad071f?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=119076a0d9f8839e4130ab236f540ade&auto=format&fit=crop&w=1634&q=80);
+  min-height: 400px;
 
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  /* scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #linegraph {
@@ -25,15 +25,6 @@
 
 .dropdown {
   left: 75%;
-}
-
-.text2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 26px;
-  font-weight: bold;
 }
 
 .yearLabel {
@@ -100,6 +91,7 @@
   font-weight: 500;
   color: rgba(252, 243, 0, 0.4);
 }
+
 /* textual elements in linegraph */
 
 .ticks {
@@ -108,14 +100,10 @@
 
 .x-axis {
   font-size: 15px;
-  font-family: sans-serif;
-
 }
 
 .y-axis {
   font-size: 13px;
-  font-family: sans-serif;
-
 }
 
 .x-axis path {
@@ -130,7 +118,6 @@
     stroke: grey;
     stroke-width: 2;
     shape-rendering: crispEdges;
-
 }
 
 .y-axis path {
@@ -166,7 +153,6 @@
 }
 
 #popInGraph {
-  font-family: sans-serif;
   font-size: 20px;
   color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
@@ -215,18 +201,15 @@
   stroke: grey;
   stroke-width: 2px;
   opacity: 0.7;
-
 }
 
 #reccit {
   opacity: 0.9;
-
 }
 
 #yearInDendro {
   font-family: sans-serif;
   font-size: 30px;
-  /* font-style: italic; */
   text-decoration: underline;
   color: rgba(252, 243, 0, 0.4);
   opacity: 0.7;
@@ -234,7 +217,6 @@
 
 
 #dendroTitle {
-  font-family: sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: rgba(252, 243, 0, 0.4);

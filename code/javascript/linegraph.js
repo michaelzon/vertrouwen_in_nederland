@@ -1,4 +1,8 @@
 function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
+/* this function creates the multiple linegraph visualisation
+** paths are drawn one for one depending on which array is selected
+** the ticks beneath the x-axis represent buttons to select a year for the
+** dendrogram */
 
   // remove current elements when dropdown options is clicked on
   if (d3.select("#linegraph").select("svg")){
@@ -51,12 +55,6 @@ function makeLinegraph(data, secondData, selectedPop, showYear, graphTitles){
       .attr("width", outerWidth)
       .attr("height", outerHeight)
       .attr("id", "linechart");
-
-  // var graphTitles = {};
-  // graphTitles["totaal"] = "Totale gemiddelde";
-  // graphTitles["nederlands"] = "Geen migratieachtergrond";
-  // graphTitles["westers"] = "Westerse migratieachtergrond";
-  // graphTitles["nietWesters"] = "Niet-westerse migratieachtergrond";
 
   // adding name of population in graph when clicked on in dropdown
   svg.append("text")

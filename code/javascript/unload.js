@@ -10,5 +10,5 @@ window.onload = function(){
   .defer(d3.json, "data_structure/json/politieke_interesse.json")
   .defer(d3.json, "data_structure/json/politieke_participatie.json")
   .awaitAll(importData);
-
+  
 };

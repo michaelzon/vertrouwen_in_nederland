@@ -92,8 +92,6 @@ function makeDendrogram(data, selectedPop, showYear, graphNames){
     // placing bars at the right of the tree
     var getRect = nodes.slice(5, nodes.length);
 
-    console.log(nodes.length)
-
     // remove bars if node is clicked and other bars are appended
     d3.selectAll("#reccit").remove();
     d3.selectAll("#axisDendro").remove();
@@ -114,7 +112,6 @@ function makeDendrogram(data, selectedPop, showYear, graphNames){
 
     // append bars and x axis when node is clicked on
     getRect.forEach(function(t){
-      // console.log(('t',t));
       svg.append("rect")
           .attr("id", "reccit")
           .attr("width", 0)
